@@ -64,7 +64,7 @@
         \item Addition: $(a +i b)+(c + i d)=(a+c)+i(b+d)$
         \item Multiplication: $(a+ i b)(c + i d)=(a c - b d)+i(a d +b c)$
         \item Division: $\dfrac{a+i b}{c + i d} = \dfrac{(a c + b d)+i(b c - a d)}{c^2+d^2}$
-        \item Square root: $\sqrt{a + i b}=\pm \left( \sqrt{\dfrac{a+\sqrt{a^2+b^2}}{2}} + i \dfrac{b}{|b|} \sqrt{\dfrac{-a+\sqrt{a^2+b^2}}{2}}\right)$
+        \item Square root: $\sqrt{a + i b}=\pm \left( \sqrt{\frac{a+\sqrt{a^2+b^2}}{2}} + i \frac{b}{|b|} \sqrt{\frac{-a+\sqrt{a^2+b^2}}{2}}\right)$ for \( b \neq 0 \).
         \item $\Re (a+ib)=a, \Im (a+ib)=b$
     \end{itemize}
     \end{minipage}
@@ -119,18 +119,23 @@
       \end{itemize} 
     \textbf{Some properties of open sets:}
     \begin{itemize}
-        \item $\C$ and \O\ are open subsets of $\C$.
+        \item $\C$ and \( \emptyset \) are open subsets of $\C$.
         \item All finite intersections of open sets are open sets.
         \item The collection of all open sets on $\C$ form a topology on $\C$.
     \end{itemize}
     \textbf{Interior, closure, density}
     \begin{itemize}
-        \item \textbf{Interior: } Let $E \subseteq \C$. The interior of $E$ is defined as, $E\degree$=set of all interior points of $E$, or equivalently, $\cup \{\Omega \mid \Omega \subseteq E \wedge \Omega \text{ is open in }\C \}$
-        \item \textbf{Closure: } Let $E \subseteq \C$. The closure of $E$ is defined as $\hat \{F \mid E \subseteq F \wedge F \text{ is closed in }\C \}$
+        \item \textbf{Interior: } Let $E \subseteq \C$. The interior of $E$ is defined as, $E\degree$=set of all interior points of $E$, or equivalently, $\cup \{\Omega \mid \Omega \subseteq E \text{ and } \Omega \text{ is open in }\C \}$
+        \item \textbf{Closure: } Let $E \subseteq \C$. The closure of $E$ is
+        defined as
+        \(
+        \overline{E} = \bigcap\{F \subseteq \C : E \subseteq F \text{ and } F
+        \text{ is closed in } \C\}.
+        \)
         \item \textbf{Density: }Let $E \subseteq D$, the closure of $E$ in $D$ is $D$. Then $E$ is called dense in $D$.
       
     \end{itemize}
-	    \textbf{Path :} A path in a metric space from a point $x \in X$ to $y \in Y$ is a continuous mapping $\gamma: [0,1] \rightarrow X$ s.t. $\gamma(0)=x$ and $\gamma(1)=y$.\\
+	    \textbf{Path :} A path in a metric space from a point $x \in X$ to $y \in X$ is a continuous mapping $\gamma: [0,1] \rightarrow X$ s.t. $\gamma(0)=x$ and $\gamma(1)=y$.\\
     \textbf{Separated and Connected}\\
     For a metric space $(X,d)$.
     \begin{itemize}
@@ -158,7 +163,7 @@
     \textbf{Compactness: } For some $K \subseteq X$ is compact if for every open cover $E$ of $K$, there exists $E_1, \cdots. E_n \in E$ s.t. $K \subset U_{i=1}^n E_n$, i.e. it is compact if it has a finite open cover.
 \begin{itemize}
     \item In a metric space, a compact set is closed.
-    \item A closed subset of a compact set is closed.
+    \item A closed subset of a compact set is compact.
 \end{itemize}
 \textbf{Limit point compact: } We say a metric space $X$ is limit point compact if every infinite subset of $X$ has a limit point.
 \begin{itemize}
@@ -186,7 +191,8 @@
     \begin{itemize}
         \item Let $f$ be an isometry s.t. $f(0)=0$, then the inner product $\langle f(z), f(w)\rangle = \langle z, w \rangle\ , \forall z,w \in \C$.
         \item If $f$ is an isometry s.t. $f(0)=0$ then $f$ is a linear map.
-        \item The standard argument for $a+ib \in \C$, Arg$(a+ib)=\tan^{-1}\frac{b}{a}$
+        \item For $z = a+ib \ne 0$, one can define a branch of $\mathrm{Arg}(z)$ via
+        a suitable version of $\arctan(b/a)$ (with quadrant corrections).
     \end{itemize}
     \end{minipage}
 };  
@@ -198,10 +204,11 @@
 \begin{tikzpicture}
 \node [mybox] (box){%
     \begin{minipage}{0.3\textwidth}
-    \textbf{Uniform convergence: } Let $\Omega \subseteq \C$ and $f_1, \cdots, f_n: \Omega \rightarrow \C$ be a set of functions on $\Omega.$ We say, $\{f\}_{n \in \N}$ converges uniformly to $f$ if given $\varepsilon>0, \exists n \in \N$ s.t. $|f_n(x)-f(x)|<\varepsilon, \forall x\in \Omega$ and $n \geq N$.\\
+    \textbf{Uniform convergence: } Let $\Omega \subseteq \C$ and $f_1, \cdots, f_n: \Omega \rightarrow \C$ be a set of functions on $\Omega.$ We say, $\{f\}_{n \in \N}$ converges uniformly to $f$ if given $\varepsilon>0$, there exists $N\in\N$ such that
+    $|f_n(x) - f(x)| < \varepsilon$ for all $x\in\Omega$ and all $n \ge N$.\\
     \textbf{Complex exponential: } For $z \in C$, exp$(z)=\sum_{n=0}^\infty \frac{z^n}{n!}$\\
-    \textbf{Trigonometric functions: } For $z\in \C$, $\cos (x)=\frac{e^{iz}+e^{-iz}}{2}$ and $\sin (x)=\frac{e^{iz}-e^{iz}}{2}$\\
-    \textbf{Hyperbolic trigonometric functions: } For $z \in \C$, $\cosh(x)=\frac{e^{z}+e^{-z}}{2}$ and $\sinh(z)=\frac{e^{z}-e^{-z}}{2}$
+    \textbf{Trigonometric functions: } For $z\in \C$, $\cos (z)=\frac{e^{iz}+e^{-iz}}{2}$ and $\sin (z)=\frac{e^{iz}-e^{-iz}}{2i}$\\
+    \textbf{Hyperbolic trigonometric functions: } For $z \in \C$, $\cosh(z)=\frac{e^{z}+e^{-z}}{2}$ and $\sinh(z)=\frac{e^{z}-e^{-z}}{2}$
     \end{minipage}
 };  
 %------------ Functions on the Complex Plane Header ---------------------
@@ -234,7 +241,8 @@
 \node [mybox] (box){%
     \begin{minipage}{0.3\textwidth}
     \textbf{Formal Power Series:} A formal power series around $z_0 \in \C$ is a formal expansion $\sum_{n=0}^\infty a_n(z-z_0)^n$, where $a_n \in \C$ and $z$ is indeterminate.\\
-    \textbf{Radius of convergence:} For a formal power series $\sum a_n(z-z_0)^n$ the radius of convergence $R \in [0,\infty]$ given by $R= \liminf_{n \rightarrow \infty} |a_n|^{-1/n}$. Using the ratio test is identical i.e. $R= \liminf_{n \rightarrow \infty} \frac{|a_n|}{|a_{n+1}|}$.
+    \textbf{Radius of convergence:} For a formal power series $\sum a_n(z-z_0)^n$ the radius of convergence $R \in [0,\infty]$ given by $R = \frac{1}{\limsup_{n\to\infty} |a_n|^{1/n}}.$. Using the ratio test is identical i.e. $R = \lim_{n\to\infty} \left|\frac{a_n}{a_{n+1}}\right|
+     $ if this limit exists.
     \begin{itemize}
         \item The series converges absolutely when $z \in B(z_0, R)$, and for $r< R$, the series converges uniformly, else if $|z-z_0|>R$ the series diverges.
         \item Let $z \in \C$ s.t. $|z-z_0|>R$, then $\exists$ infinitely many $n \in N$ s.t. $|a_n|^{-1/n}<|z-z_0|$.
@@ -252,10 +260,10 @@
     \begin{minipage}{0.3\textwidth}
     Let $F(z)=\sum_{n=1}^\infty a_n(z-z_0)^n$ be a power series around $z_0$ with a radius of convergence $R$. Then F is \textbf{holomorphic} in $B(z_0, R)$.
     \begin{itemize}
-        \item $F(x)'=\sum_{n=1}^{\infty}n a_n (z-z_0)^{n-1}$ with same radius of convergence $R.$
-        \item $a_n=\frac{F^n(z_0)}{n!}$
+        \item $F'(z )=\sum_{n=1}^{\infty}n a_n (z-z_0)^{n-1}$ with same radius of convergence $R.$
+        \item $a_n=\frac{F^{(n)}(z_0)}{n!}$
     \end{itemize}
-    \textbf{Cauchy product of two power series: } For power series $F(z)=\sum a_n(z-z_0)^n$ and $G(z)=\sum a_n(z-z_0)^n$ with degree of convergence at least $R.$ Then the Cauchy product $F(z)G(z)=\sum c_n(z-z_0)^n$ where $c_n=\sum_{k=0}^n a_k b_{n-k}$ also has degree of convergence at least $R$.
+    \textbf{Cauchy product of two power series: } For power series $F(z)=\sum a_n(z-z_0)^n$ and $G(z)=\sum b_n(z-z_0)^n$ with degree of convergence at least $R.$ Then the Cauchy product $F(z)G(z)=\sum c_n(z-z_0)^n$ where $c_n=\sum_{k=0}^n a_k b_{n-k}$ also has degree of convergence at least $R$.
     \end{minipage}
 };  
 %------------ Differentiation of Power Series Header ---------------------
@@ -266,10 +274,10 @@
 \begin{tikzpicture}
 \node [mybox] (box){%
     \begin{minipage}{0.3\textwidth}
-    For a complex function $f(z)=u(z)+iv(z)$,\\ $f'(x)=\frac{\partial u}{\partial x}+i \frac{\partial v}{\partial x}$ or $f'(x)=-i\frac{\partial u}{\partial y}+\frac{\partial v}{\partial y}$\\
+    For a complex function $f(z)=u(z)+iv(z)$,\\ $f'(z)=\frac{\partial u}{\partial x}+i \frac{\partial v}{\partial x}$ or $f'(z)=-i\frac{\partial u}{\partial y}+\frac{\partial v}{\partial y}$\\
     Therefore, we get the two \textbf{Cauchy-Riemann Differential equations},\\
     $\bullet\ \dfrac{\partial u}{\partial x}=\dfrac{\partial v}{\partial y} \hspace{2cm} \bullet\ \dfrac{\partial u}{\partial y}=-\dfrac{\partial v}{\partial x}$\\
-    A function is holomorphic \textbf{iff} it satisfies
+    A function \( f=u+iv \) with \( u,v \) continuously differentiable is holomorphic iff it satisfies
     the Cauchy-Riemann equations.
     \textbf{Wirtinger derivatives: }\\
     $\bullet\ \dfrac{\partial}{\partial z}=\dfrac{1}{2}\left(\dfrac{\partial }{\partial x}+\dfrac{1}{i}\dfrac{\partial}{\partial y}\right)\hspace{2cm} \bullet\ \dfrac{\partial}{\partial \overline{z}}=\dfrac{1}{2}\left(\dfrac{\partial }{\partial x}-\dfrac{1}{i}\dfrac{\partial}{\partial y}\right)$\\
@@ -290,12 +298,12 @@ If $f$ is holomorphic at $z_0$ then, $\frac{\partial f}{\partial \overline{z}}=0
     For any holomorphic function $f$, $\Re(f), \Im(f)$ are examples of harmonic functions, but there are harmonic functions which are not holomorphic.\\
     \textbf{Boundary of a set: }For a metric space $X$, $\Omega \in X$, \\
     the boundary of $\Omega=\partial \Omega= \overline{\Omega}\cap \overline{\Omega^C}$\\
-    \textbf{Maximum principle for harmonic functions: }Let $u: \Omega \rightarrow \R$ be a twice differentiable harmonic function. Let $k \subset \Omega$ be a compact sub   set of $\Omega$. Then,
+    \textbf{Maximum principle for harmonic functions: }Let $u: \Omega \rightarrow \R$ be a twice differentiable harmonic function. Let $K \subset \Omega$ be a compact sub   set of $\Omega$. Then,
     $\sup_{z\in k} u(z)=\sup_{z \in \partial k} u(z)$ and $\inf_{z\in k} u(z)=\inf_{z \in \partial k} u(z)$\\
     \textbf{Maximum principle for holomorphic functions: }Let $\Omega \subseteq \C$ be open and connected and let $f: \Omega \rightarrow \C$ be a holomorphic function. Then, for compact $k \subseteq \Omega$, we have, 
     $\sup_{z \in k}|f(z)|=\sup_{\partial k} |f(z)|$\\
     \textbf{Harmonic conjugate: }Let $u: \Omega \rightarrow \R$ be a twice differentiable harmonic function. We say that $v: \Omega \rightarrow \R$ is a harmonic conjugate of $u$ if $f=u+iv$ is holomorphic.\\
-    $\bullet$ For a harmonic function from $\C$ to $\R$ there exists a uniquely determined harmonic conjugate from $\C$ to $\R$ (up to constants).\\
+    $\bullet$ For a harmonic function from $\Omega \subset \C$ to $\R$ there exists a uniquely determined harmonic conjugate from $\Omega$ to $\R$ (up to constants) if \( \Omega  \) is a simply connected domain.\\
     \end{minipage}
 };  
 %------------ Harmonic Functions Header ---------------------
@@ -320,17 +328,19 @@ If $f$ is holomorphic at $z_0$ then, $\frac{\partial f}{\partial \overline{z}}=0
 \node [mybox] (box){%
     \begin{minipage}{0.3\textwidth}
     A map $S(z)=\dfrac{az+b}{cz+d}$ for $a,b,c,d \in \C$ is called a Möbius transformation if $ad-bc \neq 0$.\\
-    Every mobius transformation is holomorphic at $\C \setminus \{-d/c\}$, i.e. every point other than is zero. 
+   Every Möbius transformation is holomorphic on $\widehat{\C}\setminus\{-d/c\}$,
+   with a simple pole at $z = -d/c$ for \( c \neq 0 \).
+   
     \begin{itemize}
-        \item The set of all mobius transformations is a group under transposition.
+        \item The set of all mobius transformations is a group under composition.
         \item $S$ forms a bijection with $\widehat{\C}$
     \end{itemize}
-    Every mobius transformation can be written as composition of, 
-    \begin{enumerate}
+    Every Möbius transformation can be written as composition of, 
+    \begin{itemize}
         \item Translation: $S(z)=z+b, b \in \C$
-        \item Dilation: $S(z)=az, a\neq 0,a=e^{i \theta}$
+        \item Dilation: $S(z)=az, a\neq 0$
         \item Inversion: $S(z)=1/z$
-    \end{enumerate}
+    \end{itemize}
     
     
     
@@ -358,7 +368,8 @@ If $f$ is holomorphic at $z_0$ then, $\frac{\partial f}{\partial \overline{z}}=0
         \item Reparametrization is an equivalence relation.
     \end{itemize}
     
-    \textbf{Arc length:} Arc length of curve $\gamma=|\gamma|=\sup \sum_{i=0}^n|\gamma(x_{i+1}-\gamma(x_i))|$ for all partitions of $[a,b]$.
+    \textbf{Arc length:} Arc length of curve $\gamma$ is $|\gamma| = \sup \sum_{i=0}^n |\gamma(x_{i+1}) - \gamma(x_i)|
+    $ for all partitions of $[a,b]$.
     \begin{itemize}
         \item A curve that has a finite arc length is called \textbf{rectifiable}.
         \item $\displaystyle |\gamma|=\int_{a}^b|\gamma'(t)|\,dt$
@@ -401,12 +412,13 @@ Let $f:\Omega \rightarrow \C$ be a continuous function such that $\int_\gamma f=
     \begin{minipage}{0.3\textwidth}
     For continuously differentiable curves $\gamma:[a,b] \rightarrow \C$, and $\sigma:[b,c] \rightarrow \C$
     \begin{itemize}
-        \item For a reparametrization $\widehat{\gamma}$ of $\gamma$ we can say that $\int_\gamma f(z)\, dz=\int_{\widehat{\gamma}} f(z)\, dz$
+        \item For a reparametrization $\widehat{\gamma}$ of $\gamma$ we can say that $\int_\gamma f(z)\, dz=\int_{\widehat{\gamma}} f(z)\, dz$.
         \item $\int_{-\gamma} f(z)\, dz=-\int_{\gamma} f(z)\, dz$
-        \item $\int_{\gamma+\sigma}f(z)\, dz=\int_{\gamma}f(z)\, dz+\int_{\sigma}f(z)\,dz$
-        \item $\int_\gamma f(z)\, dz=\int_a^b f(\gamma(t))\gamma'(t)\, dt$
-        \item If $f$ is bounded by $M$ then $\int_\gamma f(z)\, dz \leq M|\gamma|$
-        \item For $c\in \C$, we have, $\int_\gamma (cf+g)(z)\, dz=c\int_\gamma f(z)\, dz+\int_\gamma g(z)\, dz$
+        \item $\int_{\gamma+\sigma}f(z)\, dz=\int_{\gamma}f(z)\, dz+\int_{\sigma}f(z)\,dz$.
+        \item $\int_\gamma f(z)\, dz=\int_a^b f(\gamma(t))\gamma'(t)\, dt$.
+        \item If $|f(z)| \le M$ on $\gamma$, then
+        $\left|\int_\gamma f(z)\, dz\right| \leq M\,|\gamma|$.
+        \item For $c\in \C$, we have, $\int_\gamma (cf+g)(z)\, dz=c\int_\gamma f(z)\, dz+\int_\gamma g(z)\, dz$.
     \end{itemize}
     \end{minipage}
 };  
@@ -435,7 +447,7 @@ Let $f:\Omega \rightarrow \C$ be a continuous function such that $\int_\gamma f=
 \begin{tikzpicture}
 \node [mybox] (box){%
     \begin{minipage}{0.3\textwidth}
-    \textbf{Cauchy-Goursat theorem: } If a curve $\gamma_0$ is homotopic to a reparametrization of $\gamma_1$ then, the integral of some function $f:\Omega \rightarrow \C$ is homotopy invariant, i.e., $\displaystyle \int_{\gamma_0}f=\int_{\gamma_1}f$\\
+    \textbf{Cauchy-Goursat theorem: } Let $f:\Omega\to\C$ be holomorphic. If a curve $\gamma_0$ is homotopic to a reparametrization of $\gamma_1$ then, the integral of some function $f:\Omega \rightarrow \C$ is homotopy invariant, i.e., $\displaystyle \int_{\gamma_0}f=\int_{\gamma_1}f$\\
     \textbf{Alternative statement: }Let $f: \Omega \rightarrow \C$ be holomorphic on $\Omega$, and $\gamma_0:[a,b]\rightarrow \Omega$ is a rectifiable curve which is null-homotopic (i.e. homotopic to a constant map). Then, $ \displaystyle \int_{\gamma_0}f(z)\, dz=0$
     \end{minipage}
 };  
@@ -615,7 +627,7 @@ $f(\Omega)$ is an open set.
 \begin{tikzpicture}
 \node [mybox] (box){%
     \begin{minipage}{0.3\textwidth}
-    Let $\Omega$ be a open connected set which is symmetric w.r.t $\R$. Then define the following,
+    Let $\Omega$ be an open connected set which is symmetric w.r.t $\R$. Then define the following,
     \begin{itemize}
         \item $\Omega_+=\{z\in \Omega \mid \Im(z)>0 \}$
         \item $\Omega_-=\{z \in \Omega \mid \Im(z)<0\}$
@@ -650,9 +662,12 @@ $f(\Omega)$ is an open set.
 \begin{tikzpicture}
 \node [mybox] (box){%
     \begin{minipage}{0.3\textwidth}
-    Let $z_n$ be a function defined for $n=,0, \pm1, \pm2,\cdots$, then it is doubly infinite.
+    Let $(a_n)_{n\in\Z}$ be a bi-infinite sequence ($n = 0, \pm1, \pm2, \dots$).
+    
     \begin{itemize}
-        \item A doubly infinite series converges if $\sum_{n=0}^\infty a_n$ and $\sum_{n=1}^\infty a_{=n}$ both converge.
+        \item A doubly infinite series converges if $\sum_{n=0}^\infty a_n$
+        and $\sum_{n=1}^\infty a_{-n}$ both converge.
+        
     \item Splitting up the series in similar manners you can define absolute and uniform convergence. 
     \end{itemize}
     
@@ -711,7 +726,7 @@ $f(\Omega)$ is an open set.
 \begin{tikzpicture}
 \node [mybox] (box){%
     \begin{minipage}{0.3\textwidth}
-    Let $\Omega$ be a open connected subset of $\C$ and let $S \subset \Omega$. Let $f: \Omega \setminus S \rightarrow \C$ be holomorphic on $\Omega.$ We say that $f$ is a meromorphic function on $\Omega$ if, 
+    Let $\Omega$ be an open connected subset of $\C$ and let $S \subset \Omega$. Let $f: \Omega \setminus S \rightarrow \C$ be holomorphic on $\Omega.$ We say that $f$ is a meromorphic function on $\Omega$ if, 
     \begin{itemize}
         \item $S$ is a discrete set.
         \item $f$ either has removable singularities or poles at point of $S$.
@@ -764,10 +779,11 @@ $f(\Omega)$ is an open set.
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			\textbf{Residue of a function:} Let $f:\Omega\setminus S \rightarrow\C$ be a holomorphic function, where $ \Omega $ is an open set and $ S $ is a discrete subset of $ \Omega $. Then for $ z_0 \in S $, let $r>0$ be s.t. $ \overline{B(z_0,r)}\subseteq \Omega$ and $ B(z_0,r)=\{ z_0 \}.$ Then in $ B(z_0,r) \setminus \{ z_0 \} $, consider the Laurent series expansion of $ f $ given by $ f(z)=\sum_{n=-\infty}^{\infty} a_n(z-z_0)^n$. We define the residue of $ f $ at $ z_0 $ to be $ \text{Res}(f,z_0)= a_{-1}$.
+			\textbf{Residue of a function:} Let $f:\Omega\setminus S \rightarrow\C$ be a holomorphic function, where $ \Omega $ is an open set and $ S $ is a discrete subset of $ \Omega $. Then for $ z_0 \in S $, let $r>0$ be s.t. $\overline{B(z_0,r)}\subseteq \Omega$ and
+			$B(z_0,r)\cap S = \{ z_0 \}$. Then in $ B(z_0,r) \setminus \{ z_0 \} $, consider the Laurent series expansion of $ f $ given by $ f(z)=\sum_{n=-\infty}^{\infty} a_n(z-z_0)^n$. We define the residue of $ f $ at $ z_0 $ to be $ \text{Res}(f,z_0)= a_{-1}$.
 			\begin{enumerate}
 				\item If $ z_0 $ is a removable singularity then Res$ (z_0)=0 $.
-				\item If $ z_0$ is a pole of order $m$ then $ (z-z_0)^m f(z)=g(z) $, where $ g(z)\neq0  $ on $ B(z_0,r)\setminus\{z_0\} $then, Res$ (z_0)= a_{m-1}=\frac{g^{(m-1)}(z_0)}{(m-1)!}.$
+				\item If $ z_0$ is a pole of order $m$ then $ (z-z_0)^m f(z)=g(z) $, where $ g(z)\neq0  $ on $ B(z_0,r)\setminus\{z_0\} $then, Res$ (z_0)=\frac{g^{(m-1)}(z_0)}{(m-1)!}.$
 			\end{enumerate}
 		\end{minipage}
 	};  
@@ -835,7 +851,7 @@ $f(\Omega)$ is an open set.
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
 			Let $ \Omega $ be an open connected subset of $ \C\setminus\{0\} $. Define a branch of the logarithm on $\Omega$ as a function $ f:\Omega \rightarrow \C $ s.t. $ \exp (f(z))=z, \forall z\in \Omega.	 $\\
-			For $\Omega=\C \setminus \{\Re(x) \leq 0\}$ define the standard branch to be 
+			For $\Omega=\C \setminus \{\Re(z) \leq 0\}$ define the standard branch to be 
 			\[ \text{Log}(z)=\ln|z|+i \text{Arg}(z)	 \]
 			As defined above Log$ (z) $ is holomorphic on $\Omega$.
 		\end{minipage}
@@ -848,7 +864,7 @@ $f(\Omega)$ is an open set.
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			Let $ \D $ denote the open unit disc. Let $ f: \D \rightarrow \D  $ be a holomoprhic function s.t. $ f(0)=0 $. Then, \[ |f(z)| \leq |z|, \forall z \in \D, \text{ and } |f'(z)|\leq 1	  \]
+			Let $ \D $ denote the open unit disc. Let $ f: \D \rightarrow \D  $ be a holomorphic function s.t. $ f(0)=0 $. Then, \[ |f(z)| \leq |z|, \forall z \in \D, \text{ and } |f'(0)|\leq 1	  \]
 			Also, if $ |f(z)|=|z| $ for some $ z \in \D $ or if $ |f'(0)|=1 $ then $ \exists \lambda \in \C, |\lambda|=1 $ s.t. $ f(z)=\lambda z $.
 		\end{minipage}
 	};  
@@ -881,11 +897,140 @@ $f(\Omega)$ is an open set.
 	\node[fancytitle, right=10pt] at (box.north west) {Automorphisms of the unit disc};
 \end{tikzpicture}
 
+
+%------------ Growth of entire functions ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			Let $f$ be entire and set 
+			$M(f,r)=\max_{|z|=r}|f(z)|$. The \textbf{order} is
+			\[
+			\rho(f)=\limsup_{r\to\infty}\frac{\log\log M(f,r)}{\log r}.
+			\]
+			
+			\textbf{Borel--Carath\'eodory.}
+			If $f$ is holomorphic on $\{\,|z|\le R\,\}$ and $0<r<R$, then
+			\[
+			\max_{|z|\le r}|f(z)|\le 
+			\frac{2r}{R-r}\sup_{|z|\le R}\Re f(z)
+			+\frac{R+r}{R-r}|f(0)|.
+			\]
+			
+			\textbf{Jensen's formula.}
+			Let $f$ be holomorphic on $\{\,|z|\le R\,\}$ with $f(0)\neq 0$.
+			Let $a_k$ be the zeros of $f$ in $|z|<r<R$, counted with multiplicity.
+			Then
+			\[
+			\log|f(0)|
+			+ \sum_{|a_k|<r}\log\frac{r}{|a_k|}
+			= \frac{1}{2\pi}\int_0^{2\pi}
+			\log|f(re^{i\theta})|\,d\theta.
+			\]
+		\end{minipage}
+	};  
+	%------------ Growth of entire functions Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Growth of entire functions};
+\end{tikzpicture}
+
+%------------ Weierstrass & Mittag-Leffler ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			\textbf{Canonical factors.}
+			For $p\in\N\cup\{0\}$, the canonical factor of genus $p$ is
+			\[
+			E_p(z)=(1-z)\exp\!\bigl(z+z^2/2+\cdots+z^p/p\bigr).
+			\]
+			
+			\textbf{Weierstrass factorisation.}
+			Let $f$ be entire with nonzero zeros $(a_n)$ (with multiplicity)
+			and a zero of order $m$ at $0$.
+			Then there exist an entire $g$ and integers $p_n\ge 0$ such that
+			\[
+			f(z)=z^m e^{g(z)}\prod_{n=1}^{\infty}
+			E_{p_n}\!\left(\frac{z}{a_n}\right).
+			\]
+			
+			\emph{Existence version.}
+			Conversely, given any discrete set $\{a_n\}\subset\C\setminus\{0\}$
+			with $|a_n|\to\infty$ and prescribed multiplicities, one can choose
+			$p_n$ and $g$ so that the product above defines an entire function
+			with exactly these zeros (but with no control on growth / order).
+			
+			\textbf{Mittag--Leffler.}
+			On a domain $\Omega\subset\C$, let $E\subset\Omega$ be discrete and
+			for each $a\in E$ fix a finite principal part
+			$p_a(z)=\sum_{k=1}^{N_a} c_{a,k}/(z-a)^k$.
+			Then there exists a meromorphic $f$ on $\Omega$ whose principal part
+			at each $a\in E$ is $p_a$ and which has no other poles.
+		\end{minipage}
+	};  
+	%------------ Weierstrass & Mittag-Leffler Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Weierstrass and Mittag-Leffler};
+\end{tikzpicture}
+%------------ Hadamard factorisation & Gamma ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			\textbf{Hadamard factorisation.}
+			Let $f$ be entire of finite order $\rho$ with nonzero zeros $(a_n)$
+			and a zero of order $m$ at $0$.
+			Let $p$ be the smallest integer with
+			$\sum_n |a_n|^{-(p+1)}<\infty$.
+			Then
+			\[
+			f(z)=z^m e^{Q(z)}\prod_{n=1}^{\infty}
+			E_p\!\left(\frac{z}{a_n}\right),
+			\]
+			where $Q$ is a polynomial with $\deg Q\le \rho$.
+			
+			\textbf{Gamma function as example.}
+			The reciprocal $1/\Gamma(z)$ is entire of order $1$ with simple zeros
+			at $0,-1,-2,\dots$.
+			Hadamard + the functional equation give
+			\[
+			\frac{1}{\Gamma(z)}
+			= z e^{\gamma z}\prod_{n=1}^{\infty}
+			\left(1+\frac{z}{n}\right)e^{-z/n},
+			\]
+			and hence
+			\[
+			\Gamma(z)
+			= \frac{e^{-\gamma z}}{z}\prod_{n=1}^{\infty}
+			\left(1+\frac{z}{n}\right)^{-1}e^{z/n},
+			\]
+			where $\gamma$ is the Euler--Mascheroni constant.
+			
+			\textbf{Euler limit form.}
+			For $z\notin\{0,-1,-2,\dots\}$,
+			\[
+			\Gamma(z)
+			= \lim_{m\to\infty}
+			\frac{m^z\,m!}{z(z+1)\cdots(z+m)}.
+			\]
+			
+			\textbf{Bohr--Mollerup.}
+			On $(0,\infty)$, $\Gamma(x)$ is the unique function such that
+			\[
+			f(1)=1,\quad f(x+1)=x f(x),\quad f>0,\ f\ \text{log-convex}.
+			\]
+			
+			\textbf{Wielandt.}
+			If $f$ is meromorphic on $\C$, satisfies
+			$f(z+1)=z f(z)$, and is bounded on a vertical strip
+			(e.g. $0<\Re z<1$), then $f=c\,\Gamma(z)$ for some constant $c$.
+		\end{minipage}
+	};  
+	%------------ Hadamard factorisation & Gamma Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Hadamard factorisation and $\Gamma$};
+\end{tikzpicture}
+
+
 %------------ Phragmén–Lindelöf method ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			Let $ \Omega =\{z\in\Omega: a < \Re(z) < b\} $. Let $ f:\overline{\Omega} \rightarrow \C $, s.t. $ f $ is continuous on $ \overline{\Omega} $ and holomorphic on $ \Omega $. Suppose for some $ z=x+iy $, we have $|f(z)|<B $ and let\\
+			Let $ \Omega =\{z\in \C: a < \Re(z) < b\} $. Let $ f:\overline{\Omega} \rightarrow \C $, s.t. $ f $ is continuous on $ \overline{\Omega} $ and holomorphic on $ \Omega $. Suppose for some $ z=x+iy $, we have $|f(z)|<B $ and let\\
 			 $ M(x)=\sup\{|f(x+iy)|:-\infty < y< \infty \} $. Then,
 			 \[ M(x)^{b-a}\leq M(a)^{b-x}M(b)^{x-a	} \]
 			 And further \[ |f(z)|\leq M(x)\leq \max \{M(a),M(b)\}=\sup_{z\in \partial \Omega} |f(z)|\]
@@ -908,6 +1053,49 @@ $f(\Omega)$ is an open set.
 	};  
 	%------------ Schwarz-Pick theorem Header ---------------------
 	\node[fancytitle, right=10pt] at (box.north west) {Schwarz-Pick theorem};
+\end{tikzpicture}
+
+%------------ Normal families & Montel's theorem ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			\textbf{Normal family.}
+			A family $\mathcal{F}$ of holomorphic (or meromorphic) functions
+			on a domain $\Omega$ is \emph{normal} if every sequence in
+			$\mathcal{F}$ has a subsequence converging locally uniformly on
+			$\Omega$ (to a holomorphic map or to $\infty$ in $\widehat{\C}$).
+			
+			\textbf{Montel's theorem.}
+			If $\mathcal{F}$ is a family of holomorphic functions on $\Omega$
+			that is locally bounded (bounded on every compact subset), then
+			$\mathcal{F}$ is normal.
+			
+			\textbf{Fundamental normality test.}
+			A family of meromorphic functions on $\Omega$ which omits the same
+			three values in $\widehat{\C}$ is normal
+			(for holomorphic functions, omitting two fixed values is enough).
+		\end{minipage}
+	};  
+	%------------ Normal families & Montel's theorem Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Normal families \& Montel's theorem};
+\end{tikzpicture}
+%------------ Riemann mapping theorem ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			\textbf{Riemann mapping theorem.}
+			If $U\subset\C$ is a non-empty simply connected open set with $U\neq\C$,
+			then there exists a biholomorphic map $f:U\to\D$.
+			
+			\textbf{Uniqueness.}
+			Given $z_0\in U$, there is a unique such $f$ with
+			$f(z_0)=0$ and $f'(z_0)>0$ (or more generally $f'(z_0)\in\partial\D$).
+			
+		
+		\end{minipage}
+	};  
+	%------------ Riemann mapping theorem Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Riemann mapping theorem};
 \end{tikzpicture}
 
 
@@ -939,7 +1127,7 @@ $f(\Omega)$ is an open set.
 			\begin{itemize}
 				\item Let $ f: Y \rightarrow X $ be a covering map and $ \gamma [a,b]\rightarrow X  $ be a curve from $ x_0$ to $ x_1 $ in $ X $. Suppose $ y_0 \in f^{-1}(\{x_0\}) $. Then there exists a unique lift $ \widetilde{\gamma} [a,b]\rightarrow Y	$ of $ \gamma $ w.r.t. $ f $ s.t. $ \widetilde{\gamma} (a)=y_0.$
 				\item For connected $ X $ let $ f: Y \rightarrow X $ be a covering map. Suppose $ x_0,x_1 \in X $. Then the cardinality of $ f^{-1} (x_0)$ is the same as the cardinality of $ f^{-1}(x)$.
-				\item For open subsets $ X,Y $ of $ \C $ let, $ f: Y \rightarrow X $ be a covering map from $ Y $ to $ X $. Let $ Z $ be an open connected subset of $ \C $, which is simply connected and locally connected. Suppose $ g: Z \rightarrow X $ is a continuous map. Then given $ z_0 \in C $ and $ y_0 \in Y $ s.t. $ g(z_0)=f(y_0) $, then there exists a unique lift $ \widetilde{g}:Z \rightarrow Y $ of $ g $ w.r.t $ f $.
+				\item For open subsets $ X,Y $ of $ \C $ let, $ f: Y \rightarrow X $ be a covering map from $ Y $ to $ X $. Let $ Z $ be an open connected subset of $ \C $, which is simply connected and locally connected. Suppose $ g: Z \rightarrow X $ is a continuous map. Then given $ z_0 \in Z $ and $ y_0 \in Y $ s.t. $ g(z_0)=f(y_0) $, then there exists a unique lift $ \widetilde{g}:Z \rightarrow Y $ of $ g $ w.r.t $ f $.
 				\item Let $ \Omega $ be a simply connected, locally connected, open connected subset of $ \C $ and $ g: \Omega \rightarrow \C^* $ be a holomorphic map. Then there exists a lift $ \widetilde{g} : \Omega \rightarrow \C$ s.t. $ \exp(\widetilde{g}) =g.$
 			\end{itemize}
 			
@@ -966,19 +1154,22 @@ $f(\Omega)$ is an open set.
 \end{tikzpicture}
 
 
-%------------ Little Picard's theorem ---------------
-\begin{tikzpicture};
+%------------ Picard theorems ---------------
+\begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
 			\begin{itemize}
-				\item Let $ \Omega $ be an open connected subset of $ \C $ which is simply connected. Let $ f: \Omega \rightarrow \C $ which omits 0 and 1. Then there exists a holomorphic function $ g:\Omega \rightarrow \C $ s.t. $ f(z)=-\exp(\pi i \cosh (2g(z))) $
-				\item The function $ g $ as defined above doesn't contain any disk of radius $ 1 $.
+				\item \textbf{Covering: }There is a universal covering $F:\D\to\C\setminus\{0,1\}$;
+				any holomorphic $f:\Omega\to\C\setminus\{0,1\}$ with simply connected $\Omega$
+				factors as $f = F\circ g$.
+				\item \textbf{Little Picard:} A non-constant entire function omits at most one value in $\C$.
+				\item \textbf{Great Picard:} At an essential singularity $z_0$, $f$ assumes every complex
+				value, with at most one exception, infinitely often in any neighbourhood of $z_0$.
 			\end{itemize}
-			\textbf{Little Picard's theorem: }If $ f $ is an entire function which omits two points, then $ f $ is a constant function.
 		\end{minipage}
-	};  
-	%------------ Little Picard's theorem Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Little Picard's theorem};
+	};
+	%------------ Picard theorems Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Picard theorems};
 \end{tikzpicture}
 
 % ==============================================================
