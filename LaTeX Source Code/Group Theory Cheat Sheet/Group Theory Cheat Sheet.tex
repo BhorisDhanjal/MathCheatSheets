@@ -290,7 +290,7 @@ Here, the last form is a case of 2-cycle (transposition).
 	\textbf{Second Isomorphism Theorem:}\\
 	For a group $G$ with, $A, B \leq G$ and, $A \trianglelefteq N_G(B)$.
 Then $AB \leq G, \\ B\trianglelefteq AB, A \cap B \trianglelefteq A$ and, $AB/B \cong A/ A \cap B$\\
-	\textbf{The Third Isomoprhism Theorem:}\\
+	\textbf{The Third Isomorphism Theorem:}\\
 	For a group $G$ with, $H, K \trianglelefteq G$ and, $H\leq K$. Then $K/H \trianglelefteq G/H$ and, $\frac{G/H}{K/H}\cong G/K$
 	\end{minipage}
 };
@@ -299,22 +299,54 @@ Then $AB \leq G, \\ B\trianglelefteq AB, A \cap B \trianglelefteq A$ and, $AB/B 
 \end{tikzpicture}
 
 
-
-
-%------------ Class equations and Orbit-stabilizer Theorem Content ---------------
+%------------ Orbit–stabilizer Theorem ---------------
 \begin{tikzpicture}
-\node [mybox] (box){%
-    \begin{minipage}{0.3\textwidth}
-    \textbf{Class equation} of a finite group $G$ is written as:\\
-    $|G|=|Z(G)|+|\sum(\text{Conjugancy classes of G})|$\\
-    \textbf{Oribit-stabilizer Theorem:}\\
-    For a group $G$ acting on a set $X$, for any $x\ \in\ X$ we have,  $|Gx||G_x|=|G|$
-    
-    \end{minipage}
-};
-%------------ Class equations and Orbit-stabilizer Theorem Header ---------------------
-'\node[fancytitle, right=10pt] at (box.north west) {Class equations and Orbit-stabilizer Theorem};
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			\textbf{Orbit–stabilizer Theorem:}\\
+			Let a finite group $G$ act on a set $X$. For $x \in X$ denote its orbit by $Gx$
+			and its stabilizer by $G_x$. Then the map
+			$G/G_x \to Gx$, $gG_x \mapsto gx$, is a bijection, so
+			$|Gx| = [G : G_x]$ and hence $|Gx|\,|G_x| = |G|$.
+		\end{minipage}
+	};
+	\node[fancytitle, right=10pt] at (box.north west) {Orbit–stabilizer Theorem};
 \end{tikzpicture}
+
+%------------ Orbit decomposition and class equation ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			For a finite group $G$ acting on a finite set $X$ we have the
+			\textbf{orbit decomposition}
+			$X = \bigsqcup_i Gx_i$, where $x_i$ run over orbit representatives, so
+			$|X| = \sum_i |Gx_i| = \sum_i [G : G_{x_i}]$.
+			For the conjugation action of $G$ on itself, the orbits are conjugacy classes
+			and the fixed points are $Z(G)$. The resulting formula
+			$$|G| = |Z(G)| + \sum_i [G : C_G(x_i)]$$
+			(with $x_i$ running over non-central conjugacy classes) is the
+			\textbf{class equation} of $G$.
+		\end{minipage}
+	};
+	\node[fancytitle, right=10pt] at (box.north west) {Orbit decomposition and class equation};
+\end{tikzpicture}
+%------------ p-group actions and fixed points ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			Let $G$ be a finite $p$-group acting on a finite set $X$. Write
+			$\mathrm{Fix}(X) = \{x \in X \mid gx = x \ \forall g \in G\}$. Then
+			$$|X| \equiv |\mathrm{Fix}(X)| \pmod p.$$
+			In particular, if $p \nmid |X|$, the action has a fixed point.
+			Applying this to the conjugation action of a $p$-group on itself gives
+			the class equation
+			$|G| = |Z(G)| + p k$, so $Z(G) \ne 1$ and more generally every finite
+			$p$-group has nontrivial center.
+		\end{minipage}
+	};
+	\node[fancytitle, right=10pt] at (box.north west) {p-group actions and fixed points};
+\end{tikzpicture}
+
 
 %------------ Cayley's Theorem Content ---------------
 \begin{tikzpicture}
@@ -328,45 +360,98 @@ Then $AB \leq G, \\ B\trianglelefteq AB, A \cap B \trianglelefteq A$ and, $AB/B 
 '\node[fancytitle, right=10pt] at (box.north west) {Cayley's Theorem};
 \end{tikzpicture}
 
-%------------ Automorphisms Content ---------------
+%------------ Automorphisms ---------------
 \begin{tikzpicture}
-\node [mybox] (box){%
-    \begin{minipage}{0.3\textwidth}
-    \textbf{Automorphism} of $G$ is defined as an isomorphism from $G$ onto itself.\\
-    The set of all automorphisms of $G$ is denoted by Aut($G$)
-    \end{minipage}
-};
-%------------ Automorphisms Header ---------------------
-'\node[fancytitle, right=10pt] at (box.north west) {Automorphisms};
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			An \textbf{automorphism} of $G$ is an isomorphism $G \to G$. The set
+			$\mathrm{Aut}(G)$ is a group under composition.
+			For $g \in G$, the map $x \mapsto gxg^{-1}$ is an \textbf{inner automorphism}.
+			The inner automorphisms form a normal subgroup
+			$\mathrm{Inn}(G) \le \mathrm{Aut}(G)$ with
+			$\mathrm{Inn}(G) \cong G/Z(G)$. The quotient
+			$\mathrm{Out}(G) = \mathrm{Aut}(G)/\mathrm{Inn}(G)$ is the group of
+			\textbf{outer automorphisms}.
+			Some facts:\\
+			$\bullet$ $\mathrm{Aut}(\mathbb{Z}/n\mathbb{Z}) \cong (\mathbb{Z}/n\mathbb{Z})^\times$.\\
+			$\bullet$ For $n \ne 2,6$, every automorphism of $S_n$ is inner, so
+			$\mathrm{Aut}(S_n) = \mathrm{Inn}(S_n)$.\\
+			$\bullet$ $S_6$ has a nontrivial outer automorphism:
+			$\mathrm{Out}(S_6) \ne 1$.
+		\end{minipage}
+	};
+	\node[fancytitle, right=10pt] at (box.north west) {Automorphisms};
 \end{tikzpicture}
 
-%------------ p-groups and Sylow p-groups Content ---------------
+%------------ p-groups and Sylow p-groups ---------------
 \begin{tikzpicture}
-\node [mybox] (box){%
-    \begin{minipage}{0.3\textwidth}
-    \textbf{• p-group} is defined as a group of order $p^a$ for some $a \geq 1$. Sub-groups of $G$ which are p-groups are called p-subgroups.\\
-    \textbf{• Sylow p-group} is defined as a group of order $p^am$, where $p \nmid m$, a subgroup of order $p^a$ is called a Sylow p-subgroup of $G$. $Syl_p(G)$ is the set of Sylow p-subgroups of $G$.
-    \end{minipage}
-};
-%------------ p-groups and Sylow p-groups Header ---------------------
-'\node[fancytitle, right=10pt] at (box.north west) {p-groups and Sylow p-groups};
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			A \textbf{p-group} is a finite group of order $p^a$ for some prime $p$ and $a \ge 1$.
+			Subgroups of $G$ which are $p$-groups are called $p$-subgroups.
+			If $|G| = p^a m$ with $p \nmid m$, a \textbf{Sylow p-subgroup} of $G$ is a
+			subgroup of order $p^a$. The set of Sylow $p$-subgroups is denoted $Syl_p(G)$.
+		\end{minipage}
+	};
+	\node[fancytitle, right=10pt] at (box.north west) {p-groups and Sylow p-groups};
+\end{tikzpicture}
+%------------ Sylow Theorems ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			Let $|G| = p^a m$ with $p \nmid m$.
+			
+			\textbf{First Sylow Theorem:}
+			$G$ has a subgroup of order $p^a$ (a Sylow $p$-subgroup).
+			
+			\textbf{Second Sylow Theorem:} Any two Sylow $p$-subgroups of $G$ are conjugate.
+
+			\textbf{Third Sylow Theorem:}
+			If $n_p$ is the number of Sylow $p$-subgroups, then
+			$n_p \equiv 1 \pmod p$ and $n_p \mid m$.
+
+			\textbf{(“Fourth” Sylow consequence):}
+			A Sylow $p$-subgroup $P$ is normal in $G$ iff $n_p = 1$ (equivalently,
+			$P$ is the unique Sylow $p$-subgroup).
+		\end{minipage}
+	};
+	\node[fancytitle, right=10pt] at (box.north west) {Sylow Theorems};
 \end{tikzpicture}
 
-
-%------------ The Sylow Theorems Content ---------------
+%------------ Sylow consequences ---------------
 \begin{tikzpicture}
-\node [mybox] (box){%
-    \begin{minipage}{0.3\textwidth}
-    \textbf{First Sylow Theorem:}\\
-    If $p$ divides $|G|$, then $G$ has a Sylow p-subgroup.\\
-    \textbf{Second Sylow Theorem:}\\
-    All Sylow p-subgroups of $G$ are conjugate to each other for a fixed $p$.\\
-    \textbf{Third Sylow Theorem:}\\
-    $n_p \equiv 1 (\text{mod}\ p)$, where $n_p$ is the number of Sylow p-subgroups of G.
-    \end{minipage}
-};
-%------------ The Sylow Theorems Header ---------------------
-'\node[fancytitle, right=10pt] at (box.north west) {The Sylow Theorems};
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			Let $G$ be a finite group and $p$ a prime.
+			
+			$\bullet$ Every $p$-subgroup of $G$ is contained in some Sylow $p$-subgroup.\\
+			$\bullet$ If $H \le G$ and $P$ is a Sylow $p$-subgroup of $G$, then
+			$P \cap H$ is a Sylow $p$-subgroup of $H$.\\
+			$\bullet$ If $H \le G$ and $[G:H]$ is coprime to $p$, then any
+			Sylow $p$-subgroup of $H$ is a Sylow $p$-subgroup of $G$.\\
+			$\bullet$ If $[G:H]$ is a power of $p$, then $H$ contains a Sylow
+			$p$-subgroup of $G$.
+		\end{minipage}
+	};
+	\node[fancytitle, right=10pt] at (box.north west) {Sylow consequences};
+\end{tikzpicture}
+%------------ Frattini subgroup and Frattini argument ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			The \textbf{Frattini subgroup} $\Phi(G)$ of a group $G$ is the
+			intersection of all maximal subgroups of $G$ (for a finite $p$-group,
+			the intersection of its maximal subgroups). It is characteristic in $G$.
+			
+			For a finite $p$-group $G$, the quotient $G/\Phi(G)$ is an elementary
+			abelian $p$-group; its dimension over $\mathbb{F}_p$ equals the minimal
+			number of generators of $G$.
+			
+			\textbf{Frattini argument:} If $N \trianglelefteq G$ and $P$ is a Sylow
+			$p$-subgroup of $N$, then $G = N_G(P)\,N$.
+		\end{minipage}
+	};
+	\node[fancytitle, right=10pt] at (box.north west) {Frattini subgroup and Frattini argument};
 \end{tikzpicture}
 
 %------------ Commutators Content ---------------
@@ -384,7 +469,8 @@ Then $AB \leq G, \\ B\trianglelefteq AB, A \cap B \trianglelefteq A$ and, $AB/B 
 				\item $xy=yx \iff [x,y]=1$
 				\item $H \trianglelefteq G \iff [H,G] \leq H$
 				\item $G/G'$ is abelian and its the largest abelian quotient of $G.$ It is called the \textbf{abelianization} of $G$.
-				\item Any homomorphism from $G$ to an abelian group $A$ factors through $G'$. i.e. its universal 
+				\item Any homomorphism from $G$ to an abelian group $A$ factors through $G/G'$ (via the natural map $G \to G/G'$).
+			
 			\end{itemize}
 		\end{minipage}
 	};
@@ -406,42 +492,76 @@ Then $AB \leq G, \\ B\trianglelefteq AB, A \cap B \trianglelefteq A$ and, $AB/B 
 	'\node[fancytitle, right=10pt] at (box.north west) {Direct products};
 	
 \end{tikzpicture}
-
-%------------ Semidirect products Content ---------------
+%------------ Semidirect products ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			Let $H, K$ be groups and $\varphi $ be a homomorphism from $K \to \textrm{Aut}(H)$. The semidirect product of $H $ and $K$ with respect to $\varphi $ denoted as $H \rtimes_\varphi H$ is defined as an ordered pair $(h,k), h \in H, k \in K$ with multiplication defined as $(h_1,k_1)(h_2,k_2)=(h_1k_1h_2, k_1k_2).$
+			\textbf{External semidirect product:}\\
+			Given groups $H, K$ and a homomorphism $\varphi : K \to \mathrm{Aut}(H)$,
+			the semidirect product $H \rtimes_\varphi K$ is the set $H \times K$ with
+			multiplication
+			$$(h_1,k_1)(h_2,k_2) = (h_1\,\varphi(k_1)(h_2),\,k_1k_2).$$[2pt]
+			\textbf{Internal semidirect product:}\\
+			A group $G$ is an internal semidirect product of subgroups $H,K$ if\\
+			$\bullet$ $H \trianglelefteq G$, \quad $\bullet$ $HK = G$, \quad $\bullet$ $H \cap K = 1$.\\
+			Then the map $H \rtimes_\varphi K \to G$, $(h,k) \mapsto hk$, is an isomorphism
+			for a suitable $\varphi : K \to \mathrm{Aut}(H)$ given by conjugation.
+			Different $\varphi$ that differ by inner automorphisms of $H$ give isomorphic
+			semidirect products; only the outer class of $\varphi$ matters.
 		\end{minipage}
 	};
-	%------------ Semidirect products Header ---------------------
-	'\node[fancytitle, right=10pt] at (box.north west) {Semidirect products};
-	
+	\node[fancytitle, right=10pt] at (box.north west) {Semidirect products};
 \end{tikzpicture}
 
 
-%------------ Fundamental theorem of finite abelian groups Content ---------------
+%------------ Exact sequences and extensions ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			Every finite abelian group can be written as a direct product of cyclic groups of prime power order.
+			A \textbf{short exact sequence} of groups is
+			$$1 \to N \xrightarrow{i} G \xrightarrow{\pi} Q \to 1,$$
+			where $i$ is injective, $\pi$ is surjective and $\mathrm{im}(i) = \ker(\pi)$.\\
+			This encodes that $N \trianglelefteq G$ and $G/N \cong Q$; one says that
+			$G$ is an \textbf{extension} of $Q$ by $N$.
+			The sequence \textbf{splits} if there is a homomorphism
+			$s : Q \to G$ with $\pi \circ s = \mathrm{id}_Q$. In this case
+			$G \cong N \rtimes Q$ is a semidirect product.
 		\end{minipage}
 	};
-%------------ Fundamental theorem of finite abelian groups Header ---------------------
-	'\node[fancytitle, right=10pt] at (box.north west) {Fundamental theorem of finite abelian groups};
+	\node[fancytitle, right=10pt] at (box.north west) {Exact sequences and extensions};
 \end{tikzpicture}
+
+
+%------------ Fundamental theorem of finitely generated abelian groups ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			Every finitely generated abelian group $A$ is isomorphic to a direct product
+			of cyclic groups. Equivalently, there is a decomposition (noncanonically)
+			$$A \cong \mathbb{Z}^r \times \mathbb{Z}/n_1\mathbb{Z} \times \cdots \times \mathbb{Z}/n_k\mathbb{Z},$$
+			with $r \ge 0$ and $n_1 \mid n_2 \mid \cdots \mid n_k$. The integers $r$ and
+			$n_i$ are uniquely determined.
+		\end{minipage}
+	};
+	\node[fancytitle, right=10pt] at (box.north west) {Finitely generated abelian groups};
+\end{tikzpicture}
+
+
 
 %------------ Schur-Zassenhaus Theorem Content ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			If $G$ is a finite group and $N \trianglelefteq G	$ and $(|G|, |G/N|)=1$ then $G=N \rtimes G/N$
+			\textbf{Schur-Zassenhaus Theorem:}\\
+			Let $G$ be a finite group and $N \trianglelefteq G$ with $\gcd(|N|,|G/N|) = 1$.
+			Then there exists a subgroup $H \leq G$ such that $|H| = |G/N|$ and
+			$G = N \rtimes H$ with $N \cap H = 1$. Any two such complements $H$ are conjugate in $G$.
 		\end{minipage}
 	};
 	%------------ Schur-Zassenhaus Theorem Header ---------------------
-	'\node[fancytitle, right=10pt] at (box.north west) {Schur-Zassenhaus Theorem};
-	
+	\node[fancytitle, right=10pt] at (box.north west) {Schur-Zassenhaus Theorem};
 \end{tikzpicture}
+
 
 %------------ Simple groups and Composition Series Content ---------------
 \begin{tikzpicture}
@@ -456,15 +576,87 @@ Then $AB \leq G, \\ B\trianglelefteq AB, A \cap B \trianglelefteq A$ and, $AB/B 
 	'\node[fancytitle, right=10pt] at (box.north west) {Simple groups and Composition Series};
 \end{tikzpicture}
 
-%------------ Jordan H\"{o}lder theorem Content ---------------
+%------------ Zassenhaus lemma and Schreier refinement ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			Every finite non trivial group $G$ has a composition series and the composition factors are unique up to permutation.
+			\textbf{Zassenhaus (butterfly) lemma:}\\
+			Let $G$ be a group with subgroups $A,C$ and normal subgroups
+			$B \trianglelefteq A$, $D \trianglelefteq C$. Then there is an isomorphism
+			$$\frac{(A \cap C)B}{(A \cap D)B} \cong
+			\frac{(A \cap C)D}{(B \cap C)D}.$$
+			This is visualized by the “butterfly” diagram in the subgroup lattice.
+			
+			\textbf{Schreier refinement theorem:}
+			Any two subnormal series of a group $G$ admit equivalent refinements
+			(their factor groups can be refined so that the multisets of factors are
+			isomorphic up to order). Jordan–Hölder is the special case for
+			composition series.
 		\end{minipage}
 	};
-	%------------ Jordan H\"{o}lder theorem Header ---------------------
-	'\node[fancytitle, right=10pt] at (box.north west) {Jordan H\"{o}lder theorem};
+	\node[fancytitle, right=10pt] at (box.north west) {Zassenhaus lemma and Schreier refinement};
+\end{tikzpicture}
+
+
+%------------ Jordan–Hölder theorem ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			A \textbf{composition series} of a nontrivial finite group $G$ is a subnormal
+			series
+			$$1 = N_0 \trianglelefteq N_1 \trianglelefteq \cdots \trianglelefteq N_k = G$$
+			with each factor $N_{i+1}/N_i$ simple. These $N_{i+1}/N_i$ are the
+			\textbf{composition factors}.
+			
+			\textbf{Jordan–Hölder theorem:}
+			Every finite nontrivial group has a composition series, and any two
+			composition series have the same multiset of composition factors,
+			up to isomorphism and order.
+		\end{minipage}
+	};
+	\node[fancytitle, right=10pt] at (box.north west) {Jordan–Hölder theorem};
+\end{tikzpicture}
+
+
+
+%------------ Examples of simple groups ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			Basic examples of finite simple groups:
+			\begin{itemize}
+				\item Simple abelian groups are exactly the cyclic groups $C_p$ of prime order $p$.
+				\item For $n \ge 5$, the alternating group $A_n$ is non-abelian and simple.
+				\item Projective special linear groups: for a field $F$,
+				$SL_n(F) = \{A \in GL_n(F) \mid \det A = 1\}$, 
+				$PSL_n(F) = SL_n(F)/Z(SL_n(F))$.
+				Over a finite field $\mathbb{F}_q$, $PSL_n(\mathbb{F}_q)$ is simple for $n \ge 2$
+				except $(n,q) = (2,2)$ and $(2,3)$; in particular $PSL_2(q)$ is simple for all $q \ge 4$.
+			\end{itemize}
+		\end{minipage}
+	};
+	%------------ Examples of simple groups Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Examples of simple groups};
+\end{tikzpicture}
+%------------ Free groups and presentations ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			A \textbf{free group} on a set $X$ is a group $F(X)$ with an
+			injection $X \to F(X)$ such that any map $X \to G$ into a group $G$
+			extends uniquely to a homomorphism $F(X) \to G$ (universal property).
+			Elements are reduced words in the generators and their inverses.
+			
+			A \textbf{presentation} of a group is
+			$G = \langle X \mid R \rangle$, the quotient of $F(X)$ by the normal
+			subgroup generated by a set of relators $R$. Every group has some
+			presentation; if both $X$ and $R$ are finite, $G$ is
+			\textbf{finitely presented}.
+			
+			(Nielsen–Schreier) Every subgroup of a free group is free.
+		\end{minipage}
+	};
+	\node[fancytitle, right=10pt] at (box.north west) {Free groups and presentations};
 \end{tikzpicture}
 
 
@@ -472,38 +664,374 @@ Then $AB \leq G, \\ B\trianglelefteq AB, A \cap B \trianglelefteq A$ and, $AB/B 
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			A group $G$ is called \textbf{solvable} if there is a chain of normal subgroups with each subsequent quotient group being abelian.
-			
-			Alternatively if there exists $G^{(n)}=1$ for some $n\geq 0$ where we define the \textbf{commutator/derived series} as follows,
-			\[ G^{(0)}=G, G^{(1)}=[G,G], \text{ and } G^{(i+1)}=[G^{(i)},G^{(i)}]\]
-			
-			\begin{itemize}
-				\item If $N \trianglelefteq G$ and $N, G/N$ are solvable then $G$ is solvable.
-				\item Burnsides theorem: If $|G|=p^aq^b$ for primes $p,q$ then $G$ is solvable
-				\item Feit-Thompson: All finite groups of odd order are solvable.
-			\end{itemize}
-			
-			
+			A group $G$ is called \textbf{solvable} if it admits a subnormal series
+			$$1 = G_0 \trianglelefteq G_1 \trianglelefteq \cdots \trianglelefteq G_n = G$$
+			with each factor $G_{i+1}/G_i$ abelian.\\[2pt]
+			Equivalently, the \textbf{derived series}
+			$$G^{(0)} = G,\quad G^{(1)} = [G,G],\quad G^{(i+1)} = [G^{(i)},G^{(i)}]$$
+			terminates: $G^{(n)} = 1$ for some $n$.\\[4pt]
+			Basic properties:\\
+			$\bullet$ If $H \le G$ and $G$ is solvable, then $H$ is solvable.\\
+			$\bullet$ If $\varphi : G \to K$ is a homomorphism and $G$ is solvable,
+			then $\varphi(G)$ and $G/\ker\varphi$ are solvable.\\
+			$\bullet$ If $N \trianglelefteq G$ and both $N$ and $G/N$ are solvable,
+			then $G$ is solvable (extensions of solvable groups are solvable).\\
+			$\bullet$ A finite direct product of solvable groups is solvable.\\[4pt]
+			For finite groups, $G$ is solvable $\iff$ all composition factors of $G$
+			are cyclic of prime order. Burnside: if $|G| = p^a q^b$ ($p,q$ primes),
+			then $G$ is solvable. Feit–Thompson: every finite group of odd order
+			is solvable.
 		\end{minipage}
 	};
-%------------ Solvable groups Header ---------------------
-	'\node[fancytitle, right=10pt] at (box.north west) {Solvable groups};
+	%------------ Solvable groups Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Solvable groups};
 \end{tikzpicture}
 
 %------------ Nilpotent groups Content ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			A group is called \textbf{nilpotent} if its \textbf{lower central series} defined below terminates,
-			\[ G=G_0\trianglerighteq G_1 \trianglerighteq \cdots \trianglerighteq G_n = 1, G_{i+1}=[G_i,G].\]
-			and $n$ is called its nilpotency class.
-			
-			
+			A group $G$ is called \textbf{nilpotent} if its \textbf{lower central series}
+			$$G_0 = G,\quad G_{i+1} = [G_i,G]$$
+			terminates: $G_n = 1$ for some $n \ge 0$. The least such $n$ is the
+			nilpotency class.\\[4pt]
+			Equivalent descriptions:\\
+			$\bullet$ $G$ has a finite \textbf{central series}
+			$$1 = G_0 \trianglelefteq G_1 \trianglelefteq \cdots \trianglelefteq G_n = G$$
+			with each factor $G_{i+1}/G_i \subseteq Z(G/G_i).$\\
+			$\bullet$ (Upper central series) There is a chain
+			$$1 = Z_0 \subseteq Z_1 \subseteq \cdots \subseteq Z_c = G$$
+			with $Z_{i+1}/Z_i = Z(G/Z_i)$ for all $i$; this terminates iff $G$ is nilpotent.\\
+			$\bullet$ For finite $G$: $G$ is nilpotent $\iff$ $G$ is the (internal)
+			direct product of its Sylow $p$-subgroups $\iff$ every Sylow subgroup is normal.\\
+			$\bullet$ (Normalizer condition, for finite $G$) $G$ is nilpotent
+			$\iff$ every proper subgroup $H < G$ satisfies $H < N_G(H)$.\\[4pt]
+			Closure properties:\\
+			$\bullet$ Subgroups of nilpotent groups are nilpotent.\\
+			$\bullet$ Homomorphic images and quotients of nilpotent groups are nilpotent.\\
+			$\bullet$ A finite direct product of nilpotent groups is nilpotent.\\[4pt]
+			In particular, every finite $p$-group is nilpotent, and every nilpotent
+			group is solvable.
 		\end{minipage}
 	};
 	%------------ Nilpotent groups Header ---------------------
-	'\node[fancytitle, right=10pt] at (box.north west) {Nilpotent groups};
+	\node[fancytitle, right=10pt] at (box.north west) {Nilpotent groups};
 \end{tikzpicture}
+
+%------------ Linear representations ---------------
+\begin{tikzpicture}
+	\node[mybox](box){%
+		\begin{minipage}{0.3\textwidth}
+			Let $G$ be a finite group over $\mathbb{C}$.
+			\begin{itemize}
+				\item A (linear) representation of $G$ is a homomorphism
+				$\rho : G \to GL(V)$, where $V$ is a finite-dimensional
+				complex vector space.
+				\item The degree of $\rho$ is $\dim_{\mathbb{C}} V$.
+				\item Choosing a basis of $V$ identifies $\rho$ with
+				$\rho : G \to GL_n(\mathbb{C})$ (matrix representation).
+				\item Two representations $(V,\rho)$ and $(W,\sigma)$ are
+				equivalent if there exists a linear isomorphism
+				$T : V \to W$ with $T\rho(g) = \sigma(g)T$ for all $g$.
+				\item Finite-dimensional representations of $G$ over $\mathbb{C}$
+				are the same as finite-dimensional left modules over
+				the group algebra $\mathbb{C}G$.
+			\end{itemize}
+		\end{minipage}
+	};
+	\node[fancytitle,right=10pt] at (box.north west){Linear representations};
+\end{tikzpicture}
+
+%------------ Subrepresentations and irreducibility ---------------
+\begin{tikzpicture}
+	\node[mybox](box){%
+		\begin{minipage}{0.3\textwidth}
+			Let $(V,\rho)$ be a representation of $G$.
+			\begin{itemize}
+				\item A subspace $W \subseteq V$ is $G$-invariant if
+				$\rho(g)W \subseteq W$ for all $g \in G$.
+				Then $W$ is a subrepresentation.
+				\item The quotient $V/W$ becomes a representation via
+				$\rho(g)(v+W) = \rho(g)v + W$.
+				\item A nonzero representation is irreducible if it has no proper
+				nonzero subrepresentation.
+				\item A representation is reducible if it is not irreducible.
+				\item A representation is completely reducible if it is a direct
+				sum of irreducible subrepresentations.
+				\item Direct sum: if $(V_i,\rho_i)$ are representations, then
+				$\bigoplus_i V_i$ with $g\cdot(v_1,\dots,v_k)
+				= (\rho_1(g)v_1,\dots,\rho_k(g)v_k)$ is a representation.
+			\end{itemize}
+		\end{minipage}
+	};
+	\node[fancytitle,right=10pt] at (box.north west){Subrepresentations and irreducibility};
+\end{tikzpicture}
+
+%------------ Basic constructions and examples ---------------
+\begin{tikzpicture}
+	\node[mybox](box){%
+		\begin{minipage}{0.3\textwidth}
+			\begin{itemize}
+				\item Trivial representation: $V = \mathbb{C}$, $\rho(g) = 1$.
+				\item Sign representation of $S_n$: $V = \mathbb{C}$,
+				$\rho(\sigma) = \mathrm{sgn}(\sigma)$.
+				\item Permutation representation: if $G$ acts on a finite set $X$,
+				let $V = \mathbb{C}^X$ with basis $\{e_x\}$ and
+				$g\cdot e_x = e_{gx}$.
+				\item Regular representation: $V = \mathbb{C}G$ with basis
+				$\{e_g\}$ and $h\cdot e_g = e_{hg}$.
+				\item Tensor product: for $V,W$, define $g\cdot(v\otimes w)
+				= \rho_V(g)v \otimes \rho_W(g)w$.
+				\item Dual representation: $V^* = \mathrm{Hom}_{\mathbb{C}}(V,\mathbb{C})$
+				with $(g\cdot f)(v) = f(\rho(g^{-1})v)$.
+			\end{itemize}
+		\end{minipage}
+	};
+	\node[fancytitle,right=10pt] at (box.north west){Basic constructions and examples};
+\end{tikzpicture}
+
+%------------ Intertwiners and Schur's Lemma ---------------
+\begin{tikzpicture}
+	\node[mybox](box){%
+		\begin{minipage}{0.3\textwidth}
+			Let $(V,\rho)$ and $(W,\sigma)$ be representations.
+			\begin{itemize}
+				\item A homomorphism of representations (intertwiner) is a
+				linear map $T : V \to W$ with $T\rho(g) = \sigma(g)T$ for all $g$.
+				\item Denote by $\mathrm{Hom}_G(V,W)$ the space of intertwiners.
+				Put $\mathrm{End}_G(V) = \mathrm{Hom}_G(V,V)$.
+				\item Schur's Lemma (1): if $V,W$ are irreducible, any
+				$T \in \mathrm{Hom}_G(V,W)$ is either $0$ or an isomorphism.
+				\item Schur's Lemma (2): if $V$ is irreducible over $\mathbb{C}$,
+				then $\mathrm{End}_G(V)$ consists of scalar multiples of the
+				identity.
+			\end{itemize}
+		\end{minipage}
+	};
+	\node[fancytitle,right=10pt] at (box.north west){Intertwiners and Schur's Lemma};
+\end{tikzpicture}
+
+%------------ Unitary representations and Maschke's theorem ---------------
+\begin{tikzpicture}
+	\node[mybox](box){%
+		\begin{minipage}{0.3\textwidth}
+			\begin{itemize}
+				\item A Hermitian inner product $(\cdot,\cdot)$ on $V$ is
+				$G$-invariant if $(\rho(g)v,\rho(g)w) = (v,w)$ for all $g$.
+				Then $\rho(g)$ is unitary.
+				\item For any inner product $(\cdot,\cdot)$ on $V$, define
+				$(v,w)_G = \frac{1}{|G|}\sum_{g\in G}(\rho(g)v,\rho(g)w)$.
+				Then $(\cdot,\cdot)_G$ is $G$-invariant.
+				\item Over $\mathbb{C}$, every finite group representation is
+				equivalent to a unitary representation.
+				\item Maschke's Theorem: if $\mathrm{char}(\mathbb{C})=0$
+				(or more generally $\mathrm{char}(F)\nmid |G|$), every
+				representation of $G$ is completely reducible.
+				\item Equivalently, for every $G$-invariant subspace
+				$W\subseteq V$ there exists a $G$-invariant complement
+				$W'$ with $V = W \oplus W'$.
+			\end{itemize}
+		\end{minipage}
+	};
+	\node[fancytitle,right=10pt] at (box.north west){Unitary representations and Maschke's theorem};
+\end{tikzpicture}
+
+%------------ Characters: definition and basic facts ---------------
+\begin{tikzpicture}
+	\node[mybox](box){%
+		\begin{minipage}{0.3\textwidth}
+			Let $(V,\rho)$ be a representation.
+			\begin{itemize}
+				\item The character of $V$ is $\chi_V : G \to \mathbb{C}$ given by
+				$\chi_V(g) = \mathrm{tr}(\rho(g))$.
+				\item $\chi_V(1) = \dim_{\mathbb{C}} V$.
+				\item If $V\cong W$ as representations, then $\chi_V = \chi_W$.
+				\item For irreducible representations over $\mathbb{C}$,
+				equality of characters implies equivalence.
+				\item $\chi_V$ is constant on conjugacy classes
+				(class function).
+				\item For direct sums and tensor products:
+				$\chi_{V\oplus W} = \chi_V + \chi_W$, and
+				$\chi_{V\otimes W} = \chi_V\chi_W$ (pointwise).
+				\item If $V$ is unitary, then $\chi_{V^*}(g)
+				= \overline{\chi_V(g)}$.
+				\item For a permutation representation from an action on $X$,
+				$\chi(g)$ equals the number of fixed points of $g$ in $X$.
+			\end{itemize}
+		\end{minipage}
+	};
+	\node[fancytitle,right=10pt] at (box.north west){Characters: definition and basic facts};
+\end{tikzpicture}
+
+%------------ Inner product and orthogonality of characters ---------------
+\begin{tikzpicture}
+	\node[mybox](box){%
+		\begin{minipage}{0.3\textwidth}
+			Let $\mathrm{CF}(G)$ be the space of complex class functions on $G$.
+			\begin{itemize}
+				\item Inner product on $\mathrm{CF}(G)$:
+				$\langle \varphi,\psi\rangle
+				= \frac{1}{|G|}\sum_{g\in G}\varphi(g)\overline{\psi(g)}$.
+				\item If $\chi_V,\chi_W$ are characters, then
+				$\langle \chi_V,\chi_W\rangle$ is a nonnegative integer.
+				It equals the multiplicity of $W$ in $V$.
+				\item Orthogonality: if $\chi_i,\chi_j$ are irreducible
+				characters, then $\langle \chi_i,\chi_j\rangle = \delta_{ij}$.
+				\item A character $\chi$ is irreducible iff
+				$\langle \chi,\chi\rangle = 1$.
+				\item If $V \cong \bigoplus_i m_i V_i$ with $V_i$ irreducible,
+				then $\chi_V = \sum_i m_i\chi_i$ and
+				$m_i = \langle \chi_V,\chi_i\rangle$.
+			\end{itemize}
+		\end{minipage}
+	};
+	\node[fancytitle,right=10pt] at (box.north west){Inner product and orthogonality of characters};
+\end{tikzpicture}
+
+%------------ Main character formulas ---------------
+\begin{tikzpicture}
+	\node[mybox](box){%
+		\begin{minipage}{0.3\textwidth}
+			Let $C_1,\dots,C_h$ be the conjugacy classes of $G$ and
+			$\chi_1,\dots,\chi_h$ the irreducible characters.
+			\begin{itemize}
+				\item The number of irreducible characters equals the number
+				of conjugacy classes.
+				\item The irreducible characters form an orthonormal basis of
+				$\mathrm{CF}(G)$ with respect to the inner product above.
+				\item Let $d_i = \chi_i(1)$ be the degrees of irreducible
+				representations. Then
+				$\sum_i d_i^2 = |G|$.
+				\item Row orthogonality: for $i\neq j$,
+				$\sum_{g\in G}\chi_i(g)\overline{\chi_j(g)} = 0$, and
+				for $i=j$, the sum is $|G|$.
+				\item Column orthogonality: if $g,h$ are representatives of
+				different conjugacy classes, then
+				$\sum_i \chi_i(g)\overline{\chi_i(h)} = 0$; if $g,h$ lie in
+				the same class $C$, then
+				$\sum_i \chi_i(g)\overline{\chi_i(h)} = |G|/|C|$.
+			\end{itemize}
+		\end{minipage}
+	};
+	\node[fancytitle,right=10pt] at (box.north west){Main character formulas};
+\end{tikzpicture}
+
+%------------ Regular representation and group algebra ---------------
+\begin{tikzpicture}
+	\node[mybox](box){%
+		\begin{minipage}{0.3\textwidth}
+			Let $R$ be the regular representation on $V = \mathbb{C}G$.
+			\begin{itemize}
+				\item The character of $R$ satisfies
+				$\chi_R(1) = |G|$ and $\chi_R(g) = 0$ for $g\neq 1$.
+				\item If $V_i$ are the irreducible representations with
+				degrees $d_i$, then
+				$R \cong \bigoplus_i d_i V_i$.
+				\item Comparing characters gives
+				$\sum_i d_i^2 = |G|$ and shows that $V_i$ occurs in $R$
+				with multiplicity $d_i$.
+				\item As an algebra,
+				$\mathbb{C}G \cong \prod_i M_{d_i}(\mathbb{C})$.
+				\item There exist central idempotents $e_i \in \mathbb{C}G$
+				with $1 = \sum_i e_i$, $e_ie_j = 0$ for $i\neq j$, and
+				$e_i\mathbb{C}G \cong M_{d_i}(\mathbb{C})$.
+			\end{itemize}
+		\end{minipage}
+	};
+	\node[fancytitle,right=10pt] at (box.north west){Regular representation and group algebra};
+\end{tikzpicture}
+
+%------------ Permutation characters and Burnside's lemma ---------------
+\begin{tikzpicture}
+	\node[mybox](box){%
+		\begin{minipage}{0.3\textwidth}
+			Let $G$ act on a finite set $X$ and consider the permutation
+			representation on $V = \mathbb{C}^X$.
+			\begin{itemize}
+				\item The character satisfies
+				$\chi(g) = |\{x\in X \mid gx = x\}|$.
+				\item The number of $G$-orbits in $X$ is
+				$\frac{1}{|G|}\sum_{g\in G}\chi(g)$.
+				This is the Cauchy–Frobenius (Burnside) lemma.
+				\item For the conjugation action of $G$ on itself,
+				permutation characters encode the sizes of conjugacy classes
+				and centralizers.
+			\end{itemize}
+		\end{minipage}
+	};
+	\node[fancytitle,right=10pt] at (box.north west){Permutation characters and Burnside's lemma};
+\end{tikzpicture}
+
+%------------ Restriction, induction and Frobenius reciprocity ---------------
+\begin{tikzpicture}
+	\node[mybox](box){%
+		\begin{minipage}{0.3\textwidth}
+			Let $H\leq G$ be a subgroup.
+			\begin{itemize}
+				\item Restriction: a representation $V$ of $G$ becomes a
+				representation of $H$ by restricting $\rho$ to $H$.
+				For characters: $(\mathrm{Res}^G_H\chi)(h)=\chi(h)$ for $h\in H$.
+				\item Induction: a representation $W$ of $H$ has an induced
+				representation $\mathrm{Ind}^G_H W$ of $G$ with
+				$\dim(\mathrm{Ind}^G_H W) = [G:H]\dim W$.
+				\item Frobenius reciprocity (characters):
+				if $\theta$ is a character of $H$ and $\chi$ a character of $G$, then
+				$\langle \mathrm{Ind}^G_H\theta,\chi\rangle_G
+				= \langle \theta,\mathrm{Res}^G_H\chi\rangle_H$.
+			\end{itemize}
+		\end{minipage}
+	};
+	\node[fancytitle,right=10pt] at (box.north west){Restriction, induction and Frobenius reciprocity};
+\end{tikzpicture}
+
+%------------ Irreducible representations of abelian groups ---------------
+\begin{tikzpicture}
+	\node[mybox](box){%
+		\begin{minipage}{0.3\textwidth}
+			Let $G$ be a finite abelian group.
+			\begin{itemize}
+				\item Every irreducible representation of $G$ over $\mathbb{C}$
+				is $1$-dimensional.
+				\item Irreducible representations are group homomorphisms
+				$\chi : G \to \mathbb{C}^\times$.
+				\item There are exactly $|G|$ distinct irreducible characters;
+				they form the dual group $\widehat{G}$ under pointwise product.
+				\item The regular representation of $G$ decomposes as the direct
+				sum of all irreducible characters, each with multiplicity $1$.
+				\item The character table of $G$ is a square matrix of size
+				$|G|\times |G|$ and is a discrete Fourier transform on $G$.
+			\end{itemize}
+		\end{minipage}
+	};
+	\node[fancytitle,right=10pt] at (box.north west){Irreducible representations of abelian groups};
+\end{tikzpicture}
+
+%------------ Example: representations of S_3 ---------------
+\begin{tikzpicture}
+	\node[mybox](box){%
+		\begin{minipage}{0.3\textwidth}
+			For $S_3$:
+			\begin{itemize}
+				\item Conjugacy classes:
+				identity $(1)$, transpositions $(12)$, $3$-cycles $(123)$.
+				Class sizes: $1,3,2$.
+				\item There are $3$ irreducible representations:
+				\begin{itemize}
+					\item Trivial: degree $1$, character values $(1,1,1)$.
+					\item Sign: degree $1$, character values $(1,-1,1)$.
+					\item Standard $2$-dimensional: degree $2$, character
+					values $(2,0,-1)$.
+				\end{itemize}
+				\item Degrees satisfy
+				$1^2 + 1^2 + 2^2 = 6 = |S_3|$.
+				\item The regular representation of $S_3$ decomposes as
+				$R \cong 1 \oplus 1_{\mathrm{sgn}} \oplus 2\cdot V_{\mathrm{std}}$.
+			\end{itemize}
+		\end{minipage}
+	};
+	\node[fancytitle,right=10pt] at (box.north west){Example: representations of $S_3$};
+\end{tikzpicture}
+
 
 
 \end{multicols*}

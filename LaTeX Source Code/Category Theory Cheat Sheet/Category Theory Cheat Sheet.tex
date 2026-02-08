@@ -314,7 +314,9 @@
 					
 					
 					\begin{itemize}
-						\item Covariant and contravariant representable functors are faithful.
+					 \item The Yoneda embeddings $y:\mathbf{C}\to[\mathbf{C}^{op},\mathbf{Set}]$ and $y':\mathbf{C}^{op}\to[\mathbf{C},\mathbf{Set}]$ are fully faithful.
+					\item In general, $\mathrm{Hom}_{\mathbf{C}}(A,-)$ (or $\mathrm{Hom}_{\mathbf{C}}(-,A)$) need not be faithful unless $A$ is a generator.
+					
 					\end{itemize}
 				\end{minipage}	
 			};
@@ -611,7 +613,7 @@
 				\begin{minipage}{0.3\textwidth}
 					A \textbf{congruence} on a category is a equivalance relation on arrows ($ f \sim g $) s.t.
 					\begin{itemize}
-						\item $ f \sim g \implies \mathrm{dom}(f)=\mathrm{dom}(f)$ and $ \mathrm{cod}(f)=\mathrm{cod}(g) $.
+						\item $ f \sim g \implies \mathrm{dom}(f)=\mathrm{dom}(g)$ and $ \mathrm{cod}(f)=\mathrm{cod}(g) $.
 						\item $ f \sim g \implies bfa \sim bga $
 					\end{itemize}
 					Let $ C_0, C_1 $ denote the class of objects and arrows for a category $ \mathbf{C} $. Then a \textbf{congruence category} $ \mathbf{C}^\sim  $ is defined as follows,
@@ -836,7 +838,8 @@
 				\begin{minipage}{0.3\textwidth}
 					A Heyting algebra is a poset with finite meets, joins, least and greatest element (0 and 1) and exponentials defined as implications, $a \wedge b  \leq c$ iff $a \leq b \implies c$.
 					\begin{itemize}
-						\item A Heyting algebra is a distributive lattice. But only complete distributive lattices form Heyting algebras.
+						\item A Heyting algebra is a bounded lattice in which each $a\wedge-$ has a right adjoint $a\Rightarrow-$ (hence it is distributive).
+						
 						\item Every boolean algebra is a Heyting algebra with implication defined classically $p \implies q $ iff $\neg p \vee q$.
 						\item Heyting algebras form an algebraic analogue for intuitionistic propositional calculi as every IPC gives rise to an associated Heyting algebra where formulae are identified by syntactic equivalence. In particular this gives a correspondence between Heyting algebras and IPC.
 					\end{itemize}
@@ -979,7 +982,7 @@
 					\begin{itemize}
 						\item The Yoneda embedding $y: \mathbf{C} \to \mathbf{Sets}^{\mathbf{C}^\mathbf{op}}$ is full and faithful.
 						\item $yC \cong yC' \implies C \cong C'$ for objects $C,C'$
-						\item All objects in presheaves are colimits of some representable functors (in particular the end). 
+						\item All objects in presheaves are colimits of some representable functors (in particular the category of elements). 
 						\item So Yoneda embedding is the free cocompletion of any category. In particular there is a UMP for maps from $\mathbf{C}$ to any cocomplete categories factoring through presheaves wrt Yoneda embedding
 					\end{itemize}	
 				\end{minipage}	
@@ -994,7 +997,7 @@
 				\begin{minipage}{0.3\textwidth}
 					For locally small category $\mathbf{C}$ its category of presheaves denoted as $\mathbf{Sets}^{\mathbf{C}^{op}} $ or $[\mathbf{C}^{\mathrm{op}}, \mathbf{Sets}]$ or $\hat{\mathbf{C}}$ is complete, cocomplete and is cartesian closed. Due to these properties its often useful to examine the presheaves of a category.
 					
-					We also have that the Yoneda embedding preserves products, exponentials and is continuous (preserves limits).
+					We also have that the Yoneda embedding is fully faithful and preserves limits. If the category is cartesian closed then it also preseves exponentials of representables.
 				\end{minipage}	
 			};
 			%------------Category of presheaves Header ---------------------
@@ -1081,6 +1084,14 @@
 			\node [mybox] (box){%
 				\begin{minipage}{0.3\textwidth}
 					
+					\textbf{String diagrams} are graphical calculus for monoidal categories:
+					objects are \emph{wires}, morphisms are \emph{boxes}.
+					Tensor product is horizontal juxtaposition, composition is vertical stacking.
+					Coherence means equalities can be checked by planar isotopy. The below example is from  Wikipedia.
+					\begin{center}
+								\includegraphics[width=0.5\linewidth]{Commutative_diagram_to_string_diagram.svg.png}
+					\end{center}
+			
 					
 				\end{minipage}	
 			};
@@ -1109,15 +1120,17 @@
 		\begin{tikzpicture}
 			\node [mybox] (box){%
 				\begin{minipage}{0.3\textwidth}
-					A \textbf{topoi} is a category which is has small limits, has exponentials and has a subobject classifier.
+					 An (elementary) \textbf{topos} is a category with finite limits, exponentials (cartesian closed), and a subobject classifier.
+					For small $\mathbf{C}$, the presheaf category $[\mathbf{C}^{op},\mathbf{Set}]$ is a (elementary) topos.
 					
-					A \textbf{subobject classifer} is an object $\Omega $ along with an arrow $1 \to \Omega $ universal such that it induces a subobject $S$ as the pullback to the following diagram for some arbitrary object $C$,
+					
+					A \textbf{subobject classifer} is an object $\Omega $ along with an arrow $t: 1 \to \Omega $ universal such for all monos \( U \hookrightarrow C \) there exists unique \( u:C \to \Omega  \) and the below square is a pullback
 					\[\begin{tikzcd}
 						U &1 \\
 						C & \Omega
 						\arrow["u"', dashed, from=2-1, to=2-2]
 						\arrow["t", from=1-2, to=2-2]
-						\arrow[tail, from=1-1, to=2-1]
+						\arrow[hook, from=1-1, to=2-1]
 						\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
 						\arrow[from=1-1, to=1-2]
 					\end{tikzcd}\]
@@ -1170,7 +1183,7 @@
 						\item Operations in Heyting algebras can interpreted as biconditions and now its clear to see how they are built on adjoints.
 						\item In first order logic, quantifiers form adjoints, in particular if you have a functor between propositions of some $\mathcal{L}-$structures then $\forall$ is its right adjoint and $\exists $ is its left adjoint
 						\item For arbitrary diagonal functors over some small index category say $J$, $\lim_{\rightarrow_J} \dashv \Delta_J \dashv \lim_{\leftarrow_J}$, in particular when diagonal functor is over 2 we get $+ \dashv \Delta_2 \dashv \times $
-						\item Free functors are right adjoint to forgetful functors
+						\item Free functors are left adjoint to forgetful functors
 						\item Right adjoints preserve limits and left adjoints preserve colimits.
 					\end{itemize}
 					
@@ -1199,7 +1212,7 @@
 				\begin{minipage}{0.3\textwidth}
 					For a locally small, complete category $\mathbf{C}$, some other category $\mathbf{D}$. A limit preserving functor $F:\mathbf{C} \to \mathbf{D}$ has a left adjoint	iff it satisfies the following `solution set' condition
 					
-					For all objects $X \in \mathbf{D}$ there is a `solution' set of $\{S_i\}_{i=I} \in \mathbf{C}$ such that for any object $A \in \mathbf{C}$ and arrow $f:X \to F(C)$ there exists a particular $i \in I $ such the the below maps exist and commute,
+					For all objects $X \in \mathbf{D}$ there is a `solution' set of $\{S_i\}_{i=I} \in \mathbf{C}$ such that for any object $A \in \mathbf{C}$ and arrow $f:X \to F(A)$ there exists a particular $i \in I $ such the the below maps exist and commute,
 					
 					\[\begin{tikzcd}
 						{S_i} && X & {F(S_i)} \\
@@ -1219,7 +1232,14 @@
 		\begin{tikzpicture}
 			\node [mybox] (box){%
 				\begin{minipage}{0.3\textwidth}
-					For a locally small, complete category $\mathbf{C}$, some other category $\mathbf{D}$. A limit preserving functor $U:\mathbf{C} \to \mathbf{X}$ has a left adjoint	iff
+				An adjunction $F:\mathbf{C}\rightleftarrows \mathbf{D}:U$ is equivalently
+				given by a \textbf{unit} $\eta:1_{\mathbf{C}}\Rightarrow UF$ and a
+				\textbf{counit} $\varepsilon:FU\Rightarrow 1_{\mathbf{D}}$ such that
+				$(U\varepsilon)\circ(\eta U)=1_U$ and $(\varepsilon F)\circ(F\eta)=1_F$.
+				
+				The hom-set bijection is
+				$\Phi(f)=U(f)\circ \eta_C$ and $\Psi(g)=\varepsilon_D\circ F(g)$.
+				
 				\end{minipage}	
 			};
 			%------------ Adjoints in terms of units and counits Header ---------------------
@@ -1232,6 +1252,15 @@
 		\begin{tikzpicture}
 			\node [mybox] (box){%
 				\begin{minipage}{0.3\textwidth}
+					A \textbf{monad} on $\mathbf{C}$ is $(T,\eta,\mu)$ with
+					$T:\mathbf{C}\to\mathbf{C}$ and natural transformations
+					$\eta:1\Rightarrow T$, $\mu:T^2\Rightarrow T$ satisfying
+					$\mu\circ T\mu=\mu\circ \mu T$ and $\mu\circ T\eta=1_T=\mu\circ \eta T$.
+					
+					From an adjunction $F\dashv U$ we get a monad $T=UF$ with $\eta$ the unit
+					and $\mu=U\varepsilon F$.
+					A $T$-algebra is $(A,a:TA\to A)$ with $a\circ \eta_A=1$ and
+					$a\circ Ta=a\circ \mu_A$.
 					
 				\end{minipage}	
 			};
@@ -1244,7 +1273,7 @@
 		\begin{tikzpicture}
 			\node [mybox] (box){%
 				\begin{minipage}{0.3\textwidth}
-					A wedge is defined for a functor $F: \mathbf{C}^{op}\times \mathbf{C} \to \mathbf{D}$ as an object and along with a class of morphisms $(E,w_{-})$ where, $E \in \mathrm{Ob}({\mathbf{C}})$ and $w_A: e\to F(A,A)$ satisfying the naturality condition
+					A wedge is defined for a functor $F: \mathbf{C}^{op}\times \mathbf{C} \to \mathbf{D}$ as an object and along with a class of morphisms $(e,w_{-})$ where, $e \in \mathrm{Ob}({\mathbf{D}})$ and $w_A: e\to F(A,A)$ satisfying the naturality condition
 					
 					\[\begin{tikzcd}
 						B && e & {F(A,A)} \\
@@ -1300,7 +1329,7 @@
 		\begin{tikzpicture}
 			\node [mybox] (box){%
 				\begin{minipage}{0.3\textwidth}
-					We begin with a notion of a purely combinatorial construction $\Delta$ denote the category with objects as non empty finite ordered sets and order preserving maps. Objects in $\Delta$ are denoted as $[n]=\{1,2,\dots,n\}$, i.e. an $n-$simplex. This is sometimes defined as the full subcategory of $\mathrm{Cat}$ on free categories of finite directed graphs equivalently finite ordinals with order preserving maps.
+					We begin with a notion of a purely combinatorial construction $\Delta$ denote the category with objects as non empty finite ordered sets and order preserving maps. Objects in $\Delta$ are denoted as $[n]=0<1<\dots<n$, i.e. an $n-$simplex. This is sometimes defined as the full subcategory of $\mathrm{Cat}$ on free categories of finite directed graphs equivalently finite ordinals with order preserving maps.
 				\end{minipage}	
 			};
 			%------------ n simplex Header ---------------------
@@ -1326,7 +1355,7 @@
 					These obey the standard relations,
 					\begin{align*}
 						d_id_j &= d_{j-1}d_i, &i <j\\
-						s_is_j&=s_{j+1}s_im &i \leq j\\
+						s_is_j&=s_{j+1}s_i &i \leq j\\
 						d_is_j&=1, &i=j,j+1\\
 						d_is_j&=s_{j-1}d_i,& i<j\\
 						d_is_j&=s_jd_{i-1},& i>j+1
@@ -1345,6 +1374,11 @@
 		\begin{tikzpicture}
 			\node [mybox] (box){%
 				\begin{minipage}{0.3\textwidth}
+					\textbf{Dold--Kan:} there is an equivalence between simplicial abelian groups
+					$s\mathbf{Ab}$ and chain complexes $\mathbf{Ch}_{\ge 0}(\mathbf{Ab})$.
+					The normalized complex is
+					$N(X)_n=\bigcap_{i>0}\ker(d_i:X_n\to X_{n-1})$ with differential $d_0$.
+					Under this equivalence, simplicial homotopy groups correspond to homology.
 					
 				\end{minipage}	
 			};
@@ -1353,16 +1387,23 @@
 		\end{tikzpicture}
 		
 		
-		%------------ Nerves and realizations  ---------------
+		%------------ Nerves and realizations ---------------
 		\begin{tikzpicture}
 			\node [mybox] (box){%
 				\begin{minipage}{0.3\textwidth}
-					This forms a generalization of the discussion of simplical sets over enriched categories
+					\textbf{Standard simplices:} $\Delta[n]=\mathrm{Hom}_{\Delta}(-,[n])$.
+					Boundary $\partial\Delta[n]\subset\Delta[n]$ is the union of all $(n-1)$-faces; horn $\Lambda^k[n]$ is the union of all faces except the $k$th.
+					
+					\textbf{Nerve:} for a small category $\mathbf{C}$, $N(\mathbf{C})_n=\mathrm{Fun}([n],\mathbf{C})$.
+					
+					\textbf{Sing/realization:} $\mathrm{Sing}(X)_n=\mathrm{Top}(|\Delta[n]|,X)$ and there is an adjunction
+					$|{-}|:\mathbf{sSet}\rightleftarrows \mathbf{Top}:\mathrm{Sing}$.
 				\end{minipage}	
 			};
-			%------------ Nerves and realizations Header ---------------------
+			%------------ Nerves Header ---------------------
 			\node[fancytitle, right=10pt] at (box.north west) {Nerves and realizations};
 		\end{tikzpicture}
+		
 		
 		
 		%------------ Abelian/Derived categories  ---------------
@@ -1371,7 +1412,7 @@
 				\begin{minipage}{0.3\textwidth}
 					An additive category is an Ab-Enriched category which has all finite coproducts.
 					
-					A kernel is a pullback of a morphism $f:A \to B$ and the unique morphism from $0 \to B$. Provided initials and pullbacks exist.
+					A kernel is a pullback of a morphism $f:A \to B$ and the unique morphism from $0 \to B$. (Note this is the zero object). Provided initials and pullbacks exist.
 					
 					\[\begin{tikzcd}
 						{\ker f} & 0 \\
@@ -1389,65 +1430,190 @@
 				\end{minipage}	
 			};
 			%------------ Abelian/Derived categories  Header ---------------------
-			\node[fancytitle, right=10pt] at (box.north west) {Abelian/Derived categories};
+			\node[fancytitle, right=10pt] at (box.north west) {Abelian categories};
 		\end{tikzpicture}
 		
-		%------------ Freyd-Mitchell Embedding  ---------------
+			%------------ Freyd-Mitchell Embedding  ---------------
 		\begin{tikzpicture}
 			\node [mybox] (box){%
 				\begin{minipage}{0.3\textwidth}
-					There exists a full, faithful and exact functor from every small abelian category to some $R-$Mod category where $R$ is a commutative ring.
+					There exists a full, faithful and exact functor from every small abelian category to some $R-$Mod category where $R$ is a ring.
 				\end{minipage}	
 			};
 			%------------ Freyd-Mitchell Embedding Header ---------------------
 			\node[fancytitle, right=10pt] at (box.north west) {Freyd-Mitchell Embedding};
 		\end{tikzpicture}
 		
-		
-		%------------ Groupoidification  ---------------
+		%------------ Localization of categories ---------------
 		\begin{tikzpicture}
 			\node [mybox] (box){%
 				\begin{minipage}{0.3\textwidth}
+					Let $\mathbf{C}$ be a category and let $W\subset \mathrm{Mor}(\mathbf{C})$.
+					A \textbf{localization} $\mathbf{C}[W^{-1}]$ is a category with a functor
+					$i:\mathbf{C}\to \mathbf{C}[W^{-1}]$ such that $i(w)$ is an isomorphism for every $w\in W$.
 					
+					It satisfies the following universal property.
+					For every category $\mathbf{D}$ and every functor $F:\mathbf{C}\to \mathbf{D}$ sending $W$ to isomorphisms
+					there exists a functor $\overline{F}:\mathbf{C}[W^{-1}]\to \mathbf{D}$ and a natural isomorphism
+					$\overline{F}\circ i \cong F$.
 				\end{minipage}	
 			};
-			%------------ Groupoidification Header ---------------------
-			\node[fancytitle, right=10pt] at (box.north west) {Groupoidification};
+			\node[fancytitle, right=10pt] at (box.north west) {Localization};
 		\end{tikzpicture}
 		
-		%------------ Infinity groupoids  ---------------
+		
+	%------------ Derived categories ---------------
+	\begin{tikzpicture}
+		\node [mybox] (box){%
+			\begin{minipage}{0.3\textwidth}
+				Let $\mathbf{A}$ be an abelian category.
+				Write $\mathbf{Ch}(\mathbf{A})$ for the category of cochain complexes in $\mathbf{A}$.
+				
+				A morphism $f:X\to Y$ in $\mathbf{Ch}(\mathbf{A})$ is a \textbf{quasi-isomorphism} if
+				$H^n(f):H^n(X)\to H^n(Y)$ is an isomorphism for every $n$.
+				Write $\mathrm{qis}\subset \mathrm{Mor}(\mathbf{Ch}(\mathbf{A}))$ for the class of quasi-isomorphisms.
+				
+				The \textbf{derived category} is
+				$\mathbf{D}(\mathbf{A})=\mathbf{Ch}(\mathbf{A})[\mathrm{qis}^{-1}]$.
+				
+				If $\mathbf{A}=R\text{-}\mathrm{Mod}$ there is a standard model structure on $\mathbf{Ch}(R)$ with weak equivalences the quasi-isomorphisms
+				and then $\mathbf{D}(R)\cong \mathrm{Ho}(\mathbf{Ch}(R))$.
+			\end{minipage}	
+		};
+		\node[fancytitle, right=10pt] at (box.north west) {Derived categories};
+	\end{tikzpicture}
+	%------------ Triangulated categories ---------------
+	\begin{tikzpicture}
+		\node [mybox] (box){%
+			\begin{minipage}{0.3\textwidth}
+				A \textbf{triangulated category} is an additive category $\mathbf{T}$ with an autoequivalence $[1]:\mathbf{T}\to\mathbf{T}$
+				and a chosen class of diagrams called \textbf{distinguished triangles}
+				$X\to Y\to Z\to X[1]$.
+				In practice the key example is $\mathbf{T}=\mathbf{D}(\mathbf{A})$.
+				
+				Given a morphism $f:X\to Y$ of complexes the \textbf{mapping cone} $\mathrm{Cone}(f)$ is a complex
+				and there is a canonical triangle in $\mathbf{D}(\mathbf{A})$
+				\[
+				X \xrightarrow{\,f\,} Y \longrightarrow \mathrm{Cone}(f) \longrightarrow X[1].
+				\]
+				Distinguished triangles in $\mathbf{D}(\mathbf{A})$ are exactly those isomorphic to such cone triangles.
+			\end{minipage}	
+		};
+		\node[fancytitle, right=10pt] at (box.north west) {Triangulated categories};
+	\end{tikzpicture}
+	
+		
+	
+		
+		
+%		%------------ Groupoidification  ---------------
+%		\begin{tikzpicture}
+%			\node [mybox] (box){%
+%				\begin{minipage}{0.3\textwidth}
+%					
+%				\end{minipage}	
+%			};
+%			%------------ Groupoidification Header ---------------------
+%			\node[fancytitle, right=10pt] at (box.north west) {Groupoidification};
+%		\end{tikzpicture}
+		%------------ Weak factorization systems  ---------------
 		\begin{tikzpicture}
 			\node [mybox] (box){%
 				\begin{minipage}{0.3\textwidth}
+					Write $i\,\square\,p$ if every commutative square admits a diagonal lift.
+					For a class $\mathcal{M}$ set ${}^{\square}\mathcal{M}=\{i\mid i\square m\ \forall m\in\mathcal{M}\}$ and
+					$\mathcal{M}^{\square}=\{p\mid i\square p\ \forall i\in\mathcal{M}\}$.
 					
+					A \textbf{weak factorization system} (WFS) on $\mathbf{C}$ is a pair $(\mathcal{L},\mathcal{R})$ such that
+					$\mathcal{L}={}^{\square}\mathcal{R}$ and $\mathcal{R}=\mathcal{L}^{\square}$, and every morphism $f$ factors functorially as
+					$f=r\circ \ell$ with $\ell\in\mathcal{L}$ and $r\in\mathcal{R}$.
 				\end{minipage}	
 			};
-			%------------ Infinity groupoids Header ---------------------
-			\node[fancytitle, right=10pt] at (box.north west) {$\mathbf{\infty}$ groupoids};
+			%------------ WFS Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Weak factorization systems};
 		\end{tikzpicture}
 		
+	%------------ Infinity groupoids  ---------------
+	\begin{tikzpicture}
+		\node [mybox] (box){%
+			\begin{minipage}{0.3\textwidth}
+				Write $\Delta[n]$ for the standard $n$-simplex and $\Lambda^k[n]\subset \Delta[n]$ for the $k$th horn (all faces except the $k$th).
+				
+				A simplicial set $X$ is a \textbf{Kan complex} if every horn map $\Lambda^k[n]\to X$ extends to $\Delta[n]\to X$ for all $n\ge 1$ and $0\le k\le n$.
+				
+				Kan complexes model \textbf{$\infty$-groupoids} (homotopy types).
+			\end{minipage}	
+		};
+		%------------ Infinity groupoids Header ---------------------
+		\node[fancytitle, right=10pt] at (box.north west) {$\mathbf{\infty}$ groupoids};
+	\end{tikzpicture}
+	
 		
-		%------------ Higher categories  ---------------
-		\begin{tikzpicture}
-			\node [mybox] (box){%
-				\begin{minipage}{0.3\textwidth}
-					
-				\end{minipage}	
-			};
-			%------------ Higher categories Header ---------------------
-			\node[fancytitle, right=10pt] at (box.north west) {Higher categories};
-		\end{tikzpicture}
 		
-		%------------ Model categories  ---------------
-		\begin{tikzpicture}
-			\node [mybox] (box){%
-				\begin{minipage}{0.3\textwidth}
-					
-				\end{minipage}	
-			};
-			%------------ Model categories Header ---------------------
-			\node[fancytitle, right=10pt] at (box.north west) {Model categories};
-		\end{tikzpicture}
+	%------------ Higher categories  ---------------
+	\begin{tikzpicture}
+		\node [mybox] (box){%
+			\begin{minipage}{0.3\textwidth}
+				An \textbf{\((\infty,1)\)-category} has $k$-morphisms for all $k\ge 1$ with all $k\ge 2$ morphisms invertible up to higher equivalence.
+				
+				A \textbf{quasicategory} is a simplicial set $X$ with fillers for all \textbf{inner horns}
+				$\Lambda^k[n]\to X$ for $0<k<n$.
+				
+				Kan complexes are precisely quasicategories where \emph{all} horns fill (so all $1$-morphisms are invertible up to homotopy).
+				
+				Many \((\infty,1)\)-categories arise from model categories by inverting weak equivalences homotopy-coherently; Quillen equivalences give equivalences on the resulting \((\infty,1)\)-categories.
+			\end{minipage}	
+		};
+		%------------ Higher categories Header ---------------------
+		\node[fancytitle, right=10pt] at (box.north west) {Higher categories};
+	\end{tikzpicture}
+	
+%------------ Model categories  ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			A \textbf{model category} is a bicomplete category $\mathbf{M}$ with classes
+			$\mathcal{W}$ (weak equivalences), $\mathcal{C}$ (cofibrations), $\mathcal{F}$ (fibrations) such that
+			\begin{itemize}
+				\item $\mathcal{W}$ contains all isomorphisms and satisfies $2$-out-of-$3$.
+				\item Lifting holds: $\mathcal{C}\,\square\,(\mathcal{F}\cap\mathcal{W})$ and $(\mathcal{C}\cap\mathcal{W})\,\square\,\mathcal{F}$.
+				\item Factorization holds: every map factors as $p\circ i$ with $i\in\mathcal{C}$ and $p\in\mathcal{F}\cap\mathcal{W}$, and also as $q\circ j$ with $j\in\mathcal{C}\cap\mathcal{W}$ and $q\in\mathcal{F}$.
+			\end{itemize}
+			The homotopy category is $\mathrm{Ho}(\mathbf{M})=\mathbf{M}[\mathcal{W}^{-1}]$.
+			
+			A \textbf{Quillen adjunction} is an adjunction $F:\mathbf{M}\rightleftarrows \mathbf{N}:U$ with $F$ preserving cofibrations and trivial cofibrations.
+			It is a \textbf{Quillen equivalence} if for every cofibrant $X$ in $\mathbf{M}$ and fibrant $Y$ in $\mathbf{N}$, a map $F X\to Y$ is in $\mathcal{W}_{\mathbf{N}}$ if and only if its adjoint $X\to UY$ is in $\mathcal{W}_{\mathbf{M}}$.
+			Equivalently, the derived functors $L F:\mathrm{Ho}(\mathbf{M})\to \mathrm{Ho}(\mathbf{N})$ and $R U$ are inverse equivalences.
+		\end{minipage}	
+	};
+	%------------ Model categories Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Model categories};
+\end{tikzpicture}
+
+%------------ Examples of model categories ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+		
+			$\mathbf{sSet}$ with Kan--Quillen model structure.
+			Weak equivalences are weak homotopy equivalences.
+			Fibrations are Kan fibrations.
+			Cofibrations are monomorphisms.
+			
+			$\mathbf{Top}$ with Quillen model structure.
+			Weak equivalences are weak homotopy equivalences.
+			Fibrations are Serre fibrations.
+			Cofibrations are retracts of relative CW inclusions.
+			
+			$\mathbf{Ch}(R)$ for a ring $R$.
+			Weak equivalences are quasi-isomorphisms.
+			A standard choice is fibrations degreewise surjections.
+			This model category presents the derived category via $\mathrm{Ho}(\mathbf{Ch}(R))\cong \mathbf{D}(R)$.
+		\end{minipage}	
+	};
+	\node[fancytitle, right=10pt] at (box.north west) {Model category examples};
+\end{tikzpicture}
+
 		
 		% ==============================================================
 	\end{multicols*}
