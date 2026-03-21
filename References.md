@@ -11,6 +11,12 @@ Textbook references
 10. Categorical Homotopy Theory - Riehl
 11. Algebraic Topology - Hatcher
 12. Topology: A Categorical Approach - Bradley, Bryson and Terilla
+13. Homotopical Topology - Fuchs and Fomenko
+14. A Concise Course in Algebraic Topology - Peter May
+15. Introduction to Topology and Modern Analysis - Simmons
+16. Introduction to Smooth Manifolds - Lee
+17. Riemannian Geometry - Petersen
+18. Lecture notes on Algebraic Geometry - Gathmann
 
 Online references
 1. Wolfram Mathworld

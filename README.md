@@ -14,7 +14,10 @@ The topics I've included are:
 
 In progress
 1. Commutative Algebra
-2. Algebraic topology 
+2. Algebraic Topology 
+3. Algebraic Geometry
+4. Functional Analysis
+5. Differential Geometry
 
 You are free to use and share these sheets. If you notice a mistake or want to collaborate to add a new subject feel free to make a pull request here.
 
