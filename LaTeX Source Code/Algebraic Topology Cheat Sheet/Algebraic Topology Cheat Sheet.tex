@@ -42,6 +42,8 @@
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\D}{\mathbb{D}}
 \newcommand{\F}{\mathbb{F}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\Aut}{\mathrm{Aut}}
 % \colorbox[HTML]{e4e4e4}{\makebox[\textwidth-2\fboxsep][l]{texto}}
 \begin{document}
 \definecolor{orange}{RGB}{255, 115,0}
@@ -178,33 +180,136 @@ rectangle, rounded corners, inner sep=10pt, inner ysep=10pt]
 	};
 	\node[fancytitle, right=10pt] at (box.north west) {CW Complex};
 \end{tikzpicture}
-%------------ Constructions on CW complexes ---------------
+
+
+
+%------------ Wedge, smash and suspension ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
+			For pointed spaces \((X,x_0)\), \((Y,y_0)\):
 			
+			\begin{itemize}
+				\item \textbf{Wedge sum:} \(X\vee Y=(X\sqcup Y)/(x_0\sim y_0).\)
+				\item \textbf{Smash product: }\( X\wedge Y=(X\times Y)/(X\vee Y).\)
+				\item \textbf{Reduced suspension:} \( \Sigma X=(X\times I)/(X\times\{0\}\cup X\times\{1\}\cup \{x_0\}\times I). \)
+			\end{itemize}
+			If \(X,Y\) are pointed CW complexes, then \(X\vee Y\), \(X\wedge Y\), and \(\Sigma X\) admit CW structures.
 		\end{minipage}
 	};
-	%------------ Constructions on CW complexes Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Constructions on CW complexes};
+	%------------ Wedge, smash and suspension Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Wedge, smash and suspension};
+\end{tikzpicture}
+%------------ Cone, cylinder and mapping cone ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			For a space \(X\):
+			\begin{itemize}
+				\item \textbf{Cone:} \(CX=(X\times I)/(X\times\{1\}).\)
+				\item \textbf{Cylinder:} \(X\times I.\)
+			\end{itemize}
+			
+			For \(f:X\to Y\):
+			\begin{itemize}
+				\item \textbf{Mapping cylinder:} \(M_f=((X\times I)\sqcup Y)/((x,0)\sim f(x)).\)
+				\item \textbf{Mapping cone:} \(C_f=M_f/(X\times\{1\})\cong Y\cup_f CX.\)
+			\end{itemize}
+			
+			If \(X,Y\) are CW complexes and \(f\) is cellular, then \(M_f\) and \(C_f\) admit CW structures.
+		\end{minipage}
+	};
+	%------------ Cone, cylinder and mapping cone Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Cone, cylinder and mapping cone};
 \end{tikzpicture}
 
-%------------ Examples of CW structures ---------------
+%------------ Join and adjunction spaces ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
+			\begin{itemize}
+				\item \textbf{Join:} \(X*Y=(X\times Y\times I)/\sim,\) where \((x,y_1,0)\sim (x,y_2,0)\) and \((x_1,y,1)\sim (x_2,y,1).\)
+				\item \textbf{Adjunction space:} if \(A\subseteq X\) and \(f:A\to Y\), then \(Y\cup_f X=(Y\sqcup X)/(a\sim f(a)\text{ for }a\in A).\)
+			\end{itemize}
 			
+			If \(A\subseteq X\) is a subcomplex and \(f\) is cellular, then \(Y\cup_f X\) is a CW complex.
 		\end{minipage}
 	};
-	%------------ Examples of CW structures Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Examples of CW Structures};
+	%------------ Join and adjunction spaces Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Join and adjunction spaces};
 \end{tikzpicture}
+
+%------------ Cellular maps and skeleta ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			\begin{itemize}
+				\item \textbf{\(n\)-skeleton:} \(X^n=\) union of all cells of dimension \(\le n.\)
+				\item \textbf{Subcomplex:} union of cells closed under boundaries.
+				\item \textbf{Cellular map:} \(f:X\to Y\) with \(f(X^n)\subseteq Y^n\) for all \(n.\)
+				\item \textbf{Characteristic map:} \(D^n_\alpha\to X^n.\)
+				\item \textbf{Attaching map:} \(S^{n-1}_\alpha\to X^{n-1}.\)
+			\end{itemize}
+			
+			Cellular maps preserve skeleta and induce maps on cellular chain complexes.
+		\end{minipage}
+	};
+	%------------ Cellular maps and skeleta Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Cellular maps and skeleta};
+\end{tikzpicture}
+
+%------------ CW approximation and cellular approximation ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			\begin{itemize}
+				\item \textbf{CW approximation:} for every space \(X\), there exists a CW complex \(Z\) and a weak homotopy equivalence \(Z\to X.\)
+				\item \textbf{Cellular approximation theorem:} if \(X,Y\) are CW complexes, every map \(f:X\to Y\) is homotopic to a cellular map.
+				\item More generally, if \(A\subseteq X\) is a subcomplex and \(f:A\to Y\) is cellular, the homotopy may be taken rel \(A.\)
+			\end{itemize}
+		\end{minipage}
+	};
+	%------------ CW approximation and cellular approximation Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {CW approximation and cellular approximation};
+\end{tikzpicture}
+%
+%%------------ Constructions on CW complexes ---------------
+%\begin{tikzpicture}
+%	\node [mybox] (box){%
+%		\begin{minipage}{0.3\textwidth}
+%			Closure properties of CW complexes.
+%			\begin{itemize}
+%				\item A subcomplex \(A\subseteq X\) is a CW complex.
+%				\item If \(A\subseteq X\) is a subcomplex, then the quotient \(X/A\) admits a CW structure.
+%				\item Finite products of CW complexes admit CW structures.
+%				\item If \(X,Y\) are pointed CW complexes, then \(X\vee Y\), \(X\wedge Y\), and \(\Sigma X\) admit CW structures.
+%				\item If \(X\) is a CW complex, then \(CX\) admits a CW structure.
+%				\item If \(f:X\to Y\) is cellular, then \(M_f\) and \(C_f\) admit CW structures.
+%				\item If \(A\subseteq X\) is a subcomplex and \(f:A\to Y\) is cellular, then the adjunction space \(Y\cup_f X\) admits a CW structure.
+%				\item Joins of CW complexes admit CW structures.
+%			\end{itemize}
+%		\end{minipage}
+%	};
+%	%------------ Constructions on CW complexes Header ---------------------
+%	\node[fancytitle, right=10pt] at (box.north west) {Constructions on CW complexes};
+%\end{tikzpicture}
+
+% ==============================================================
+% Chunk 1: Fundamental Group and Covering Space Theory
+% ==============================================================
 
 %------------ Paths and loops ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			
+			Let \(I=[0,1]\).
+			\begin{itemize}
+				\item A \textbf{path} from \(x_0\) to \(x_1\) is a map \(\gamma:I\to X\) with \(\gamma(0)=x_0\), \(\gamma(1)=x_1\).
+				\item A \textbf{loop} at \(x_0\) is a path \(\gamma:I\to X\) with \(\gamma(0)=\gamma(1)=x_0\).
+				\item If \(\gamma:x_0\to x_1\), \(\eta:x_1\to x_2\), then \((\eta*\gamma)(t)=\gamma(2t)\) for \(0\le t\le \tfrac12\), and \((\eta*\gamma)(t)=\eta(2t-1)\) for \(\tfrac12\le t\le 1\).
+				\item The reverse path is \(\overline{\gamma}(t)=\gamma(1-t)\).
+				\item The loop space is \(\Omega(X,x_0)=\{\gamma:I\to X:\gamma(0)=\gamma(1)=x_0\}\).
+			\end{itemize}
 		\end{minipage}
 	};
 	%------------ Paths and loops Header ---------------------
@@ -215,67 +320,542 @@ rectangle, rounded corners, inner sep=10pt, inner ysep=10pt]
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			
+			The \textbf{fundamental groupoid} \(\Pi_1(X)\) is the category with:
+			\begin{itemize}
+				\item objects: points \(x\in X\),
+				\item morphisms \(x_0\to x_1\): paths \(\gamma:x_0\to x_1\) modulo homotopy rel endpoints.
+			\end{itemize}
+			Its composition is induced by concatenation, identities by constant paths, inverses by path reversal, so \(\Pi_1(X)\) is a \textbf{groupoid}.
+			\begin{itemize}
+				\item \(\Hom_{\Pi_1(X)}(x_0,x_1)=\{\text{paths }x_0\to x_1\}/\simeq \text{ rel }\partial I\).
+				\item \(\Aut_{\Pi_1(X)}(x_0)=\Hom_{\Pi_1(X)}(x_0,x_0)\) is a group.
+				\item A map \(f:X\to Y\) induces a functor \(f_*:\Pi_1(X)\to \Pi_1(Y)\), given by \(x\mapsto f(x)\) on objects and \([\gamma]\mapsto [f\circ \gamma]\) on morphisms.
+				\item Thus \(\Pi_1:\mathbf{Top}\to \mathbf{Gpd}\) is a functor.
+			\end{itemize}
 		\end{minipage}
 	};
 	%------------ Fundamental groupoid Header ---------------------
 	\node[fancytitle, right=10pt] at (box.north west) {Fundamental groupoid};
 \end{tikzpicture}
 
-%------------ van Kampen theorem for groupoids ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			
-		\end{minipage}
-	};
-	%------------ van Kampen theorem for groupoids Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {van Kampen theorem for groupoids};
-\end{tikzpicture}
-
 %------------ Fundamental group ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			
+			The \textbf{fundamental group} of \((X,x_0)\) is the automorphism group of \(x_0\) in \(\Pi_1(X)\):
+			\begin{itemize}
+				\item \(\pi_1(X,x_0)=\Aut_{\Pi_1(X)}(x_0)=\Hom_{\Pi_1(X)}(x_0,x_0)\),
+				\item equivalently, \(\pi_1(X,x_0)=\{\text{loops at }x_0\}/\simeq \text{ rel }\partial I\).
+			\end{itemize}
+			The group structure is:
+			\begin{itemize}
+				\item product: \([\eta][\gamma]=[\eta*\gamma]\),
+				\item identity: the constant loop class,
+				\item inverse: \([\gamma]^{-1}=[\overline{\gamma}]\).
+			\end{itemize}
+			Functoriality for based spaces:
+			\begin{itemize}
+				\item a based map \(f:(X,x_0)\to (Y,y_0)\) induces \(f_*:\pi_1(X,x_0)\to \pi_1(Y,y_0)\), \([\gamma]\mapsto [f\circ\gamma]\),
+				\item hence \(\pi_1:\mathbf{Top}_*\to \mathbf{Grp}\) is a functor.
+				\item if \(\alpha:x_0\to x_1\) is a path, then \([\gamma]\mapsto [\overline{\alpha}*\gamma*\alpha]\) gives an isomorphism \(\pi_1(X,x_0)\cong \pi_1(X,x_1)\).
+			\end{itemize}
 		\end{minipage}
 	};
 	%------------ Fundamental group Header ---------------------
 	\node[fancytitle, right=10pt] at (box.north west) {Fundamental group};
 \end{tikzpicture}
 
+%------------ Free products and pushouts ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+	\begin{minipage}{0.3\textwidth}
+		Algebra for van Kampen.
+		\begin{itemize}
+			\item In \(\mathbf{Grp}\), the pushout of \(B\leftarrow A\to C\) is the \textbf{free product with amalgamation} \(B*_{A}C\).
+			\item In \(\mathbf{Gpd}\), pushouts also exist.
+			\item For connected \(U,V,U\cap V\) and \(x_0\in U\cap V\), classical van Kampen gives \(\pi_1(U\cup V,x_0)\cong \pi_1(U,x_0)*_{\pi_1(U\cap V,x_0)}\pi_1(V,x_0)\).
+		\end{itemize}
+	\end{minipage}
+};
+%------------ Free products and pushouts Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Free products and pushouts};
+\end{tikzpicture}
+
+%------------ van Kampen theorem for groupoids ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+	\begin{minipage}{0.3\textwidth}
+		For \(A\subseteq X\), let \(\Pi_1(X,A)\) be the full subgroupoid of \(\Pi_1(X)\) on the objects \(A\).
+		\begin{itemize}
+			\item \(A\) is \textbf{representative} in \(X\) if it meets every path component of \(X\).
+			\item Let \(X=U\cup V\) with \(U,V\) open, and assume \(A\subseteq U\cap V\) is representative in \(U\cap V\).
+			\item Then \(A\) is representative in \(U\), \(V\), and \(X\).
+			\item The inclusions induce a pushout square in \(\mathbf{Gpd}\):
+		\end{itemize}
+		\[
+		\begin{tikzcd}[column sep=small,row sep=small]
+			\Pi_1(U\cap V,A) & \Pi_1(U,A) \\
+			\Pi_1(V,A) & \Pi_1(X,A)
+			\arrow[from=1-1, to=1-2]
+			\arrow[from=1-1, to=2-1]
+			\arrow[from=1-2, to=2-2]
+			\arrow[from=2-1, to=2-2]
+			\arrow["\lrcorner"{anchor=center, pos=0.125, rotate=180}, draw=none, from=2-2, to=1-1]
+		\end{tikzcd}
+		\]
+		\begin{itemize}
+			\item For \(A=\{x_0\}\) and connected \(U,V,U\cap V\), this recovers the usual group version.
+			\item This is a special case of the stronger fact that \(\Pi_1\) preserves homotopy colimits.
+		\end{itemize}
+	\end{minipage}
+};
+%------------ van Kampen theorem for groupoids Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {van Kampen theorem for groupoids};
+\end{tikzpicture}
 %------------ Covering spaces ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			
+			A \textbf{covering map} is a map \(p:\widetilde X\to X\) such that every \(x\in X\) has an open neighborhood \(U\) with \(p^{-1}(U)=\bigsqcup_\alpha U_\alpha\), where each \(p|_{U_\alpha}:U_\alpha\to U\) is a homeomorphism.
+			\begin{itemize}
+				\item Such a \(U\) is \textbf{evenly covered}.
+				\item A \textbf{morphism of coverings} \(g:(\widetilde X,p)\to (\widehat X,q)\) is a map with \(q\circ g=p\).
+				\item Let \(\mathrm{Cov}(X)\) denote the category of coverings over \(X\).
+				\item A covering is a local homeomorphism.
+			\end{itemize}
+			\[
+			\begin{tikzcd}
+				\widetilde X \arrow[rr,"g"] \arrow[dr,"p"'] && \widehat X \arrow[dl,"q"]\\
+				& X &
+			\end{tikzcd}
+			\qquad
+			\begin{tikzcd}
+				U_\alpha \arrow[r,"p|_{U_\alpha}","\cong"'] \arrow[d,hook]
+				& U \arrow[d,hook] \\
+				\widetilde X \arrow[r,"p"']
+				& X
+			\end{tikzcd}
+			\]
 		\end{minipage}
 	};
 	%------------ Covering spaces Header ---------------------
 	\node[fancytitle, right=10pt] at (box.north west) {Covering spaces};
 \end{tikzpicture}
 
-%------------ Lifting and deck transformations ---------------
+%------------ Path lifting and homotopy lifting ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			
+			Lifting properties of a covering \(p:\widetilde X\to X\).
+			\begin{itemize}
+				\item \textbf{Unique path lifting:} if \(\gamma:I\to X\) and \(\widetilde x_0\in p^{-1}(\gamma(0))\), there is a unique lift \(\widetilde\gamma:I\to \widetilde X\) with \(\widetilde\gamma(0)=\widetilde x_0\).
+				\item \textbf{Unique homotopy lifting:} if \(H:Y\times I\to X\) and \(\widetilde H_0:Y\to \widetilde X\) lifts \(H|_{Y\times\{0\}}\), then there is a unique lift \(\widetilde H:Y\times I\to \widetilde X\) with \(\widetilde H|_{Y\times\{0\}}=\widetilde H_0\).
+				\item If \(\widetilde X\) is path connected, then \(p_*:\pi_1(\widetilde X,\widetilde x_0)\to \pi_1(X,x_0)\) is injective.
+				\item Fiber transport along a path \(\gamma:x\to y\) gives a bijection \(T_\gamma:p^{-1}(x)\to p^{-1}(y)\).
+			\end{itemize}
+			\[
+			\begin{tikzcd}
+				& \widetilde X \arrow[d,"p"] \\
+				I \arrow[ur,dashed,"\widetilde\gamma"] \arrow[r,"\gamma"']
+				& X
+			\end{tikzcd}
+			\qquad
+			\begin{tikzcd}
+				Y\times\{0\} \arrow[r,"\widetilde H_0"] \arrow[d,hook]
+				& \widetilde X \arrow[d,"p"] \\
+				Y\times I \arrow[ur,dashed,"\widetilde H"] \arrow[r,"H"']
+				& X
+			\end{tikzcd}
+			\]
 		\end{minipage}
 	};
-	%------------ Lifting and deck transformations Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Lifting and deck transformations};
+	%------------ Path lifting and homotopy lifting Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Path lifting and homotopy lifting};
+\end{tikzpicture}
+
+%------------ Deck transformations ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			A \textbf{deck transformation} of \(p:\widetilde X\to X\) is a homeomorphism \(h:\widetilde X\to \widetilde X\) with \(p\circ h=p\).
+			\begin{itemize}
+				\item They form a group \(\mathrm{Deck}(\widetilde X/X)\).
+				\item \(\mathrm{Deck}(\widetilde X/X)\) acts on each fiber \(p^{-1}(x)\).
+				\item If \(\widetilde X\) is path connected, a deck transformation is determined by its value at one point.
+				\item A connected covering is \textbf{regular} iff \(\mathrm{Deck}(\widetilde X/X)\) acts transitively on one, hence every, fiber.
+			\end{itemize}
+			\[
+			\begin{tikzcd}
+				\widetilde X \arrow[r,"h"] \arrow[dr,"p"']
+				& \widetilde X \arrow[d,"p"] \\
+				& X
+			\end{tikzcd}
+			\]
+		\end{minipage}
+	};
+	%------------ Deck transformations Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Deck transformations};
+\end{tikzpicture}
+
+%------------ Universal covers ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			A \textbf{universal cover} of \(X\) is a simply connected covering \(p:\widetilde X\to X\).
+			\begin{itemize}
+				\item If \(X\) is connected, locally path connected, and semilocally simply connected, then a universal cover exists.
+				\item It is unique up to isomorphism in \(\mathrm{Cov}(X)\).
+				\item Every connected covering of \(X\) is a quotient of a universal cover.
+				\item After choosing \(\widetilde x_0\in p^{-1}(x_0)\), \(\mathrm{Deck}(\widetilde X/X)\cong \pi_1(X,x_0)\).
+			\end{itemize}
+		\end{minipage}
+	};
+	%------------ Universal covers Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Universal covers};
 \end{tikzpicture}
 
 %------------ Classification of covering spaces ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			
+			Assume \(X\) is connected, locally path connected, and semilocally simply connected, and let \(G=\pi_1(X,x_0)\).
+			\begin{itemize}
+				\item A \textbf{left \(G\)-set} is a set \(S\) with an action \(G\times S\to S\), \((g,s)\mapsto gs\).
+				\item It is \textbf{transitive} if for all \(s,s'\in S\), there exists \(g\in G\) with \(gs=s'\).
+				\item The fiber \(F_{x_0}=p^{-1}(x_0)\) of a connected covering carries a transitive \(G\)-action by path lifting.
+				\item Let \(\mathrm{Cov}_0(X)\) be the category of connected coverings over \(X\). Then \(\mathrm{Cov}_0(X)\simeq G\text{-}\mathrm{Set}_{\mathrm{tr}}\).
+				\item Equivalently, \(\mathrm{Cov}_0(X)\simeq O(G)\), where \(O(G)\) is the orbit category with objects \(G/H\) and morphisms \(G\)-maps.
+				\item The covering corresponding to \(G/H\) has \(p_*\pi_1(\widetilde X,\widetilde x_0)=H\).
+			\end{itemize}
 		\end{minipage}
 	};
 	%------------ Classification of covering spaces Header ---------------------
 	\node[fancytitle, right=10pt] at (box.north west) {Classification of covering spaces};
 \end{tikzpicture}
+
+%------------ Group actions, orbit spaces, and Galois correspondence ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			Let \(p:\widetilde X\to X\) be a universal cover and identify \(G=\mathrm{Deck}(\widetilde X/X)\cong \pi_1(X,x_0)\).
+			\begin{itemize}
+				\item For each subgroup \(H\le G\), the quotient \(\widetilde X/H\to X\) is a connected covering.
+				\item Every connected covering of \(X\) is isomorphic to \(\widetilde X/H\) for some \(H\le G\).
+				\item If \(H\le K\le G\), there is a covering \(\widetilde X/H\to \widetilde X/K\) over \(X\).
+				\item Let \(\mathrm{Sub}(G)\) be the poset of subgroups ordered by inclusion.
+				\item Let \(\mathrm{Int}(\widetilde X/X)\) be the poset of intermediate connected coverings, ordered by factorization: \(Y\preceq Z\) if \(Y\to Z\to X\).
+				\item Then \(H\mapsto \widetilde X/H\) is order-preserving \(\mathrm{Sub}(G)\to \mathrm{Int}(\widetilde X/X)\).
+				\item If instead \(\mathrm{Int}(\widetilde X/X)\) is ordered by reverse factorization, this becomes order-reversing, i.e. the classical \textbf{Galois connection}.
+				\item \(\widetilde X/H\to X\) is regular iff \(H\trianglelefteq G\).
+				\item In general \(\mathrm{Deck}(\widetilde X/H\,/\,X)\cong N(H)/H\), and if \(H\trianglelefteq G\), then \(\mathrm{Deck}(\widetilde X/H\,/\,X)\cong G/H\).
+			\end{itemize}
+		\end{minipage}
+	};
+	%------------ Group actions, orbit spaces, and Galois correspondence Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Group actions, orbit spaces, and Galois correspondence};
+\end{tikzpicture}
+% ==============================================================
+% Chunk 2: Homology
+% ==============================================================
+% ==============================================================
+% Chunk 2: Homology
+% ==============================================================
+
+%------------ Chain complexes and exactness ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}
+	};
+	%------------ Chain complexes and exactness Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Chain complexes and exactness};
+\end{tikzpicture}
+
+%------------ Homology theories and Eilenberg-Steenrod axioms ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}
+	};
+	%------------ Homology theories and Eilenberg-Steenrod axioms Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Homology theories and Eilenberg-Steenrod axioms};
+\end{tikzpicture}
+
+%------------ Cellular homology ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}
+	};
+	%------------ Cellular homology Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Cellular homology};
+\end{tikzpicture}
+
+%------------ Homology of pairs ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}
+	};
+	%------------ Homology of pairs Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Homology of pairs};
+\end{tikzpicture}
+
+%------------ Reduced homology ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}
+	};
+	%------------ Reduced homology Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Reduced homology};
+\end{tikzpicture}
+
+%------------ Long exact sequence of a pair ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}
+	};
+	%------------ Long exact sequence of a pair Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Long exact sequence of a pair};
+\end{tikzpicture}
+
+%------------ Homotopy invariance and excision ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}
+	};
+	%------------ Homotopy invariance and excision Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Homotopy invariance and excision};
+\end{tikzpicture}
+
+%------------ Mayer-Vietoris and homology of colimits ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}
+	};
+	%------------ Mayer-Vietoris and homology of colimits Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Mayer-Vietoris and homology of colimits};
+\end{tikzpicture}
+
+%------------ Singular chain complex and singular homology ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}
+	};
+	%------------ Singular chain complex and singular homology Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Singular chain complex and singular homology};
+\end{tikzpicture}
+
+%------------ Simplicial complexes and simplicial homology ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}
+	};
+	%------------ Simplicial complexes and simplicial homology Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Simplicial complexes and simplicial homology};
+\end{tikzpicture}
+
+%------------ Geometric realization and comparison theorems ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}
+	};
+	%------------ Geometric realization and comparison theorems Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Geometric realization and comparison theorems};
+\end{tikzpicture}
+
+%------------ Uniqueness theorem for homology on CW complexes ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}
+	};
+	%------------ Uniqueness theorem for homology on CW complexes Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Uniqueness theorem for homology on CW complexes};
+\end{tikzpicture}
+
+%------------ Homology with coefficients ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}
+	};
+	%------------ Homology with coefficients Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Homology with coefficients};
+\end{tikzpicture}
+
+%------------ Degree of a map ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}
+	};
+	%------------ Degree of a map Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Degree of a map};
+\end{tikzpicture}
+
+%------------ Basic computations and consequences ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}
+	};
+	%------------ Basic computations and consequences Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Basic computations and consequences};
+\end{tikzpicture}
+% ==============================================================
+% Chunk 3: Cohomology
+% ==============================================================
+
+
+
+%------------ Singular cohomology ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}
+	};
+	%------------ Singular cohomology Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Singular cohomology};
+\end{tikzpicture}
+
+%------------ Cohomology of pairs ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}
+	};
+	%------------ Cohomology of pairs Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Cohomology of pairs};
+\end{tikzpicture}
+
+%------------ Universal coefficient theorem ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}
+	};
+	%------------ Universal coefficient theorem Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Universal coefficient theorem};
+\end{tikzpicture}
+
+%------------ Cup product ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}
+	};
+	%------------ Cup product Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Cup product};
+\end{tikzpicture}
+
+%------------ Cross and cap products ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}
+	};
+	%------------ Cross and cap products Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Cross and cap products};
+\end{tikzpicture}
+
+%------------ Kunneth theorem ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}
+	};
+	%------------ Kunneth theorem Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Kunneth theorem};
+\end{tikzpicture}
+
+%------------ Poincare duality ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}
+	};
+	%------------ Poincare duality Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Poincare duality};
+\end{tikzpicture}
+
+%------------ Cohomology operations ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}
+	};
+	%------------ Cohomology operations Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Cohomology operations};
+\end{tikzpicture}
+
+%------------ Steenrod squares ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}
+	};
+	%------------ Steenrod squares Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Steenrod squares};
+\end{tikzpicture}
+
+%------------ Characteristic classes ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}
+	};
+	%------------ Characteristic classes Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Characteristic classes};
+\end{tikzpicture}
+
+%------------ Classifying spaces and bundles ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}
+	};
+	%------------ Classifying spaces and bundles Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Classifying spaces and bundles};
+\end{tikzpicture}
+
+% ==============================================================
+% Chunk 4: Homotopy Theory
+% ==============================================================
+
 
 %------------ Higher homotopy groups ---------------
 \begin{tikzpicture}
@@ -299,15 +879,92 @@ rectangle, rounded corners, inner sep=10pt, inner ysep=10pt]
 	\node[fancytitle, right=10pt] at (box.north west) {Eckmann-Hilton argument};
 \end{tikzpicture}
 
-%------------ Whitehead product ---------------
+%------------ Relative homotopy groups ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
 			
 		\end{minipage}
 	};
-	%------------ Whitehead product Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Whitehead product};
+	%------------ Relative homotopy groups Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Relative homotopy groups};
+\end{tikzpicture}
+
+%------------ Action of pi_1 on pi_n ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}
+	};
+	%------------ Action of pi_1 on pi_n Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Action of \(\pi_1\) on \(\pi_n\)};
+\end{tikzpicture}
+
+%------------ Long exact sequence of homotopy groups ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}
+	};
+	%------------ Long exact sequence of homotopy groups Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Long exact sequence of homotopy groups};
+\end{tikzpicture}
+
+%------------ Fibrations and cofibrations ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}
+	};
+	%------------ Fibrations and cofibrations Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Fibrations and cofibrations};
+\end{tikzpicture}
+
+%------------ Homotopy extension and lifting properties ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}
+	};
+	%------------ Homotopy extension and lifting properties Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Homotopy extension and lifting properties};
+\end{tikzpicture}
+
+%------------ Loop spaces and suspension adjunction ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}
+	};
+	%------------ Loop spaces and suspension adjunction Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Loop spaces and suspension adjunction};
+\end{tikzpicture}
+
+%------------ Freudenthal suspension theorem ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}
+	};
+	%------------ Freudenthal suspension theorem Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Freudenthal suspension theorem};
+\end{tikzpicture}
+
+%------------ Blakers-Massey theorem ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}
+	};
+	%------------ Blakers-Massey theorem Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Blakers-Massey theorem};
 \end{tikzpicture}
 
 %------------ Hurewicz theorem ---------------
@@ -332,15 +989,37 @@ rectangle, rounded corners, inner sep=10pt, inner ysep=10pt]
 	\node[fancytitle, right=10pt] at (box.north west) {Whitehead theorem};
 \end{tikzpicture}
 
-%------------ Fibrations and cofibrations ---------------
+%------------ Whitehead product ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
 			
 		\end{minipage}
 	};
-	%------------ Fibrations and cofibrations Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Fibrations and cofibrations};
+	%------------ Whitehead product Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Whitehead product};
+\end{tikzpicture}
+
+%------------ CW approximation and cellular approximation ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}
+	};
+	%------------ CW approximation and cellular approximation Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {CW approximation and cellular approximation};
+\end{tikzpicture}
+
+%------------ Eilenberg-MacLane spaces ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}
+	};
+	%------------ Eilenberg-MacLane spaces Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Eilenberg-MacLane spaces};
 \end{tikzpicture}
 
 %------------ Postnikov towers ---------------
@@ -365,144 +1044,106 @@ rectangle, rounded corners, inner sep=10pt, inner ysep=10pt]
 	\node[fancytitle, right=10pt] at (box.north west) {Obstruction theory};
 \end{tikzpicture}
 
-%------------ Spectral sequences ---------------
+% ==============================================================
+% Chunk 5: Spectral Sequences and Advanced Topics
+% ==============================================================
+
+
+%------------ Spectral sequence basics ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
 			
 		\end{minipage}
 	};
-	%------------ Spectral sequences Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Spectral sequences};
+	%------------ Spectral sequence basics Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Spectral sequence basics};
 \end{tikzpicture}
 
-%------------ Simplicial, singular and cellular homology ---------------
+%------------ Homological / cohomological SS ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
 			
 		\end{minipage}
 	};
-	%------------ Simplicial, singular and cellular homology Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Simplicial, singular and cellular homology};
+	%------------ Homological / cohomological SS Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Homological / cohomological SS};
 \end{tikzpicture}
 
-%------------ Homology of Pairs ---------------
+%------------ Leray-Serre spectral sequence ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
 			
 		\end{minipage}
 	};
-	%------------ Homology of Pairs Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Homology of Pairs};
+	%------------ Leray-Serre spectral sequence Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Leray-Serre spectral sequence};
 \end{tikzpicture}
 
-%------------ Reduced homology ---------------
+%------------ Gysin and Wang sequences ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
 			
 		\end{minipage}
 	};
-	%------------ Reduced homology Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Reduced homology};
+	%------------ Gysin and Wang sequences Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Gysin and Wang sequences};
 \end{tikzpicture}
 
-%------------ Homotopy invariance of homology ---------------
+%------------ Adams SS and stable methods ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
 			
 		\end{minipage}
 	};
-	%------------ Homotopy invariance of homology Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Homotopy invariance of homology};
+	%------------ Adams SS and stable methods Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Adams SS and stable methods};
 \end{tikzpicture}
 
-%------------ Long exact sequence of homology of pairs ---------------
+%------------ Stable homotopy and spectra ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
 			
 		\end{minipage}
 	};
-	%------------ Long exact sequence of homology of pairs Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Long exact sequence of homology};
+	%------------ Stable homotopy and spectra Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Stable homotopy and spectra};
 \end{tikzpicture}
 
-%------------ Universal Coefficient theorem ---------------
+%------------ Bott periodicity and K-theory ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
 			
 		\end{minipage}
 	};
-	%------------ Universal Coefficient theorem Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Universal Coefficient theorem};
+	%------------ Bott periodicity and K-theory Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Bott periodicity and K-theory};
 \end{tikzpicture}
 
-%------------ Kunneth theorem ---------------
+%------------ Cobordism and further topics ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
 			
 		\end{minipage}
 	};
-	%------------ Kunneth theorem Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Kunneth theorem};
+	%------------ Cobordism and further topics Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Cobordism and further topics};
 \end{tikzpicture}
 
-%------------ Singular cohomology ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			
-		\end{minipage}
-	};
-	%------------ Singular cohomology Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Singular cohomology};
-\end{tikzpicture}
-
-%------------ Cohomology of pairs ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			
-		\end{minipage}
-	};
-	%------------ Cohomology of pairs Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Cohomology of pairs};
-\end{tikzpicture}
-
-%------------ Cup product ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			
-		\end{minipage}
-	};
-	%------------ Cup product Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Cup product};
-\end{tikzpicture}
-
-%------------ Poincare duality ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			
-		\end{minipage}
-	};
-	%------------ Poincare duality Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Poincare duality};
-\end{tikzpicture}
 % ==============================================================
 % Explicit examples
 % ==============================================================
 
 \end{multicols*}
 \newpage
-\begin{center}{\fontsize{35}{60}{\textcolor{DarkOrchid}{\textbf{Algebraic Topology Cheat Sheet: Explicit Examples}}}}\\
+\begin{center}{\fontsize{35}{60}{\textcolor{DarkOrchid}{\textbf{Explicit Examples}}}}\\
 \end{center}
 \begin{multicols*}{3}
 
@@ -517,37 +1158,26 @@ rectangle, rounded corners, inner sep=10pt, inner ysep=10pt]
 	\node[fancytitle, right=10pt] at (box.north west) {Spheres and disks};
 \end{tikzpicture}
 
-%------------ Graphs and wedges ---------------
+%------------ Graphs and wedges of circles ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
 			
 		\end{minipage}
 	};
-	%------------ Graphs and wedges Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Graphs and wedges};
+	%------------ Graphs and wedges of circles Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Graphs and wedges of circles};
 \end{tikzpicture}
 
-%------------ Products and smash ---------------
+%------------ Tori and products of spaces ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
 			
 		\end{minipage}
 	};
-	%------------ Products and smash Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Products and smash};
-\end{tikzpicture}
-
-%------------ Suspensions and cones ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			
-		\end{minipage}
-	};
-	%------------ Suspensions and cones Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Suspensions and cones};
+	%------------ Tori and products of spaces Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Tori and products of spaces};
 \end{tikzpicture}
 
 %------------ Surfaces ---------------
@@ -581,6 +1211,17 @@ rectangle, rounded corners, inner sep=10pt, inner ysep=10pt]
 	};
 	%------------ Lens spaces Header ---------------------
 	\node[fancytitle, right=10pt] at (box.north west) {Lens spaces};
+\end{tikzpicture}
+
+%------------ Eilenberg-MacLane spaces ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}
+	};
+	%------------ Eilenberg-MacLane spaces Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Eilenberg-MacLane spaces};
 \end{tikzpicture}
 
 %------------ Grassmannians ---------------
@@ -627,6 +1268,17 @@ rectangle, rounded corners, inner sep=10pt, inner ysep=10pt]
 	\node[fancytitle, right=10pt] at (box.north west) {Classical groups};
 \end{tikzpicture}
 
+%------------ Classifying spaces ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}
+	};
+	%------------ Classifying spaces Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Classifying spaces};
+\end{tikzpicture}
+
 %------------ Cayley projective plane ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
@@ -638,26 +1290,15 @@ rectangle, rounded corners, inner sep=10pt, inner ysep=10pt]
 	\node[fancytitle, right=10pt] at (box.north west) {Cayley projective plane};
 \end{tikzpicture}
 
-%------------ Standard fibrations ---------------
+%------------ Standard fibrations and fiber sequences ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
 			
 		\end{minipage}
 	};
-	%------------ Standard fibrations Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Standard fibrations};
-\end{tikzpicture}
-
-%------------ Standard homotopy groups ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			
-		\end{minipage}
-	};
-	%------------ Standard homotopy groups Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Standard homotopy groups};
+	%------------ Standard fibrations and fiber sequences Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Standard fibrations and fiber sequences};
 \end{tikzpicture}
 
 %------------ Standard homology and cohomology ---------------
@@ -669,6 +1310,17 @@ rectangle, rounded corners, inner sep=10pt, inner ysep=10pt]
 	};
 	%------------ Standard homology and cohomology Header ---------------------
 	\node[fancytitle, right=10pt] at (box.north west) {Standard homology and cohomology};
+\end{tikzpicture}
+
+%------------ Standard homotopy groups and patterns ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}
+	};
+	%------------ Standard homotopy groups and patterns Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Standard homotopy groups and patterns};
 \end{tikzpicture}
 
 \end{multicols*}
