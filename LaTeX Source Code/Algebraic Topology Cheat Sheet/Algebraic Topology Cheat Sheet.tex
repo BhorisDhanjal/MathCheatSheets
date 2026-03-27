@@ -557,173 +557,336 @@ rectangle, rounded corners, inner sep=10pt, inner ysep=10pt]
 % ==============================================================
 % Chunk 2: Homology
 % ==============================================================
-% ==============================================================
-% Chunk 2: Homology
-% ==============================================================
-
 %------------ Chain complexes and exactness ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			
+			Fix a ring \(R\). A \textbf{chain complex} \(C_*\) of \(R\)-modules is a sequence of maps
+			\(\cdots \to C_{n+1}\xrightarrow{\partial_{n+1}} C_n\xrightarrow{\partial_n} C_{n-1}\to \cdots\)
+			with \(\partial_n\partial_{n+1}=0\) for all \(n\).
+			\begin{itemize}
+				\item \(Z_n(C_*)=\ker(\partial_n)\) are the \(n\)-cycles.
+				\item \(B_n(C_*)=\mathrm{im}(\partial_{n+1})\) are the \(n\)-boundaries.
+				\item Since \(\partial_n\partial_{n+1}=0\), one has \(B_n(C_*)\subseteq Z_n(C_*)\).
+				\item \(H_n(C_*)=Z_n(C_*)/B_n(C_*)=\ker(\partial_n)/\mathrm{im}(\partial_{n+1})\).
+				\item A homogeneous map \(f:C_*\to D_*\) has \textbf{degree} \(r\) if \(f_n:C_n\to D_{n+r}\) for all \(n\).
+				\item A \textbf{chain map} is a degree \(0\) map \(f:C_*\to D_*\) with \(\partial f=f\partial\), hence induces \(f_*:H_n(C_*)\to H_n(D_*)\).
+				\item A \textbf{chain homotopy} \(h:f\simeq g\) between chain maps \(f,g:C_*\to D_*\) is a degree \(1\) map \(h:C_*\to D_*\) with \(f-g=\partial h+h\partial\).
+				\item \(C_*\) is \textbf{exact} if \(\mathrm{im}(\partial_{n+1})=\ker(\partial_n)\) for all \(n\), equivalently \(H_n(C_*)=0\) for all \(n\).
+			\end{itemize}
 		\end{minipage}
 	};
 	%------------ Chain complexes and exactness Header ---------------------
 	\node[fancytitle, right=10pt] at (box.north west) {Chain complexes and exactness};
 \end{tikzpicture}
 
-%------------ Homology theories and Eilenberg-Steenrod axioms ---------------
+%------------ Free, projective, and injective modules ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			
+			Fix a ring \(R\).
+			\begin{itemize}
+				\item An \(R\)-module \(F\) is \textbf{free} if \(F\cong \bigoplus_{i\in I} R\).
+				\item An \(R\)-module \(P\) is \textbf{projective} if for every epimorphism \(g:M\twoheadrightarrow N\) and map \(f:P\to N\), there exists \(\widetilde f:P\to M\) with \(g\widetilde f=f\).
+				\item Equivalently, \(P\) is projective iff \(P\) is a direct summand of a free module.
+				\item An \(R\)-module \(I\) is \textbf{injective} if for every monomorphism \(j:M\hookrightarrow N\) and map \(f:M\to I\), there exists \(\widetilde f:N\to I\) with \(\widetilde f j=f\).
+				\item Every free module is projective.
+				\item In \(R\)-Mod, there are enough projectives and enough injectives.
+			\end{itemize}
 		\end{minipage}
 	};
-	%------------ Homology theories and Eilenberg-Steenrod axioms Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Homology theories and Eilenberg-Steenrod axioms};
+	%------------ Free, projective, and injective modules Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Free, projective, and injective modules};
 \end{tikzpicture}
 
-%------------ Cellular homology ---------------
+%------------ Resolutions ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			
+			Let \(M\) be an \(R\)-module.
+			\begin{itemize}
+				\item A \textbf{free resolution} of \(M\) is an exact sequence \(\cdots \to F_2\to F_1\to F_0\to M\to 0\) with each \(F_i\) free.
+				\item A \textbf{projective resolution} of \(M\) is an exact sequence \(\cdots \to P_2\to P_1\to P_0\to M\to 0\) with each \(P_i\) projective.
+				\item An \textbf{injective resolution} of \(M\) is an exact sequence \(0\to M\to I^0\to I^1\to I^2\to \cdots\) with each \(I^i\) injective.
+				\item Any two projective resolutions of \(M\) are chain homotopy equivalent.
+				\item Any two injective resolutions of \(M\) are chain homotopy equivalent.
+				\item If \(R=\mathbb Z\), every Abelian group \(M\) has a free resolution \(0\to F_1\to F_0\to M\to 0\), since \(\mathbb Z\) is a PID and submodules of free modules are free.
+			\end{itemize}
 		\end{minipage}
 	};
-	%------------ Cellular homology Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Cellular homology};
+	%------------ Resolutions Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Resolutions};
+\end{tikzpicture}
+%------------ Exact functors and derived functors ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			Let \(F:\mathcal A\to\mathcal B\) be an additive covariant functor, with \(\mathcal A\) abelian.
+			\begin{itemize}
+				\item \(F\) is \textbf{left exact} if \(0\to A'\to A\to A''\) exact implies \(0\to F(A')\to F(A)\to F(A'')\) exact.
+				\item \(F\) is \textbf{right exact} if \(A'\to A\to A''\to 0\) exact implies \(F(A')\to F(A)\to F(A'')\to 0\) exact.
+				\item Assume \(\mathcal A\) has enough projectives and \(F\) is right exact. For \(A\in\mathcal A\), choose a projective resolution \(\cdots \to P_2\xrightarrow{d_2}P_1\xrightarrow{d_1}P_0\to A\to 0\).
+				\item Applying \(F\) degreewise gives a chain complex \(F(P_*)\), since \(F(d_i)F(d_{i+1})=F(d_id_{i+1})=0\).
+				\item The \textbf{left derived functors} of \(F\) are \(L_iF(A)=H_i(F(P_*))\). In particular \(L_0F\cong F\).
+				\item Dually, if \(\mathcal A\) has enough injectives and \(F\) is left exact, then for an injective resolution \(0\to A\to I^0\xrightarrow{d^0}I^1\xrightarrow{d^1}\cdots\), the \textbf{right derived functors} are \(R^iF(A)=H^i(F(I^*))\). In particular \(R^0F\cong F\).
+				\item These are well-defined up to natural isomorphism since projective and injective resolutions are unique up to chain homotopy.
+				\item A short exact sequence \(0\to A'\to A\to A''\to 0\) induces natural connecting morphisms and hence long exact sequences of left or right derived functors.
+			\end{itemize}
+		\end{minipage}
+	};
+	%------------ Exact functors and derived functors Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Exact functors and derived functors};
+\end{tikzpicture}
+
+%------------ Tensor, Hom, Tor, Ext ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			Let \(R\) be a ring.
+			\begin{itemize}
+				\item If \(M\) is a right \(R\)-module, then \(M\otimes_R -\) is covariant right exact.
+				\item If \(N\) is a left \(R\)-module, then \(-\otimes_R N\) is covariant right exact.
+				\item If \(M\) is a left \(R\)-module, then \(\mathrm{Hom}_R(M,-)\) is covariant left exact.
+				\item \(\mathrm{Tor}_i^R(M,N)=L_i(M\otimes_R -)(N)\).
+				\item \(\mathrm{Ext}_R^i(M,N)=R^i\mathrm{Hom}_R(M,-)(N)\).
+				\item For \(P_*\to M\to 0\) projective resolution, \(\mathrm{Tor}_i^R(M,N):=H_i(P_*\otimes_R N)\).
+				\item For \(0\to N\to I^\bullet\) injective resolution,  \(\mathrm{Ext}_R^i(M,N):=H^i(\mathrm{Hom}_R(M,I^\bullet))\).
+				\item Over \(\mathbb Z\): \(\mathrm{Tor}_1^{\mathbb Z}(\mathbb Z/n,A)\cong \{a\in A:na=0\}\), \(\mathrm{Ext}_{\mathbb Z}^1(\mathbb Z/n,A)\cong A/nA\).
+			\end{itemize}
+		\end{minipage}
+	};
+	%------------ Tensor, Hom, Tor, Ext Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Tensor, Hom, Tor, Ext};
+\end{tikzpicture}
+
+%------------ Singular simplices and singular chains ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			\begin{itemize}
+				\item A \textbf{singular \(n\)-simplex} in \(X\) is a map \(\sigma:\Delta^n\to X\).
+				\item \(C_n^{\mathrm{sing}}(X)\) is the free Abelian group on singular \(n\)-simplices, i.e. finite sums \(\sum_i a_i\sigma_i\), \(a_i\in \mathbb Z\).
+				\item \(\partial \sigma=\sum_{i=0}^n(-1)^i\sigma\circ \delta_i\), where \(\delta_i:\Delta^{n-1}\to \Delta^n\) is the \(i\)-th face map.
+				\item Then \(\partial^2=0\), so \(C_*^{\mathrm{sing}}(X)\) is a chain complex.
+				\item \textbf{Singular homology:} \(H_n^{\mathrm{sing}}(X)=H_n(C_*^{\mathrm{sing}}(X))\).
+			\end{itemize}
+		\end{minipage}
+	};
+	%------------ Singular simplices and singular chains Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Singular simplices and singular chains};
 \end{tikzpicture}
 
 %------------ Homology of pairs ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			
+			A \textbf{pair} \((X,A)\) means \(A\subseteq X\).
+			\begin{itemize}
+				\item \(C_n^{\mathrm{sing}}(X,A)=C_n^{\mathrm{sing}}(X)/C_n^{\mathrm{sing}}(A)\).
+				\item \(H_n(X,A)=H_n(C_*^{\mathrm{sing}}(X,A))\).
+				\item A map of pairs \(f:(X,A)\to (Y,B)\) means \(f(A)\subseteq B\), and induces \(f_*:H_n(X,A)\to H_n(Y,B)\).
+				\item \(H_n(X,\varnothing)\cong H_n(X)\).
+				\item If \(A\subseteq X\) is a subcomplex, then often \(H_n(X,A)\cong \widetilde H_n(X/A)\).
+			\end{itemize}
 		\end{minipage}
 	};
 	%------------ Homology of pairs Header ---------------------
 	\node[fancytitle, right=10pt] at (box.north west) {Homology of pairs};
 \end{tikzpicture}
 
-%------------ Reduced homology ---------------
+%------------ Homology theories and Eilenberg-Steenrod axioms ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			
+			All homology theories under discussion satisfy the Eilenberg-Steenrod axioms.
+			\begin{itemize}
+				\item \textbf{Homotopy:} homotopic maps induce the same map.
+				\item \textbf{Exactness:} every pair gives a natural long exact sequence.
+				\item \textbf{Excision:} if \(\overline U\subseteq \mathrm{int}(A)\), then \((X\setminus U,A\setminus U)\hookrightarrow (X,A)\) induces an isomorphism.
+				\item \textbf{Additivity:} \(H_n(\bigsqcup_\alpha X_\alpha)\cong \bigoplus_\alpha H_n(X_\alpha)\).
+				\item \textbf{Dimension:} \(H_n(*)=0\) for \(n>0\), \(H_0(*)\cong \mathbb Z\).
+			\end{itemize}
 		\end{minipage}
 	};
-	%------------ Reduced homology Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Reduced homology};
+	%------------ Homology theories and Eilenberg-Steenrod axioms Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Homology theories and Eilenberg-Steenrod axioms};
 \end{tikzpicture}
 
 %------------ Long exact sequence of a pair ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			
+			Every pair \((X,A)\) gives
+			\[
+			\cdots \to H_n(A)\xrightarrow{i_*} H_n(X)\xrightarrow{j_*} H_n(X,A)\xrightarrow{\partial} H_{n-1}(A)\to \cdots .
+			\]
+			\begin{itemize}
+				\item \(i_*\) is induced by \(A\hookrightarrow X\).
+				\item \(j_*\) is induced by the quotient \(C_n(X)\to C_n(X,A)\).
+				\item \(\partial\) is the connecting homomorphism.
+			\end{itemize}
 		\end{minipage}
 	};
 	%------------ Long exact sequence of a pair Header ---------------------
 	\node[fancytitle, right=10pt] at (box.north west) {Long exact sequence of a pair};
 \end{tikzpicture}
 
-%------------ Homotopy invariance and excision ---------------
+%------------ Reduced homology ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			
+			For a nonempty space \(X\), choose \(x_0\in X\) and define \(\widetilde H_n(X)=H_n(X,x_0)\).
+			\begin{itemize}
+				\item If \(X\) is path connected, this is independent of \(x_0\).
+				\item \(H_n(X)\cong \widetilde H_n(X)\) for \(n>0\).
+				\item If \(X\) is path connected, then \(H_0(X)\cong \mathbb Z\) and \(\widetilde H_0(X)=0\).
+				\item \(\widetilde H_{n+1}(\Sigma X)\cong \widetilde H_n(X)\).
+			\end{itemize}
 		\end{minipage}
 	};
-	%------------ Homotopy invariance and excision Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Homotopy invariance and excision};
+	%------------ Reduced homology Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Reduced homology};
 \end{tikzpicture}
 
-%------------ Mayer-Vietoris and homology of colimits ---------------
+%------------ Mayer-Vietoris sequence ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			
+			If \(X=U\cup V\), there is a natural exact sequence
+			\[
+			\cdots \to H_n(U\cap V)\to H_n(U)\oplus H_n(V)\to H_n(X)\to H_{n-1}(U\cap V)\to \cdots .
+			\]
+			\begin{itemize}
+				\item This is the \textbf{Mayer-Vietoris sequence}.
+				\item It follows from the long exact sequence and excision.
+				\item It is the basic tool for homology of unions and glued spaces.
+			\end{itemize}
 		\end{minipage}
 	};
-	%------------ Mayer-Vietoris and homology of colimits Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Mayer-Vietoris and homology of colimits};
+	%------------ Mayer-Vietoris sequence Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Mayer-Vietoris sequence};
 \end{tikzpicture}
 
-%------------ Singular chain complex and singular homology ---------------
+%------------ Cellular homology ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			
+			For a CW complex \(X\) with skeleta \(X^n\),
+			\begin{itemize}
+				\item \(C_n^{\mathrm{cell}}(X)=H_n(X^n,X^{n-1})\).
+				\item If \(X\) has \(n\)-cells \(e_\alpha^n\), then \(C_n^{\mathrm{cell}}(X)\) is the free Abelian group on the \(n\)-cells.
+				\item The differential comes from the LES of \((X^n,X^{n-1},X^{n-2})\).
+				\item In practice, the differential is determined by the attaching maps and their degrees.
+				\item This is usually the fastest way to compute homology of CW complexes.
+			\end{itemize}
 		\end{minipage}
 	};
-	%------------ Singular chain complex and singular homology Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Singular chain complex and singular homology};
+	%------------ Cellular homology Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Cellular homology};
 \end{tikzpicture}
 
 %------------ Simplicial complexes and simplicial homology ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			
+			\begin{itemize}
+				\item A \textbf{simplicial complex} is a collection of simplices closed under faces and such that intersections are common faces.
+				\item A \textbf{triangulation} of \(X\) is a homeomorphism \(|K|\cong X\) for some simplicial complex \(K\).
+				\item \(C_n^\Delta(K)\) is the free Abelian group on oriented \(n\)-simplices, modulo sign under permutation.
+				\item \(\partial[v_0,\dots,v_n]=\sum_{i=0}^n(-1)^i[v_0,\dots,\widehat v_i,\dots,v_n]\).
+				\item \textbf{Simplicial homology:} \(H_n^\Delta(K)=H_n(C_*^\Delta(K))\).
+			\end{itemize}
 		\end{minipage}
 	};
 	%------------ Simplicial complexes and simplicial homology Header ---------------------
 	\node[fancytitle, right=10pt] at (box.north west) {Simplicial complexes and simplicial homology};
 \end{tikzpicture}
 
-%------------ Geometric realization and comparison theorems ---------------
+%------------ Comparison theorems ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			
+			\begin{itemize}
+				\item If \(K\) is a simplicial complex, then \(H_n^\Delta(K)\cong H_n^{\mathrm{sing}}(|K|)\).
+				\item If \(X\) is a CW complex, then \(H_n^{\mathrm{cell}}(X)\cong H_n^{\mathrm{sing}}(X)\).
+				\item Hence simplicial, cellular, and singular homology agree whenever they are all defined.
+			\end{itemize}
 		\end{minipage}
 	};
-	%------------ Geometric realization and comparison theorems Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Geometric realization and comparison theorems};
+	%------------ Comparison theorems Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Comparison theorems};
 \end{tikzpicture}
 
-%------------ Uniqueness theorem for homology on CW complexes ---------------
+%------------ Kunneth theorem ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			
+			For suitable spaces \(X,Y\), there is a natural short exact sequence
+			\[
+			0\to \bigoplus_{p+q=n} H_p(X)\otimes H_q(Y)\to H_n(X\times Y)\to \bigoplus_{p+q=n-1}\mathrm{Tor}(H_p(X),H_q(Y))\to 0.
+			\]
+			\begin{itemize}
+				\item This is the \textbf{K\"unneth theorem for homology}.
+				\item Over a field, the \(\mathrm{Tor}\)-term vanishes.
+				\item It computes homology of products from the homology of the factors.
+			\end{itemize}
 		\end{minipage}
 	};
-	%------------ Uniqueness theorem for homology on CW complexes Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Uniqueness theorem for homology on CW complexes};
+	%------------ Kunneth theorem Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Kunneth theorem};
+\end{tikzpicture}
+
+%------------ Universal coefficient theorem for homology ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			For an Abelian group \(G\), there is a natural short exact sequence
+			\[
+			0\to H_n(X)\otimes G\to H_n(X;G)\to \mathrm{Tor}(H_{n-1}(X),G)\to 0.
+			\]
+			\begin{itemize}
+				\item This is the \textbf{universal coefficient theorem for homology}.
+				\item It splits, but not naturally in general.
+				\item It expresses homology with coefficients in terms of integral homology.
+			\end{itemize}
+		\end{minipage}
+	};
+	%------------ Universal coefficient theorem for homology Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Universal coefficient theorem for homology};
 \end{tikzpicture}
 
 %------------ Homology with coefficients ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			
+			\begin{itemize}
+				\item For an Abelian group \(G\), \(C_*(X;G)=C_*(X)\otimes G\).
+				\item \(H_n(X;G)=H_n(C_*(X;G))\).
+				\item With field coefficients, homology becomes a graded vector space.
+				\item With \(\mathbb Z/m\)-coefficients, torsion information is often easier to detect.
+			\end{itemize}
 		\end{minipage}
 	};
 	%------------ Homology with coefficients Header ---------------------
 	\node[fancytitle, right=10pt] at (box.north west) {Homology with coefficients};
 \end{tikzpicture}
 
-%------------ Degree of a map ---------------
+%------------ Degree, Euler characteristic, and surfaces ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			
+			\begin{itemize}
+				\item For \(f:S^n\to S^n\), \(H_n(f)\) is multiplication by an integer \(\deg(f)\).
+				\item \(\deg(\mathrm{id})=1\), \(\deg(g\circ f)=\deg(g)\deg(f)\), and the antipodal map on \(S^n\) has degree \((-1)^{n+1}\).
+				\item For a finite CW complex, \(\chi(X)=\sum_n(-1)^n c_n=\sum_n(-1)^n \mathrm{rank}\,H_n(X)\).
+				\item Closed orientable surface \(\Sigma_g\): \(H_1(\Sigma_g)\cong \mathbb Z^{2g}\), \(\chi(\Sigma_g)=2-2g\).
+				\item Closed nonorientable surface \(N_g\): \(H_1(N_g)\cong \mathbb Z^{g-1}\oplus \mathbb Z/2\), \(\chi(N_g)=2-g\).
+				\item So homology and Euler characteristic recover the genus in the surface classification.
+			\end{itemize}
 		\end{minipage}
 	};
-	%------------ Degree of a map Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Degree of a map};
-\end{tikzpicture}
-
-%------------ Basic computations and consequences ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			
-		\end{minipage}
-	};
-	%------------ Basic computations and consequences Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Basic computations and consequences};
+	%------------ Degree, Euler characteristic, and surfaces Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Degree, Euler characteristic, and surfaces};
 \end{tikzpicture}
 % ==============================================================
 % Chunk 3: Cohomology
