@@ -1,0 +1,524 @@
+\documentclass[dvipsnames]{article}
+\usepackage{geometry}
+\geometry{a3paper, landscape, margin=2in}
+\usepackage{url}
+\usepackage{multicol}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathmorphing}
+\usepackage{amsmath,amssymb}
+\usepackage{esint}
+\usepackage{enumitem}
+\usepackage{colortbl}
+\usepackage{mathtools}
+\usepackage{ mathrsfs }	
+\usepackage{ gensymb }
+\usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
+\makeatletter
+\setlist[itemize]{noitemsep, topsep=0pt}
+\usepackage{quiver}
+\newcommand*\bigcdot{\mathpalette\bigcdot@{.5}}
+\newcommand*\bigcdot@[2]{\mathbin{\vcenter{\hbox{\scalebox{#2}{$\m@th#1\bullet$}}}}}
+\makeatother
+%Sheet made by Boris, Template is by Drew Ulick https://de.overleaf.com/articles/130-cheat-sheet/ntwtkmpxmgrp
+\usepackage[english]{babel}
+\usepackage{lmodern}
+\usepackage{bm}
+\definecolor{cobalt}{rgb}{0.0, 0.28, 0.67}
+\advance\topmargin-1.2in
+\advance\textheight3in
+\advance\textwidth3in
+\advance\oddsidemargin-1.5in
+\advance\evensidemargin-1.5in
+\parindent0pt
+\parskip2pt
+\newcommand{\hr}{\centerline{\rule{3.5in}{1pt}}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\F}{\mathbb{F}}
+\begin{document}
+\definecolor{orange}{RGB}{255, 115,0}
+\begin{center}{\fontsize{35}{60}{\textcolor{Bittersweet}{\textbf{Algebraic Geometry Cheat Sheet}}}}\\
+\end{center}
+
+\tikzset{every loop/.style={min distance=5mm,in=20,out=90,looseness=1}}
+\tikzstyle{mybox} = [draw=Bittersweet, fill=white, very thick,
+rectangle, rounded corners, inner sep=10pt, inner ysep=10pt]
+\tikzstyle{fancytitle} =[fill=Bittersweet, text=white, font=\bfseries]
+
+\begin{multicols*}{3}
+
+% ------------------------------------------------------
+% Start of Sheet
+% ------------------------------------------------------
+
+%------------ Affine Space and Conventions ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			Let $K$ be an algebraically closed field. The \textbf{affine $n$-space} is $\mathbb{A}^n = K^n$ as a set. Write $K[x_1,\dots,x_n]$ for the polynomial ring and $f(x)$ for evaluation at a point $x\in\mathbb{A}^n$.
+		\end{minipage}
+	};
+	\node[fancytitle, right=10pt] at (box.north west) {Affine Space};
+\end{tikzpicture}
+
+%------------ Ideal of a Variety ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			For a set $X\subseteq \mathbb{A}^n$ the \textbf{ideal of a variety} is
+			$I(X) := \{f\in K[x_1,\dots,x_n] : f(x)=0\ \forall x\in X\}$.
+
+			The \textbf{coordinate ring} is $A(X) = K[x_1,\dots,x_n]/I(X)$.
+
+			\begin{itemize}
+				\item $X\subseteq Y \implies I(X)\supseteq I(Y)$
+				\item $I(X\cup Y) = I(X)\cap I(Y)$
+				\item $I(X\cap Y) = \sqrt{I(X)+I(Y)}$
+				\item $I(V(I)) = \sqrt{I}$
+			\end{itemize}
+		\end{minipage}
+	};
+	\node[fancytitle, right=10pt] at (box.north west) {Ideal of a Variety};
+\end{tikzpicture}
+
+
+
+%------------ Affine Varieties ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			For $S\subseteq K[x_1,\dots,x_n]$ the \textbf{zero locus} is
+			$V(S) := \{x\in\mathbb{A}^n : f(x)=0\ \forall f\in S\}$. 
+			Subsets of this form are \textbf{affine varieties}.
+			\begin{itemize}
+				\item $S_1\subseteq S_2 \implies V(S_1)\supseteq V(S_2)$
+				\item $V(S_1)\cup V(S_2) = V(S_1S_2)$
+				\item $\bigcap_i V(S_i) = V(\sum_i S_i)$
+			\end{itemize}
+
+			When $S$ is an ideal:
+			\begin{itemize}
+				\item $V(I) = V(\sqrt{I})$
+				\item $V(I_1)\cup V(I_2) = V(I_1 I_2) = V(I_1 \cap I_2)$
+				\item $V(I_1)\cap V(I_2) = V(I_1 + I_2)$
+			\end{itemize}
+		\end{minipage}
+	};
+	\node[fancytitle, right=10pt] at (box.north west) {Affine Varieties};
+\end{tikzpicture}
+
+%------------ Nullstellensatz ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			\textbf{Nullstellensatz:}
+			\begin{itemize}
+				\item \textbf{Weak:} Every proper ideal $I\subsetneq K[x_1,\dots,x_n]$ has a zero ($V(I)\neq\emptyset$)
+				\item \textbf{Hilbert:} Order-reversing bijection between radical ideals and affine varieties via $I\leftrightarrow V(I)$. This is an \textbf{adjoint functor}.
+				\item \textbf{Relative:} $f\in\sqrt{I}$ iff $f$ vanishes on $V(I)$.
+			\end{itemize}
+		\end{minipage}
+	};
+	\node[fancytitle, right=10pt] at (box.north west) {Nullstellensatz};
+\end{tikzpicture}
+
+%------------ Coordinate Rings and Relative Theory ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+\begin{minipage}{0.3\textwidth}
+\textbf{Coordinate ring}: for affine $X\subset\mathbb A^n$,
+$A(X)=K[x_1,\dots,x_n]/I(X)$,
+and regular functions on $X$ are exactly elements of $A(X)$.
+
+For affine $Y$ and $X\subset Y$ affine:
+\begin{itemize}
+\item Relative zero loci and ideals are defined in $A(Y)$.
+\item Relative Nullstellensatz gives an inclusion-reversing bijection
+between affine subvarieties of $Y$ and radical ideals of $A(Y)$.
+\item $A(X)\cong A(Y)/I_Y(X)$.
+\end{itemize}
+\end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {Coordinate Rings and Relative Theory};
+\end{tikzpicture}
+
+
+%------------ Zariski Topology ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			For affine $X$, the closed sets are exactly affine subvarieties $V(S)$ with $S\subset A(X)$.
+
+			A \textbf{distinguished open} is $D(f):=X\setminus V(f)$ for $f\in A(X)$.
+			\begin{itemize}
+				\item $D(f)\cap D(g)=D(fg)$
+				\item $D(1)=X$, $D(0)=\emptyset$
+			\end{itemize}
+
+			Key facts:
+			\begin{itemize}
+				\item Zariski topology on $X$ agrees with the subspace Zariski topology from any affine ambient variety.
+				\item In $\mathbb{A}^1$, closed sets are finite sets or all of $\mathbb{A}^1$.
+				\item Injective maps $\mathbb{A}^1\to\mathbb{A}^1$ are automatically Zariski-continuous.
+				\item Zariski topology on $X\times Y$ is usually not the product topology.
+				\item $V(I(T))=\overline{T}$ for every $T\subset\mathbb{A}^n$.
+				\item Every Noetherian topological space is compact.
+			\end{itemize}
+		\end{minipage}
+	};
+	\node[fancytitle, right=10pt] at (box.north west) {Zariski Topology};
+\end{tikzpicture}
+
+%------------ Irreducibility and Connectedness ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			For a topological space $X$:
+			\begin{itemize}
+				\item \textbf{Reducible}: $X=X_1\cup X_2$ with closed $X_i\subsetneq X$.
+				\item \textbf{Disconnected}: $X=X_1\cup X_2$, $X_1\cap X_2=\emptyset$, closed proper $X_i$.
+				\item \textbf{Noetherian}: no infinite strictly descending chain of closed sets.
+			\end{itemize}
+
+			For affine varieties:
+			\begin{itemize}
+				\item If $X$ is disconnected, then $A(X)\cong A(X_1)\times A(X_2)$.
+				\item Non-empty $X$ is \textbf{irreducible} iff $A(X)$ is an integral domain.
+				\item Irreducible affine subvarieties of $Y$ correspond to prime ideals of $A(Y)$.
+				\item Every affine variety is Noetherian and has a finite irreducible decomposition, unique up to order.
+				\item Irreducible components correspond to minimal prime ideals.
+				\item In irreducible $X$, any two non-empty open subsets intersect and every non-empty open subset is dense.
+				\item Continuous images preserve connectedness and irreducibility.
+				\item If $X,Y$ are irreducible affine varieties, then $X\times Y$ is irreducible.
+				\item Ideal quotients encode differences:
+				$I(Y_1\setminus Y_2)=I(Y_1):I(Y_2)$ and
+				$V(J_1)\setminus V(J_2)=V(J_1:J_2)$.
+			\end{itemize}
+		\end{minipage}
+	};
+	\node[fancytitle, right=10pt] at (box.north west) {Irreducibility and Connectedness};
+\end{tikzpicture}
+
+
+%------------ Dimension of a Variety ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			The \textbf{dimension} of non-empty $X$ is the maximal length of chains
+			$\emptyset\neq Y_0\subsetneq\cdots\subsetneq Y_n\subset X$
+			with irreducible closed $Y_i$.
+
+			For irreducible closed $Y\subset X$, the \textbf{codimension} in $X$ is the maximal chain length from $Y$ to $X$.
+
+			For affine varieties:
+			\begin{itemize}
+				\item $\dim X$ equals the Krull dimension of $A(X)$.
+				\item $\operatorname{codim}_X(Y)=\operatorname{codim}(I(Y)\subset A(X))$.
+				\item Dimensions and codimensions are finite.
+				\item $\dim(X\times Y)=\dim X+\dim Y$; in particular $\dim\mathbb{A}^n=n$.
+				\item If $Y\subset X$ is irreducible, then $\dim X=\dim Y+\operatorname{codim}_X(Y)$.
+				\item If $0\neq f\in A(X)$, each irreducible component of $V(f)$ has codimension $1$.
+				\item $\dim X=\max_i\dim X_i$ over irreducible components.
+				\item $\dim X=\sup\{\operatorname{codim}_X\{a\}:a\in X\}$.
+				\item $\operatorname{codim}_X\{a\}=\max\{\dim X_i:\,a\in X_i\}$.
+				\item If $A\subset X$, then $\dim A\leq\dim X$.
+				\item For an open cover $X=\bigcup_i U_i$, $\dim X=\sup_i\dim U_i$.
+				\item If $X$ is irreducible affine and $U\subset X$ is non-empty open, then $\dim U=\dim X$.
+			\end{itemize}
+		\end{minipage}
+	};
+	\node[fancytitle, right=10pt] at (box.north west) {Dimension of a Variety};
+\end{tikzpicture}
+
+%------------ Hypersurfaces and UFD ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+\begin{minipage}{0.3\textwidth}
+For a Noetherian integral domain $R$, the following are equivalent:
+\begin{itemize}
+\item Every prime ideal of codimension $1$ is principal.
+\item $R$ is a unique factorization domain.
+\end{itemize}
+
+For hypersurfaces in affine space:
+\begin{itemize}
+\item In $K[x_1,\dots,x_n]$, every affine hypersurface has ideal $\langle f\rangle$.
+\item If the hypersurface is irreducible, then $f$ is irreducible.
+\item If $I(X)=\langle f\rangle$, then \textbf{degree}$(X):=\deg f$.
+\item Names by degree: linear (1), quadric (2), cubic (3).
+\end{itemize}
+
+Pure-dimensional terminology:
+\begin{itemize}
+\item $X$ is pure-dimensional of dimension $n$ if all irreducible components have dimension $n$.
+\item Curve: pure dimension $1$. Surface: pure dimension $2$.
+\item Hypersurface in pure-dimensional $Y$: pure dimension $\dim Y-1$.
+\end{itemize}
+
+Counterexample:
+\begin{itemize}
+\item $R=K[x_1,x_2,x_3,x_4]/\langle x_1x_4-x_2x_3\rangle$ is not a UFD.
+\item It has a codimension-$1$ prime ideal that is not principal.
+\end{itemize}
+\end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {Hypersurfaces and UFD};
+\end{tikzpicture}
+
+
+
+
+%------------ Regular Functions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+\begin{minipage}{0.3\textwidth}
+Let $X$ be affine and $U\subset X$ open. A map $\varphi:U\to K$ is \textbf{regular} if every $a\in U$ has a neighborhood $U_a$ with
+\(\varphi=\frac{g}{f}\) on $U_a$,
+for $f,g\in A(X)$ and $f\neq 0$ on $U_a$.
+
+\begin{itemize}
+\item The regular functions on $U$ form a $K$-algebra $\mathcal O_X(U)$.
+\item For $\varphi\in\mathcal O_X(U)$, its zero locus $V(\varphi)$ is closed in $U$.
+\item Identity theorem: on irreducible $X$, if two regular functions on an open set agree on a non-empty open subset, they agree everywhere.
+\end{itemize}
+\end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {Regular Functions};
+\end{tikzpicture}
+
+%------------ Distinguished Opens and Localization ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+\begin{minipage}{0.3\textwidth}
+For $f\in A(X)$, set $D(f):=X\setminus V(f)$.
+
+\begin{itemize}
+\item $D(f)\cap D(g)=D(fg)$.
+\item Every open subset is a finite union of distinguished opens.
+\item $\mathcal O_X(D(f))=\left\{\frac{g}{f^n}:g\in A(X),\ n\in\mathbb N\right\}\cong A(X)_f$.
+\item Hence $\mathcal O_X(X)=A(X)$.
+\end{itemize}
+
+If $A(X)$ is a UFD and $U=X\setminus Y$, then
+$\mathcal O_X(U)=A(X)$ iff $\operatorname{codim}Y\ge 2$.
+\end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {Distinguished Open Subsets and Localization};
+\end{tikzpicture}
+
+%------------ Sheaves and Stalks ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+\begin{minipage}{0.3\textwidth}
+A \textbf{presheaf} on $X$ consists of:
+\begin{itemize}
+\item a ring $\mathcal F(U)$ for each open $U\subset X$;
+\item restriction homomorphisms $\rho_{V,U}:\mathcal F(V)\to\mathcal F(U)$ for $U\subset V$,
+with identity and composition compatibility.
+\end{itemize}
+A \textbf{sheaf} is a presheaf with unique gluing of compatible local sections.
+
+\begin{itemize}
+\item $\mathcal O_X$ is a sheaf of $K$-algebras on $X$.
+\item For $a\in X$, the \textbf{stalk} $\mathcal O_{X,a}$ is the ring of germs of regular functions at $a$.
+\item Algebraically, $\mathcal O_{X,a}\cong A(X)_{I(a)}=\left\{\frac{g}{f}: f(a)\neq 0\right\}$.
+\item $\mathcal O_{X,a}$ is local with maximal ideal
+$I_a=\left\{(U,\varphi):\varphi(a)=0\right\}$.
+\end{itemize}
+\end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {Sheaves and Stalks of Regular Functions};
+\end{tikzpicture}
+
+%------------ Sheaf Operations ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+\begin{minipage}{0.3\textwidth}
+For a sheaf $\mathcal F$ on $X$:
+\begin{itemize}
+\item Restriction to $U\subset X$: $\mathcal F|_U(V)=\mathcal F(V)$ for $V\subset U$ open.
+\item Stalk at $a\in X$: germs of sections near $a$.
+\item For an irreducible closed $Y\subset X$, the stalk at $Y$ corresponds to functions near dense open subsets of $Y$.
+\end{itemize}
+
+For affine $X$:
+$\mathcal O_{X,a}\cong A(X)_{I(a)}$ and
+$\mathcal O_{X,Y}\cong A(X)_{I(Y)}$ for irreducible closed $Y$.
+\end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {Sheaf Operations};
+\end{tikzpicture}
+
+
+
+%------------ Morphisms of Ringed Spaces ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+\begin{minipage}{0.3\textwidth}
+A \textbf{ringed space} is a topological space $X$ with a structure sheaf $\mathcal O_X$.
+An affine variety is viewed with its sheaf of regular functions.
+
+For a map $f:X\to Y$, pull-back is $f^*\varphi:=\varphi\circ f$.
+The map $f$ is a \textbf{morphism} if:
+\begin{itemize}
+\item $f$ is continuous;
+\item for every open $U\subset Y$ and $\varphi\in\mathcal O_Y(U)$,
+$f^*\varphi\in\mathcal O_X(f^{-1}(U))$.
+\end{itemize}
+
+A bijective morphism need not be an isomorphism.
+\end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {Morphisms of Ringed Spaces};
+\end{tikzpicture}
+
+%------------ Affine Morphisms and Coordinate Rings ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+\begin{minipage}{0.3\textwidth}
+If $U\subset X$ is open and $Y\subset\mathbb A^n$ affine, then morphisms
+$f:U\to Y$ are exactly maps $f=(\varphi_1,\dots,\varphi_n)$
+with $\varphi_i\in\mathcal O_X(U)$ and image in $Y$.
+
+For affine varieties $X,Y$:
+$\operatorname{Hom}(X,Y)\cong \operatorname{Hom}_{K\text{-alg}}(A(Y),A(X))$, $f\mapsto f^*$.
+Hence isomorphisms of affine varieties correspond to isomorphisms of coordinate rings.
+
+Finite type reduced $K$-algebras and affine varieties correspond up to isomorphism.
+\end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {Affine Morphisms};
+\end{tikzpicture}
+
+%------------ Products and Tensor Products ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+\begin{minipage}{0.3\textwidth}
+Product varieties satisfy the universal property:
+for morphisms $f_X:Z\to X$ and $f_Y:Z\to Y$ there is a unique
+$f:Z\to X\times Y$ with $\pi_X\circ f=f_X$ and $\pi_Y\circ f=f_Y$.
+
+So giving a morphism to $X\times Y$ is equivalent to giving one to each factor.
+
+On coordinate rings, $A(X\times Y)\cong A(X)\otimes_K A(Y)$.
+\end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {Product Varieties};
+\end{tikzpicture}
+
+%------------ Distinguished Opens Are Affine ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+\begin{minipage}{0.3\textwidth}
+For affine $X$ and $f\in A(X)$, the distinguished open
+$D(f)=X\setminus V(f)$ is affine, with coordinate ring $A(D(f))\cong A(X)_f$.
+
+This realizes localization geometrically.
+
+$\mathbb A^2\setminus\{0\}$ is not affine,
+although it is covered by the affine opens $D(x_1)$ and $D(x_2)$.
+\end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {Distinguished Opens as Affine Varieties};
+\end{tikzpicture}
+
+%------------ Morphisms: Locality and Reconstruction ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+\begin{minipage}{0.3\textwidth}
+Morphisms are stable under composition and restriction.
+They satisfy a gluing property: if a map is a morphism on an open cover, then it is a morphism globally.
+
+Further structure facts:
+\begin{itemize}
+\item Affine varieties correspond to finitely generated reduced $K$-algebras (up to isomorphism).
+\item Affine variety is used up to isomorphism of ringed spaces.
+\item For affine $X$ and $f\in A(X)$, $D(f)$ is affine with coordinate ring $A(X)_f$.
+\item $\mathbb A^2\setminus\{0\}$ is not affine, though covered by affine opens.
+\end{itemize}
+\end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {Locality and Reconstruction of Morphisms};
+\end{tikzpicture}
+
+
+
+%------------ Prevarieties and Gluing ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+\begin{minipage}{0.3\textwidth}
+A \textbf{prevariety} is a ringed space with a finite open cover by affine varieties.
+Affine varieties and their open subsets are prevarieties.
+
+Gluing principle:
+\begin{itemize}
+\item Glue prevarieties $X_i$ along isomorphic open subsets $U_{i,j}$.
+\item Compatibility cocycle conditions give a well-defined glued prevariety.
+\end{itemize}
+\end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {Prevarieties and Gluing};
+\end{tikzpicture}
+
+%------------ Subvarieties in Prevarieties ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+\begin{minipage}{0.3\textwidth}
+For a prevariety $X$:
+\begin{itemize}
+\item Open subsets are open subprevarieties with restricted sheaf.
+\item Closed subsets carry a natural sheaf of locally restricted regular functions, hence closed subprevarieties.
+\item Inclusion $Y\hookrightarrow X$ of a closed subprevariety is a morphism.
+\item If $f:Z\to X$ and $f(Z)\subset Y$, then $f$ factors as a morphism $Z\to Y$.
+\item Inverse images of open/closed subprevarieties are open/closed.
+\end{itemize}
+\end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {Open and Closed Subprevarieties};
+\end{tikzpicture}
+
+%------------ Products of Prevarieties ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+\begin{minipage}{0.3\textwidth}
+Product $X\times Y$ of prevarieties is characterized by the universal property:
+for morphisms $f_X:Z\to X$, $f_Y:Z\to Y$, there is a unique $f:Z\to X\times Y$ with
+$\pi_X\circ f=f_X$ and $\pi_Y\circ f=f_Y$.
+
+Existence: glue affine products of affine open patches.
+Uniqueness: unique up to unique isomorphism.
+
+If $X',Y'$ are closed subprevarieties, then the two natural prevariety structures on $X'\times Y'$ agree.
+\end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {Product Prevarieties};
+\end{tikzpicture}
+
+%------------ Varieties (Separatedness) ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+\begin{minipage}{0.3\textwidth}
+A prevariety $X$ is a \textbf{variety} (separated) iff the diagonal
+$\Delta_X=\{(x,x):x\in X\}$
+is closed in $X\times X$.
+
+Key results:
+\begin{itemize}
+\item Affine varieties are varieties.
+\item Open and closed subprevarieties of varieties are varieties.
+\item For pure-dimensional varieties, curves and surfaces are dimensions $1$ and $2$.
+\item For morphisms to a variety $Y$, graph $\Gamma_f$ is closed and equalizer
+$\{x:f(x)=g(x)\}$ is closed.
+\end{itemize}
+\end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {Varieties and Diagonal Criterion};
+\end{tikzpicture}
+
+\end{multicols*}
+\end{document}
