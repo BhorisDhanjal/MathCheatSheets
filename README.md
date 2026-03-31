@@ -11,13 +11,14 @@ The topics I've included are:
 4. [Galois Theory](Galois%20Theory%20Cheat%20Sheet.pdf)
 5. [Measure Theory](Measure%20Theory%20Cheat%20Sheet.pdf)
 6. [Category Theory](Category%20Theory%20Cheat%20Sheet.pdf)
+7. [Real Analysis](Real%20Analysis%20Cheat%20Sheet.pdf)
 
-In progress
-1. Commutative Algebra
-2. Algebraic Topology 
-3. Algebraic Geometry
-4. Functional Analysis
-5. Differential Geometry
+In progress (parenthetical text indicates planned coverage):
+1. Commutative Algebra (Entirety of Atiyah-MacDonald and some homological algebra)
+2. Algebraic Topology (Most of Hatcher and some model categories)
+3. Algebraic Geometry (In the first pass I'll mostly just follow Gathmann's lecture notes)
+4. Functional Analysis (Upto the spectral theorem over Hilbert spaces ending at Gelfand duality)
+5. Differential Geometry (Most of Lee's Smooth Manifolds and Petersen's Riemannian geometry)
 
 You are free to use and share these sheets. If you notice a mistake or want to collaborate to add a new subject feel free to make a pull request here.
 

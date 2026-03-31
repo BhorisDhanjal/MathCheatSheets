@@ -1,0 +1,626 @@
+\documentclass[dvipsnames]{article}
+\usepackage{geometry}
+\geometry{a3paper, landscape, margin=2in}
+\usepackage{url}
+\usepackage{multicol}
+\usepackage{amsmath,amssymb}
+\usepackage{esint}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathmorphing}
+\usepackage{enumitem}
+\usepackage{colortbl}
+\usepackage{mathtools}
+\usepackage{ mathrsfs }
+\usepackage{ gensymb }
+\usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
+\makeatletter
+\setlist[itemize]{noitemsep, topsep=0pt}
+\newcommand*\bigcdot{\mathpalette\bigcdot@{.5}}
+\newcommand*\bigcdot@[2]{\mathbin{\vcenter{\hbox{\scalebox{#2}{$\m@th#1\bullet$}}}}}
+\makeatother
+%Sheet made by Boris, Template is by Drew Ulick https://de.overleaf.com/articles/130-cheat-sheet/ntwtkmpxmgrp
+\title{Real Analysis Cheat Sheet}
+\usepackage[english]{babel}
+\usepackage{lmodern}
+\usepackage{bm}
+
+\advance\topmargin-1.2in
+\advance\textheight3in
+\advance\textwidth3in
+\advance\oddsidemargin-1.5in
+\advance\evensidemargin-1.5in
+\parindent0pt
+\parskip2pt
+\newcommand{\hr}{\centerline{\rule{3.5in}{1pt}}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\F}{\mathbb{F}}
+
+\begin{document}
+
+\begin{center}{\fontsize{35}{60}{\textcolor{SeaGreen}{\textbf{Real Analysis Cheat Sheet}}}}\\
+\end{center}
+\begin{multicols*}{3}
+
+\tikzstyle{mybox} = [draw=SeaGreen, fill=white, very thick,
+    rectangle, rounded corners, inner sep=10pt, inner ysep=10pt]
+\tikzstyle{fancytitle} =[fill=SeaGreen, text=white, font=\bfseries]
+
+% ------------------------------------------------------
+% Start of Sheet
+% ------------------------------------------------------
+
+%------------ Field Axioms ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    A set $\F$ is a \textbf{field} if it has operations $+,\cdot$ satisfying:
+    \begin{itemize}
+        \item \textbf{Associativity:} $a{+}(b{+}c) = (a{+}b){+}c$, $a(bc) = (ab)c$
+        \item \textbf{Commutativity:} $a+b = b+a$, $ab = ba$
+        \item \textbf{Identities:} $\exists 0, 1 \in \F$ s.t. $a+0=a, a\cdot 1=a$
+        \item \textbf{Inverses:} $\forall a, \exists -a$ s.t. $a+(-a)=0$. If $a \neq 0$, $\exists a^{-1}$ s.t. $a a^{-1}=1$
+        \item \textbf{Distributivity:} $a(b+c) = ab+ac$
+    \end{itemize}
+    \end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {Field Axioms};
+\end{tikzpicture}
+
+%------------ Order Axioms & Ordered Field ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    An \textbf{ordered field} $\F$ contains a positive subset $P \subset \F$ where for $a>b \iff a-b \in P$:
+    \begin{itemize}
+        \item \textbf{Trichotomy:} For any $a \in \F$, exactly one is true: $a \in P$, $-a \in P$, or $a = 0$.
+        \item \textbf{Closure properties:} If $a, b \in P$, then $a+b \in P$ and $ab \in P$.
+        \item \textbf{Transitivity:} $a < b$ and $b < c \implies a < c$.
+        \item \textbf{Translation:} $a < b \implies a+c < b+c$.
+        \item \textbf{Multiplication:} $a < b$ and $c > 0 \implies ac < bc$.
+    \end{itemize}
+    \end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {Ordered Field Axioms};
+\end{tikzpicture}
+
+%------------ Dedekind Cuts ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    We can formally construct $\R$ from $\Q$ using \textbf{Dedekind cuts}. A cut is a subset $A \subset \Q$ such that:
+    \begin{itemize}
+        \item $A \neq \emptyset$ and $A \neq \Q$ (non-trivial).
+        \item If $x \in A$ and $y < x$ for $y \in \Q$, then $y \in A$ (downward closed).
+        \item If $x \in A$, then $\exists z \in A$ such that $x < z$ (no maximum element).
+    \end{itemize}
+    \textbf{Properties \& Operations:}
+    \begin{itemize}
+        \item $\R$ is the set of all Dedekind cuts. 
+        \item $A \le B \iff A \subseteq B$.
+        \item $A + B = \{a+b \mid a \in A, b \in B\}$.
+        \item In $\R$, every non-empty bounded set has a least upper bound (Completeness).
+    \end{itemize}
+    \end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {Construction of $\R$ via Dedekind Cuts};
+\end{tikzpicture}
+
+%------------ Completeness & Supremum ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \begin{itemize}
+        \item \textbf{Upper Bound:} $M \in \R$ is an upper bound for $S$ if $\forall s \in S, s \le M$.
+        \item \textbf{Supremum (LUB):} $s = \sup S$ if $s$ is an upper bound, and for any upper bound $M$, $s \le M$.
+        \item \textbf{Axiom of Completeness:} Every non-empty subset $S \subset \R$ bounded above has a supremum.
+        \item \textbf{Archimedean Property:} $\forall x, y \in \R$ with $x>0$, $\exists n \in \N$ such that $nx > y$.
+        \item \textbf{Density of $\Q$:} Between any two real numbers $a < b$, there exists $q \in \Q$ with $a < q < b$.
+    \end{itemize}
+    \end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {Completeness \& Supremum Property};
+\end{tikzpicture}
+
+%------------ Classes of Real Numbers ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \begin{itemize}
+        \item \textbf{Natural Numbers ($\N$):} Inductive set containing 1.
+        \item \textbf{Rational ($\Q$) / Irrational:} $q \in \Q \iff q = m/n$ for $m \in \Z, n \in \N$. Reals not in $\Q$ are irrational (e.g., $\sqrt{2}$).
+        \item \textbf{Archimedean Principle:} For any $h > 0$ and $x \in \R$, $\exists k \in \Z$ such that $(k-1)h \le x < kh$.
+        \item \textbf{Geometric Interpretation:} Points on a line. The sets $(a,b)$, $[a,b]$, $(a,b]$, $[a,b)$ are intervals. 
+    \end{itemize}
+    \end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {Classes of Real Numbers};
+\end{tikzpicture}
+
+%------------ Basic Lemmas of Completeness ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    Three equivalent topological principles stemming from completeness:
+    \begin{itemize}
+        \item \textbf{Nested Interval Lemma (Cauchy--Cantor):} For any sequence of nested closed intervals $I_1 \supset I_2 \supset \dots$ with lengths $|I_n| \to 0$, there exists a unique point $c \in \bigcap_{n=1}^\infty I_n$.
+        \item \textbf{Finite Covering Lemma (Borel--Lebesgue / Heine-Borel):} Every open cover of a closed and bounded interval $[a,b]$ admits a finite subcover.
+        \item \textbf{Limit Point Lemma (Bolzano--Weierstrass):} Every bounded infinite subset of $\R$ has at least one limit point in $\R$.
+    \end{itemize}
+    \end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {Lemmas on Completeness};
+\end{tikzpicture}
+
+%------------ Countable and Uncountable Sets ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \begin{itemize}
+        \item \textbf{Equinumerous Sets:} $A \sim B$ if there exists a bijection $f: A \to B$.
+        \item \textbf{Countable Set:} A set $A$ is countable if $A \sim \N$.
+        \item \textbf{Properties of Countable Sets:} 
+              \begin{itemize}
+                  \item Any infinite subset of a countable set is countable.
+                  \item The union of countably many countable sets is countable.
+                  \item $\Q$ is countable.
+              \end{itemize}
+        \item \textbf{Cardinality of the Continuum:} $\R$ is uncountable. In fact, any non-degenerate interval (like $[0,1]$) is uncountable and has the cardinality of the continuum.
+        \item \textbf{Cantor's Theorem:} The power set $2^A$ has strictly greater cardinality than $A$.
+    \end{itemize}
+    \end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {Countable \& Uncountable Sets};
+\end{tikzpicture}
+
+%------------ Limits of Sequences ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    A sequence $\{x_n\}$ \textbf{converges} to $a$ ($\lim_{n\to\infty} x_n = a$) if:
+    $$ \forall \varepsilon > 0, \exists N \in \N \text{ s.t. } \forall n \ge N, |x_n - a| < \varepsilon $$
+    \begin{itemize}
+        \item \textbf{Cauchy Criterion:} Converges $\iff \forall \varepsilon>0, \exists N$ s.t. $\forall m,n \ge N, |x_m - x_n| < \varepsilon$.
+        \item \textbf{Monotone Convergence:} A monotone sequence converges $\iff$ it is bounded.
+        \item \textbf{Bolzano-Weierstrass:} Every bounded sequence contains a convergent subsequence.
+    \end{itemize}
+    \textbf{Limit Superior \& Inferior:}
+    \begin{itemize}
+        \item $\limsup x_n = \lim_{k\to\infty} (\sup_{n \ge k} x_n)$, \quad $\liminf x_n = \lim_{k\to\infty} (\inf_{n \ge k} x_n)$.
+        \item $x_n \to L \iff \limsup x_n = \liminf x_n = L$.
+        \item The set of subsequential limits of a bounded sequence is closed and bounded. The largest is $\limsup x_n$.
+    \end{itemize}
+    \end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {Limits of Sequences};
+\end{tikzpicture}
+
+%------------ Limits of Functions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    $\lim_{x \to a} f(x) = L$ (using $\varepsilon$-$\delta$ definition):
+    $$ \forall \varepsilon > 0, \exists \delta > 0 \text{ s.t. } 0 < |x-a| < \delta \implies |f(x)-L| < \varepsilon $$
+    \begin{itemize}
+        \item \textbf{Heine's Definition (Sequences):} $\lim_{x\to a} f(x) = L \iff$ for every $\{x_n\} \to a$ ($x_n \neq a$), $f(x_n) \to L$.
+        \item \textbf{Cauchy Criterion for Functions:} $\exists \lim_{x\to a} f(x) \iff \forall \varepsilon>0, \exists \delta>0$ s.t. $0 < |x'-a| < \delta$ and $0 < |x''-a| < \delta \implies |f(x')-f(x'')|<\varepsilon$.
+        \item \textbf{Limits over a Base} ($\mathcal{B}$): A more general framework for limits (e.g. $x \to \infty$, $x \searrow a$) using a filter base $\mathcal{B}$. $\lim_{\mathcal{B}} f(x) = L \iff \forall \varepsilon>0, \exists B \in \mathcal{B}$ s.t. $x \in B \implies |f(x)-L|<\varepsilon$.
+    \end{itemize}
+    \end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {Limits of Functions};
+\end{tikzpicture}
+
+%------------ Properties of Limits ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    If $\lim x_n = A$ and $\lim y_n = B$, then:
+    \begin{itemize}
+        \item \textbf{Uniqueness \& Boundedness:} Limits are unique. Convergent sequences are bounded.
+        \item \textbf{Algebraic Operations:} 
+              $\lim (x_n \pm y_n) = A \pm B$;
+              $\lim (x_n y_n) = AB$;
+              $\lim (x_n / y_n) = A/B$ (if $y_n, B \neq 0$).
+        \item \textbf{Order Properties:} If $x_n \le y_n$ for all $n$, then $A \le B$. (Strict inequality does \emph{not} guarantee $A < B$).
+        \item \textbf{Squeeze Theorem:} If $x_n \le z_n \le y_n$ and $A = B$, then $\lim z_n = A$.
+        \item \textbf{One-Sided Limits:} $f(a \pm 0) = \lim_{x \to a^\pm} f(x)$. If $f$ is monotone, 1-sided limits exist everywhere.
+    \end{itemize}
+    \end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {Properties of Limits};
+\end{tikzpicture}
+
+%------------ Elementary Series ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    A series $\sum_{n=1}^\infty x_n$ is a formal sum. The \textbf{partial sums} are $S_k = \sum_{n=1}^k x_n$.
+    \begin{itemize}
+        \item \textbf{Convergence:} The series converges to $S$ if $\lim_{k\to\infty} S_k = S$.
+        \item \textbf{Necessary Condition:} If $\sum x_n$ converges, then $\lim_{n \to \infty} x_n = 0$. (The converse is false, e.g., harmonic series $\sum 1/n$).
+        \item \textbf{Cauchy Criterion for Series:} $\sum x_n$ converges $\iff \forall \varepsilon > 0, \exists N \in \N$ such that $\forall m > n \ge N$,
+        $|x_{n+1} + \dots + x_m| < \varepsilon$.
+        \item \textbf{The Number $e$:} $e = \sum_{n=0}^\infty \frac{1}{n!} = \lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^n$. It is irrational.
+    \end{itemize}
+    \end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {Elementary Facts About Series};
+\end{tikzpicture}
+
+%------------ Series Convergence Tests ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    Let $\sum a_n$ and $\sum b_n$ be series.
+    \begin{itemize}
+        \item \textbf{Comparison Test:} If $0 \le a_n \le b_n$ for large $n$: 
+          (1) $\sum b_n$ converges $\implies \sum a_n$ converges. 
+          (2) $\sum a_n$ diverges $\implies \sum b_n$ diverges.
+        \item \textbf{Limit Comparison Test:} If $\lim_{n \to \infty} \frac{a_n}{b_n} = L > 0$, then $\sum a_n$ and $\sum b_n$ both converge or both diverge.
+        \item \textbf{Cauchy Condensation Test:} If $a_n \ge 0$ is monotonically decreasing, then $\sum a_n$ converges $\iff \sum 2^n a_{2^n}$ converges.
+        \item \textbf{p-Test:} $\sum \frac{1}{n^p}$ converges $\iff p > 1$ (proved via Cauchy Condensation or integral test).
+        \item \textbf{Ratio (D'Alembert) Test:} $L = \lim_{n \to \infty} \left| \frac{a_{n+1}}{a_n} \right|$. Converges absolutely if $L < 1$. Diverges if $L > 1$. Inconclusive if $L = 1$.
+        \item \textbf{Root (Cauchy) Test:} $L = \limsup_{n \to \infty} \sqrt[n]{|a_n|}$. Converges absolutely if $L < 1$. Diverges if $L > 1$. Inconclusive if $L = 1$.
+        \item \textbf{Alternating Series (Leibniz) Test:} If $a_n \ge 0$, monotonically decreasing $a_n \searrow 0$, then $\sum (-1)^{n+1} a_n$ converges.
+        \item \textbf{Absolute Convergence:} $\sum |a_n|$ converges $\implies \sum a_n$ converges. (The converse is false; conditionally convergent if $\sum a_n$ converges but $\sum |a_n|$ diverges).
+    \end{itemize}
+    \end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {Series Convergence Tests};
+\end{tikzpicture}
+
+%------------ Continuous Functions: Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \textbf{Basic Definitions:}
+    \begin{itemize}
+        \item A function $f: E \to \R$ is \textbf{continuous} at $a \in E$ if: \\
+        $ \forall \varepsilon > 0, \exists \delta > 0 \text{ s.t. } \forall x \in E, |x-a| < \delta \implies |f(x)-f(a)| < \varepsilon $
+        \item \textbf{Sequential criterion:} for any sequence $x_n \to a$, $f(x_n) \to f(a)$.
+    \end{itemize}
+    \textbf{Points of Discontinuity:}
+    \begin{itemize}
+        \item \textbf{Removable:} $\lim_{x \to a} f(x)$ exists but $\neq f(a)$.
+        \item \textbf{First Kind (Jump):} Left limit $f(a-0)$ and right limit $f(a+0)$ exist but are unequal. Let $\omega(a) = |f(a+0) - f(a-0)|$ be the jump.
+        \item \textbf{Second Kind:} At least one of the one-sided limits does not exist.
+    \end{itemize}
+    \end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {Continuous Functions: Definitions};
+\end{tikzpicture}
+
+%------------ Continuous Functions: Properties ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \textbf{Local Properties:}
+    \begin{itemize}
+        \item Continuity is preserved under $+$, $-$, $\cdot$, and $/$ (if denominator $\neq 0$).
+        \item Composition of continuous functions is continuous.
+        \item If $f$ is continuous at $a$ and $f(a) > 0$, then $f(x) > 0$ in some neighborhood of $a$.
+    \end{itemize}
+    \textbf{Global Properties (on closed interval $[a,b]$):}
+    \begin{itemize}
+        \item \textbf{Weierstrass I (Boundedness):} $f$ is bounded on $[a,b]$.
+        \item \textbf{Weierstrass II (Maximum):} $f$ achieves its global maximum and minimum on $[a,b]$.
+        \item \textbf{Intermediate Value Theorem (Bolzano-Cauchy):} If $f(a)$ and $f(b)$ have opposite signs, $\exists c \in (a,b)$ s.t. $f(c) = 0$. By extension, $f$ assumes all values between $f(a)$ and $f(b)$.
+        \item \textbf{Uniform Continuity (Cantor/Heine):} $f$ is uniformly continuous on $[a,b]$.
+    \end{itemize}
+    \end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {Continuous Functions: Properties};
+\end{tikzpicture}
+
+
+% Chapter 5: Differential Calculus Blocks
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+        \begin{itemize}[leftmargin=*]
+            \item \textbf{Derivative:} $f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}$
+            \item \textbf{Differentiability:} $f(x+h) = f(x) + A \cdot h + o(h)$ as $h \to 0$, where $A = f'(x)$.
+            \item \textbf{Differential:} $df = f'(x) dx$, representing the linear part of the increment.
+            \item \textbf{Chain Rule:} $(g \circ f)'(x) = g'(f(x)) \cdot f'(x)$
+            \item \textbf{Inverse Function:} $(f^{-1})'(y) = \frac{1}{f'(x)}$ where $y = f(x)$ and $f'(x) \neq 0$.
+        \end{itemize}
+    \end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {Derivatives and Differentials};
+\end{tikzpicture}
+
+\vspace{10pt}
+
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+        \begin{itemize}[leftmargin=*]
+            \item \textbf{Fermat's Theorem:} If $f$ has a local extremum at $c$ and is differentiable there, then $f'(c) = 0$.
+            \item \textbf{Rolle's Theorem:} If $f \in C[a,b]$, differentiable on $(a,b)$, and $f(a)=f(b)$, then $\exists c \in (a,b)$ st $f'(c) = 0$.
+            \item \textbf{Lagrange MVT:} If $f \in C[a,b]$, differentiable on $(a,b)$, $\exists c \in (a,b)$ st $f'(c) = \frac{f(b)-f(a)}{b-a}$.
+            \item \textbf{Cauchy MVT:} If $f,g \in C[a,b]$, differentiable on $(a,b)$ and $g'(x) \neq 0$, $\exists c \in (a,b)$ st $\frac{f'(c)}{g'(c)} = \frac{f(b)-f(a)}{g(b)-g(a)}$.
+            \item \textbf{L'Hôpital's Rule:} For $\frac{0}{0}$ or $\frac{\infty}{\infty}$, $\lim \frac{f(x)}{g(x)} = \lim \frac{f'(x)}{g'(x)}$.
+        \end{itemize}
+    \end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {Mean Value Theorems};
+\end{tikzpicture}
+
+\vspace{10pt}
+
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+        \begin{itemize}[leftmargin=*]
+            \item \textbf{Taylor's Formula:} $f(x) = \sum_{k=0}^{n} \frac{f^{(k)}(a)}{k!} (x-a)^k + R_n(x)$
+            \item \textbf{Peano Remainder:} $R_n(x) = o((x-a)^n)$ as $x \to a$.
+            \item \textbf{Lagrange Remainder:} $R_n(x) = \frac{f^{(n+1)}(\xi)}{(n+1)!} (x-a)^{n+1}$ for some $\xi$ between $a$ and $x$.
+            \item \textbf{Cauchy Remainder:} $R_n(x) = \frac{f^{(n+1)}(\xi)}{n!} (x-\xi)^n (x-a)$.
+            \item \textbf{Maclaurin Series:} Taylor series centered at $a = 0$.
+        \end{itemize}
+    \end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {Taylor's Formula};
+\end{tikzpicture}
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \begin{itemize}
+        \item \textbf{Riemann Integral:} A function $f: [a,b] \to \mathbb{R}$ is Riemann integrable ($f \in \mathcal{R}[a,b]$) if there exists $I \in \mathbb{R}$ such that for every $\epsilon > 0$, there is a $\delta > 0$ where for any partition $P$ with mesh $\|P\| < \delta$ and any sample points $\xi$, $|\sum_{i} f(\xi_i)\Delta x_i - I| < \epsilon$.
+        \item \textbf{Linearity:} If $f, g \in \mathcal{R}[a,b]$ and $\alpha, \beta \in \mathbb{R}$, then $\alpha f + \beta g \in \mathcal{R}[a,b]$ and
+        \[ \int_a^b (\alpha f + \beta g) dx = \alpha \int_a^b f dx + \beta \int_a^b g dx \]
+        \item \textbf{Additivity:} For $a < c < b$, $f \in \mathcal{R}[a,b] \iff f \in \mathcal{R}[a,c]$ and $f \in \mathcal{R}[c,b]$, with
+        \[ \int_a^b f dx = \int_a^c f dx + \int_c^b f dx \]
+        \item \textbf{Monotonicity:} If $f \leq g$ on $[a,b]$, then $\int_a^b f dx \leq \int_a^b g dx$.
+    \end{itemize}
+    \end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {Riemann Integral \& Properties};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \begin{itemize}
+        \item \textbf{First Fundamental Theorem of Calculus:} If $f$ is continuous on $[a,b]$, then the function $F(x) = \int_a^x f(t) dt$ is differentiable on $(a,b)$ and $F'(x) = f(x)$.
+        \item \textbf{Newton-Leibniz Formula (Second FTC):} If $f \in \mathcal{R}[a,b]$ and $F$ is an antiderivative of $f$ (i.e., $F' = f$), then
+        \[ \int_a^b f(x) dx = F(b) - F(a) \]
+        \item \textbf{Integration by Parts:} If $u, v$ are continuously differentiable on $[a,b]$, then
+        \[ \int_a^b u(x)v'(x) dx = \left[u(x)v(x)\right]_a^b - \int_a^b u'(x)v(x) dx \]
+        \item \textbf{Substitution Rule:} If $\phi: [\alpha, \beta] \to [a,b]$ is continuously differentiable and $f$ is continuous, then
+        \[ \int_{\phi(\alpha)}^{\phi(\beta)} f(x) dx = \int_\alpha^\beta f(\phi(t))\phi'(t) dt \]
+    \end{itemize}
+    \end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {Fundamental Theorems \& Techniques};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \begin{itemize}
+        \item \textbf{Improper Integrals (Unbounded Interval):} If $f$ is integrable on $[a, R]$ for all $R > a$, the improper integral is defined as:
+        \[ \int_a^\infty f(x) dx = \lim_{R \to \infty} \int_a^R f(x) dx \]
+        Converges if the limit exists and is finite.
+        \item \textbf{Improper Integrals (Unbounded Function):} If $f$ is continuous on $[a, b)$ and $\lim_{x \to b^-} |f(x)| = \infty$, then:
+        \[ \int_a^b f(x) dx = \lim_{\epsilon \to 0^+} \int_a^{b-\epsilon} f(x) dx \]
+        \item \textbf{Comparison Test:} If $0 \leq f(x) \leq g(x)$ for $x \geq a$:
+        \begin{itemize}
+            \item If $\int_a^\infty g(x) dx$ converges, then $\int_a^\infty f(x) dx$ converges.
+            \item If $\int_a^\infty f(x) dx$ diverges, then $\int_a^\infty g(x) dx$ diverges.
+        \end{itemize}
+        \item \textbf{Absolute Convergence:} If $\int_a^\infty |f(x)| dx$ converges, then $\int_a^\infty f(x) dx$ converges absolutely.
+    \end{itemize}
+    \end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {Improper Integrals};
+\end{tikzpicture}
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    The space $\mathbb{R}^m$ is treated as a metric space with the standard Euclidean distance.
+    \begin{itemize}
+        \item \textbf{Norm}: $\|x\| = \sqrt{x_1^2 + \dots + x_m^2}$. Satisfies $\|x\| \ge 0$, $\|\lambda x\| = |\lambda|\|x\|$, $\|x+y\| \le \|x\| + \|y\|$ (Triangle Inequality).
+        \item \textbf{Distance}: $d(x,y) = \|x - y\|$. 
+        \item \textbf{$r$-neighborhood}: $B_r(a) = \{ x \in \mathbb{R}^m \mid \|x-a\| < r \}$.
+        \item \textbf{Open set}: $U \subset \mathbb{R}^m$ is open if $\forall x \in U$, $\exists r>0$ s.t. $B_r(x) \subset U$.
+        \item \textbf{Closed set}: $F \subset \mathbb{R}^m$ is closed if its complement $\mathbb{R}^m \setminus F$ is open. Equivalently, $F$ contains all its limit points.
+        \item \textbf{Compact set}: $K \subset \mathbb{R}^m$ is compact if every open cover has a finite subcover. \textit{Heine-Borel}: $K$ is compact $\iff$ $K$ is closed and bounded.
+        \item \textbf{Bolzano-Weierstrass}: Every bounded sequence in $\mathbb{R}^m$ has a convergent subsequence.
+    \end{itemize}
+    \end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {Space $\mathbb{R}^m$ \dots Topology};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    Let $f: X \subset \mathbb{R}^m \to \mathbb{R}^n$ and $a$ be a limit point of $X$.
+    \begin{itemize}
+        \item \textbf{Limit}: $\lim_{x \to a} f(x) = L$ if $\forall \varepsilon > 0, \exists \delta > 0$ s.t. $0 < \|x - a\| < \delta \implies \|f(x) - L\| < \varepsilon$.
+        \item \textbf{Cauchy Criterion}: $\lim_{x \to a} f(x)$ exists $\iff$ $\forall \varepsilon > 0, \exists \delta > 0$ s.t. $\forall x', x'' \in B_\delta(a) \cap X \setminus \{a\}$, $\|f(x') - f(x'')\| < \varepsilon$.
+        \item \textbf{Iterated Limits}: For $f(x, y)$, the iterated limits $\lim_{x \to a}(\lim_{y \to b} f(x,y))$ might not equal the multiple limit $\lim_{(x,y) \to (a,b)} f(x,y)$, and their existence does not imply the other.
+        \item \textbf{Properties}: Standard limit laws apply (linear combinations, products, quotients). 
+    \end{itemize}
+    \end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {Limits of Functions of Several Variables};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    Let $f: X \subset \mathbb{R}^m \to \mathbb{R}^n$ be a function.
+    \begin{itemize}
+        \item \textbf{Continuity at $a \in X$}: $\forall \varepsilon > 0, \exists \delta > 0$ s.t. $\|x - a\| < \delta \implies \|f(x) - f(a)\| < \varepsilon$. Equivalently, $\lim_{x \to a} f(x) = f(a)$.
+        \item \textbf{Global Continuity}: $f$ is continuous on $X$ if it is continuous at every point in $X$.
+        \item \textbf{Weierstrass Theorem}: If $K \subset \mathbb{R}^m$ is compact and $f: K \to \mathbb{R}$ is continuous, then $f(K)$ is compact (bounded) and achieves its maximum and minimum on $K$.
+        \item \textbf{Uniform Continuity}: $f$ is uniformly continuous on $X$ if $\forall \varepsilon > 0, \exists \delta > 0$ s.t. $\forall x_1, x_2 \in X$, $\|x_1 - x_2\| < \delta \implies \|f(x_1) - f(x_2)\| < \varepsilon$.
+        \item \textbf{Cantor's Theorem}: If $f$ is continuous on a compact set $K$, then $f$ is uniformly continuous on $K$.
+        \item \textbf{Connectedness}: If $X$ is connected and $f$ is continuous, $f(X)$ is connected (Intermediate Value Theorem equivalent).
+    \end{itemize}
+    \end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {Continuity in $\mathbb{R}^m$};
+\end{tikzpicture}
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \begin{itemize}
+        \item \textbf{Partial Derivative}: Limit of $f$ with respect to one variable, others held constant: $\frac{\partial f}{\partial x_i} = \lim_{h \to 0} \frac{f(x+h e_i) - f(x)}{h}$.
+        \item \textbf{Differentiability}: A function $f$ is differentiable at $x$ if $\Delta f = L(\Delta x) + o(\|\Delta x\|)$ as $\Delta x \to 0$, where $L$ is a continuous linear operator (the differential $\mathrm{d}f(x)$).
+        \item \textbf{Jacobian Matrix}: The matrix representing the linear map $\mathrm{d}f(x)$, with entries $J_{ij} = \frac{\partial f_i}{\partial x_j}$.
+        \item \textbf{Chain Rule}: If $f$ is diff. at $x$ and $g$ is diff. at $y=f(x)$, then $g \circ f$ is diff. at $x$ with $J_{g \circ f}(x) = J_g(f(x)) J_f(x)$.
+        \item \textbf{Directional Derivative}: Rate of change along a vector $v$: $D_v f(x) = \lim_{t \to 0} \frac{f(x+tv) - f(x)}{t}$. If $f$ is diff., $D_v f(x) = \nabla f(x) \cdot v$.
+        \item \textbf{Gradient}: Vector of partial derivatives $\nabla f = \left(\frac{\partial f}{\partial x_1}, \dots, \frac{\partial f}{\partial x_n}\right)^T$. Points in the direction of steepest local ascent.
+    \end{itemize}
+    \end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {Differentiability \& Derivatives};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \begin{itemize}
+        \item \textbf{Schwarz's Theorem}: If mixed partial derivatives $f_{xy}$ and $f_{yx}$ are continuous at a point, they are equal: $\frac{\partial^2 f}{\partial x \partial y} = \frac{\partial^2 f}{\partial y \partial x}$.
+        \item \textbf{Taylor's Formula}:
+        $f(x+h) = f(x) + \mathrm{d}f(x)(h) + \frac{1}{2!}\mathrm{d}^2f(x)(h,h) + \dots + \frac{1}{k!}\mathrm{d}^kf(x)(h,\dots,h) + R_k(h)$, where remainder $R_k(h) = o(\|h\|^k)$.
+        Up to second order using the Hessian matrix $H$: $f(x+h) \approx f(x) + \nabla f(x)^T h + \frac{1}{2} h^T H(x) h$.
+        \item \textbf{Extrema Necessary Condition}: For a differentiable function $f$, if $a$ is a local extremum, then $\nabla f(a) = 0$ (critical or stationary point).
+        \item \textbf{Extrema Sufficient Condition (Hessian Matrix $H$)}:
+        Let $H(a) = \left[ \frac{\partial^2 f}{\partial x_i \partial x_j}(a) \right]$ be the Hessian at a critical point $a$.
+        \begin{itemize}
+            \item If $H(a)$ is positive definite, $a$ is a \textbf{local minimum}.
+            \item If $H(a)$ is negative definite, $a$ is a \textbf{local maximum}.
+            \item If $H(a)$ is indefinite, $a$ is a \textbf{saddle point} (no extremum).
+        \end{itemize}
+    \end{itemize}
+    \end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {Taylor's Formula \& Extrema};
+\end{tikzpicture}
+
+%------------ Implicit & Inverse Function Theorems ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \begin{itemize}
+        \item \textbf{Inverse Function Theorem:} Let $f: U \subset \mathbb{R}^n \to \mathbb{R}^n$ be $C^k$. If the Jacobian determinant $\det(J_f(a)) \neq 0$ at $a \in U$, then there exist neighborhoods $V$ of $a$ and $W$ of $f(a)$ such that $f: V \to W$ is a $C^k$ diffeomorphism (bijection with $C^k$ inverse), and $J_{f^{-1}}(f(a)) = (J_f(a))^{-1}$.
+        \item \textbf{Implicit Function Theorem:} Let $F: \mathbb{R}^n \times \mathbb{R}^m \to \mathbb{R}^m$ be $C^k$. Suppose $F(a, b) = 0$ and the partial Jacobian matrix with respecto to $y$, $\det(D_y F(a,b)) \neq 0$. Then near $(a,b)$, the solution to $F(x,y)=0$ is locally given by a $C^k$ function $y = \phi(x)$, and $D\phi(x) = -(D_y F)^{-1} D_x F$.
+        \item \textbf{Functional Dependence:} Functions $y_1=f_1(x), \dots, y_m=f_m(x)$ are functionally independent near a point iff the Jacobian matrix $[\frac{\partial f_i}{\partial x_j}]$ has maximum rank.
+        \item \textbf{Constant Rank Theorem:} If $J_f$ has constant rank $k$ near $a$, then locally $f$ is equivalent (via diffeomorphisms) to a linear projection/injection of rank $k$.
+    \end{itemize}
+    \end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {Inverse \& Implicit Functions};
+\end{tikzpicture}
+
+%------------ Constrained Extrema & Morse Lemma ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \begin{itemize}
+        \item \textbf{Constrained Extrema (Lagrange Multipliers):} To find local extrema of $f(x)$ subject to constraints $g_1(x)=0, \dots, g_m(x)=0$, define the Lagrangian $\mathcal{L} = f - \sum \lambda_i g_i$. A necessary condition at $a$ (if gradients $\nabla g_i(a)$ are linearly independent) is $\nabla \mathcal{L}(a) = 0$, meaning $\nabla f(a)$ is a linear combination of $\nabla g_i(a)$.
+        \item \textbf{Non-degenerate Critical Point:} A critical point $a$ ($\nabla f(a)=0$) where the Hessian matrix $H(a)$ is invertible (non-zero determinant).
+        \item \textbf{Morse Lemma:} If $a$ is a non-degenerate critical point of a $C^3$ function $f$, then there exists a local diffeomorphism $y = \phi(x)$ such that locally $f(y) = f(a) - y_1^2 - \dots - y_k^2 + y_{k+1}^2 + \dots + y_n^2$, where $k$ is the index of the Hessian matrix $H(a)$ (number of negative eigenvalues).
+        \item \textbf{Tangent \& Normal Spaces:} For a surface $S = \{x : F(x)=0\}$ where $\nabla F \neq 0$, the normal vector is $\nabla F$, and the tangent space at $a \in S$ is $\{ v \in \mathbb{R}^n : \nabla F(a) \cdot v = 0\}$.
+    \end{itemize}
+    \end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {Extrema with Constraint \& Morse Lemma};
+\end{tikzpicture}
+
+%------------ Properties of Diff & Integration ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \begin{itemize}
+        \item \textbf{Darboux's Theorem:} If $f$ is differentiable on $[a,b]$, then $f'$ satisfies the intermediate value property (takes all values between $f'(a)$ and $f'(b)$).
+        \item \textbf{Convexity \& Jensen's Inequality:} $f$ is convex on $I$ if $f(tx + (1-t)y) \le t f(x) + (1-t) f(y)$. For convex $f$, $f(\sum \lambda_i x_i) \le \sum \lambda_i f(x_i)$ where $\sum \lambda_i = 1, \lambda_i \ge 0$.
+    \end{itemize}
+    \end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {Differential Calculus Properties};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \begin{itemize}
+        \item \textbf{Lebesgue's Criterion:} A bounded function on $[a,b]$ is Riemann integrable $\iff$ its set of discontinuities has Lebesgue measure zero.
+        \item \textbf{First Mean Value Theorem for Integrals:} If $f$ is continuous, $\exists c \in [a,b]$ s.t. $\int_a^b f(x)g(x)dx = f(c)\int_a^b g(x)dx$ ($g \ge 0$).
+        \item \textbf{Second Mean Value Theorem:} If $f$ is monotonic and $g$ integrable, $\exists c \in [a,b]$ s.t. $\int_a^b f(x)g(x)dx = f(a^+)\int_a^c g(x)dx + f(b^-)\int_c^b g(x)dx$.
+        \item \textbf{Dirichlet / Abel Tests (Improper Integrals):} $\int f(x)g(x)dx$ converges if (Dirichlet) $F(x) = \int^x f$ is bounded and $g \searrow 0$, or (Abel) $\int f$ converges and $g$ is monotone \& bounded.
+    \end{itemize}
+    \end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {Advanced Integration Properties};
+\end{tikzpicture}
+
+%------------ 16.1 Pointwise & Uniform Convergence ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \begin{itemize}
+        \item \textbf{Pointwise Convergence:} $f_n \to f$ on $X$ if $\forall x \in X$, $\lim_{n \to \infty} f_n(x) = f(x)$. 
+        \item \textbf{Uniform Convergence ($f_n \rightrightarrows f$):} $\forall \varepsilon > 0, \exists N$ s.t. $\forall n \ge N, \forall x \in X, |f_n(x) - f(x)| < \varepsilon$. Equivalently, $\lim_{n \to \infty} \sup_{x \in X} |f_n(x) - f(x)| = 0$.
+        \item \textbf{Cauchy Criterion:} $f_n \rightrightarrows f \iff \forall \varepsilon > 0, \exists N$ s.t. $\forall m, n \ge N, \sup_{x} |f_n(x) - f_m(x)| < \varepsilon$.
+        \item \textbf{Dini's Theorem:} If $(f_n)$ is a monotonic sequence of continuous functions converging point-wise to a continuous function $f$ on a compact set $K$, then $f_n \rightrightarrows f$.
+    \end{itemize}
+    \end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {16.1 Pointwise \& Uniform Convergence};
+\end{tikzpicture}
+
+%------------ 16.2 Uniform Convergence of Series ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \begin{itemize}
+        \item \textbf{Partial Sums:} $\sum f_n(x) \rightrightarrows f(x)$ if $S_n(x) = \sum_{k=1}^n f_k(x) \rightrightarrows f(x)$.
+        \item \textbf{Weierstrass M-Test:} If $|f_n(x)| \le M_n$ on $X$ and $\sum M_n < \infty$, then $\sum f_n(x)$ converges absolutely and uniformly on $X$.
+        \item \textbf{Dirichlet's Test:} $\sum f_n(x)g_n(x)$ converges uniformly if the partial sums $F_n = \sum_{k=1}^n f_k$ are uniformly bounded, and $g_n(x) \rightrightarrows 0$ monotonically.
+        \item \textbf{Abel's Test:} $\sum f_n(x)g_n(x)$ converges uniformly if $\sum f_n(x)$ converges uniformly and $g_n(x)$ is uniformly bounded and monotonic.
+    \end{itemize}
+    \end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {16.2 Uniform Convergence of Series};
+\end{tikzpicture}
+
+%------------ 16.3 Properties of Uniformly Convergent Sequences ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \begin{itemize}
+        \item \textbf{Continuity:} If $f_n \rightrightarrows f$ on $X$ and each $f_n$ is continuous, then $f$ is continuous.
+        \item \textbf{Integration:} If $f_n \rightrightarrows f$ on $[a,b]$ and $f_n$ are integrable, then $f$ is integrable and $\lim_{n} \int_a^b f_n(x) dx = \int_a^b f(x) dx$. Same holds for series: $\int \sum f_n = \sum \int f_n$.
+        \item \textbf{Differentiation:} If $f_n$ are continuously differentiable on $[a,b]$, $\sum f_n(x_0)$ converges at some point $x_0$, and $\sum f_n'(x)$ converges uniformly, then $\sum f_n(x)$ converges uniformly to a differentiable function $f$, and $f'(x) = \sum f_n'(x)$.
+    \end{itemize}
+    \end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {16.3 Properties of Uniform Convergence};
+\end{tikzpicture}
+
+%------------ Function Spaces (Compactness & Approximation) ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \begin{itemize}
+        \item \textbf{Arzelà-Ascoli Theorem:} A set $\mathcal{F} \subset C(K)$ (where $K$ is compact) is relatively compact (every sequence has a uniformly convergent subsequence) $\iff$ $\mathcal{F}$ is uniformly bounded and equicontinuous ($\forall \varepsilon > 0, \exists \delta > 0$ s.t. $\forall f \in \mathcal{F}, d(x,y) < \delta \implies |f(x)-f(y)| < \varepsilon$).
+        \item \textbf{Stone-Weierstrass Theorem:} If a subalgebra $A \subset C(K; \mathbb{R})$ ($K$ compact) separates points and contains constants, then $A$ is dense in $C(K)$ under the uniform norm.
+    \end{itemize}
+    \end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {Function Spaces \& Compactness};
+\end{tikzpicture}
+
+\end{multicols*}
+\end{document}

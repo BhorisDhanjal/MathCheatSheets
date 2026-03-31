@@ -17,6 +17,8 @@ Textbook references
 16. Introduction to Smooth Manifolds - Lee
 17. Riemannian Geometry - Petersen
 18. Lecture notes on Algebraic Geometry - Gathmann
+19. Zorich Vol 1-2
+20. Baby Rudin
 
 Online references
 1. Wolfram Mathworld
